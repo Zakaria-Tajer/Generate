@@ -1,15 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC } from "react";
+import { requestCreator } from "lib/requestCreator";
+import { useRouter } from "next/router";
+import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { display } from "slices/switchSlice";
 import { AppDispatch } from "store/store";
 
 export const Login: FC = () => {
   const dispatch: AppDispatch = useDispatch();
-
+  const [data, setData] = useState<string>('')
   const switchToRegister = () => {
     dispatch(display(true));
   };
+
+  const [email,setEmail] = useState<string>('');
+  const [password,setPassword] = useState<string>('');
+  const router = useRouter()
+  const save = () => {
+   requestCreator('POST','http://localhost:8000/userLogin',`email=${email}&password=${password}`,'/client',router )    
+  }
   return (
     <div className="min-h-screen flex items-center justify-center ">
       <div className="absolute top-10 left-24 xl:left-44 xl:top-2 2xl:top-6">
@@ -28,7 +37,7 @@ export const Login: FC = () => {
           <p className="font-poppins">Welcome back to dreamers platform</p>
         </div>
         <div className="mt-3">
-          <form action="" className="space-y-6">
+          <form action="" className="space-y-6" onSubmit={e=> e.preventDefault()}>
             <div>
               <label
                 htmlFor=""
@@ -38,6 +47,7 @@ export const Login: FC = () => {
               </label>
               <input
                 type="email"
+                onChange={e=>setEmail(e.target.value)}
                 placeholder="example@mail.com"
                 className="md:w-[460px] w-96 xl:py-4 py-2 rounded pl-4 outline-none border-2 focus:border-blue-600"
               />
@@ -51,11 +61,12 @@ export const Login: FC = () => {
               </label>
               <input
                 type="password"
+                onChange={e=>setPassword(e.target.value)}
                 placeholder="6+ strong chracter"
                 className="md:w-[460px] w-96 xl:py-4 py-2 rounded pl-4 outline-none border-2 focus:border-blue-600"
               />
             </div>
-            <button className=" text-white font-poppins hover:bg-blue-900 hover:duration-700 bg-main md:w-[460px] w-96 xl:py-3 py-2 rounded ">
+            <button className=" text-white font-poppins hover:bg-blue-900 hover:duration-700 bg-main md:w-[460px] w-96 xl:py-3 py-2 rounded " onClick={save}>
               Login
             </button>
           </form>
