@@ -8,6 +8,7 @@ function requestCreator(
   values?: string,
   RedirectedUrl?: string,
   router?: any,
+  load?:boolean
 
 ) {
   const req = new XMLHttpRequest();
@@ -17,13 +18,16 @@ function requestCreator(
       if (req.status === 200) {
         // Todo: implement parsing data
         let datas = JSON.parse(req.response.trim())
-        const { bodyMessage, status,token: { token }} = datas
+        const { bodyMessage, status,token} = datas
         if(status == '201' && bodyMessage == 'success'){
+          load == true
           Cookies.set('token',token)
           router.push(RedirectedUrl)
         }else {
           toast.error(datas)
         }
+        console.log(datas);
+        
       }
     }
   };

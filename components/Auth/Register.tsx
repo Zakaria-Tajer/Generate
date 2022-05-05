@@ -1,5 +1,4 @@
-import { requestCreator } from "lib/requestCreator";
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { display } from "slices/switchSlice";
@@ -7,7 +6,8 @@ import { AppDispatch } from "store/store";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import { RegisterApi } from "lib/RequestApi";
+import ReactLoading from 'react-loading';
+import shortUUID from "short-uuid";
 
 export const Register: FC = () => {
   const [firstName, setFirstName] = useState<string>("");
@@ -27,6 +27,7 @@ export const Register: FC = () => {
     setFile(e.target.files[0]);
   };
   const getRegisterData = () => {
+    const unique_id = shortUUID.generate()
     if (
       firstName !== "" &&
       LastName !== "" &&
@@ -47,13 +48,15 @@ export const Register: FC = () => {
         formdata.append("email", email);
         formdata.append("password", password);
         formdata.append("confirmationPassword", confirmationPassword);
+        formdata.append("unique_id", unique_id);
 
-        axios.post("http://localhost:8000/user", formdata, {}).then((res) => {
+        axios.post("http://localhost:8000/api/user", formdata, {}).then((res) => {
           const { data } = res;
           console.log(data);
           if(data.bodyMessage == 'success'){
-              Cookies.set('token', data.token.token)
+              Cookies.set('token', data.token)
               router.push('/client')
+              console.log(unique_id);
           }else {
             toast.error(data.bodyMessage)
           }
@@ -62,6 +65,7 @@ export const Register: FC = () => {
       }
     } else {
       toast.error("All fields are required");
+      
     }
   };
 

@@ -1,26 +1,30 @@
 import axios from "axios";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
+import { createContext } from "react";
 import toast from "react-hot-toast";
 
-function RegisterApi(files:any,firstName:string,LastName:string,email:string,password:string,confirmationPassword:string,router:any){
-    let formdata = new FormData();
-        formdata.append("file", files);
-        formdata.append("firstName", firstName);
-        formdata.append("LastName", LastName);
-        formdata.append("email", email);
-        formdata.append("password", password);
-        formdata.append("confirmationPassword", confirmationPassword);
+function getData(
+  token: string,
+  methods: string,
+  url: string,
+  values?: string,
+) {
+  if (token) {
+    const req = new XMLHttpRequest();
+    req.open(methods, url, true);
+    req.onload = () => {
+      if (req.readyState === XMLHttpRequest.DONE) {
+        if (req.status === 200) {
+          // Todo: implement parsing data
+          let response = JSON.parse(req.response.trim());
+          const { bodyMessage, status, token } = response;
+          console.log(response);
+        }
+      }
+    };
+    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.setRequestHeader("Content-Type", "multipart/form-data");
 
-        axios.post("http://localhost:8000/user", formdata, {}).then((res) => {
-          const { data } = res;
-          console.log(JSON.parse(data));
-          if(data.bodyMessage == 'success'){
-              Cookies.set('token', data.token)
-              router.push('/client')
-          }else {
-            toast.error(data.bodyMessage)
-          }
-        });
+    req.send(values);
+  }
 }
-
-export {RegisterApi}

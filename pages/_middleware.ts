@@ -11,4 +11,5 @@ export function middleware(req: NextRequest, ev: NextFetchEvent) {
     }else if(pathname.includes('/client') && !token){
         return NextResponse.redirect(new URL('/', req.url))
     }
+    
 }
