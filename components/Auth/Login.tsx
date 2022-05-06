@@ -14,6 +14,9 @@ export const Login: FC = () => {
   const switchToRegister = () => {
     dispatch(display(true));
   };
+  const switchToPortal = () => {
+    
+  };
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -44,11 +47,17 @@ export const Login: FC = () => {
   };
   return (
     <div className="min-h-screen flex items-center justify-center ">
-      <div className="absolute top-10 left-24 xl:left-44 xl:top-2 2xl:top-6">
+      <div className="absolute top-10 left-24 xl:left-44 xl:top-2 2xl:top-6 space-x-2">
         <a className="font-poppins text-gray-400">
           New Here?{" "}
           <span className="text-main cursor-pointer" onClick={switchToRegister}>
             Register
+          </span>
+        </a>
+        <a className="font-poppins text-gray-400">
+          Not a client?{" "}
+          <span className="text-main cursor-pointer" onClick={switchToPortal}>
+            login to Portal
           </span>
         </a>
       </div>

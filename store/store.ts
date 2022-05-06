@@ -4,7 +4,8 @@ import switchReducer from "slices/switchSlice";
 export const store = configureStore({
   reducer: {
     switch: switchReducer,
-    loaded: switchReducer
+    loaded: switchReducer,
+    sucessRef: switchReducer
   },
 });
 

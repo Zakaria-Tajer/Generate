@@ -4,6 +4,7 @@ import { Auth } from "interfaces/Switch";
 export const initialState: Auth = {
     show: false,
     load: false,
+    success: false
 }
 
 
@@ -17,9 +18,12 @@ export const switchSlice = createSlice({
         },
         loading: (state,action:PayloadAction<boolean>) => {
             state.load = action.payload
+        },
+        getLoginSuccess: (state,action:PayloadAction<boolean>) => {
+            state.success = action.payload
         }
     }
 
 })
-export const { display,loading } = switchSlice.actions;
+export const { display,loading,getLoginSuccess } = switchSlice.actions;
 export default switchSlice.reducer;

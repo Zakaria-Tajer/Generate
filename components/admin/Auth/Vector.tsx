@@ -11,11 +11,11 @@ export const Vector: FC = () => {
           renderer: "svg",
           loop: true,
           autoplay: true,
-          animationData: require("public/61312-quest.json"),
+          animationData: require("public/91956-work-from-home.json"),
         });
       }
     }, []);
   
-    return <div ref={container} className=""></div>;
+    return <div ref={container} className="h-screen"></div>;
   };
   

@@ -45,19 +45,21 @@ const Home: NextPage = () => {
         .then((res) => {
           const data = res.data;
           console.log(data);
-          const { first_name, last_name,image } = data.data;
-          if (first_name || last_name !== "") {
-            setFname(first_name);
-            setLname(last_name);
-            setImg(image)
-            setLoaded(true);
+          if (data !== "") {
+            const { first_name, last_name, image } = data.data;
+            if (first_name || last_name !== "") {
+              setFname(first_name);
+              setLname(last_name);
+              setImg(image);
+              setLoaded(true);
+            }
           }
         });
     }
   }, [email]);
 
   return (
-    <UserContext.Provider value={{ fName, lName,img }}>
+    <UserContext.Provider value={{ fName, lName, img }}>
       {loaded ? (
         <div className="min-h-screen flex bg-gray-400 w-full">
           <div className="w-full bg-blue-400 flex">
