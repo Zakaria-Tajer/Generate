@@ -7,26 +7,50 @@ import {
   faEnvelope,
   faCalendarDay,
 } from "@fortawesome/free-solid-svg-icons";
-import { Search } from "./Navbar/Search";
+
 import { UserContext } from "context/AuthContext";
-import Image from "next/image";
+import { useMediaQuery } from "react-responsive";
 
 export const Navbar: FC = () => {
+  const Mobile = useMediaQuery({ query: "(max-width: 425px)" });
+  const Tablet = useMediaQuery({ query: "(max-width: 768px)" });
   const { fName, lName, img } = useContext(UserContext);
-  // window.btoa
+
   return (
     <div className="flex">
-      <div className="w-1/4 h-[65px] flex space-x-7 items-center pl-8">
-        <FontAwesomeIcon icon={faListCheck} className=" text-lg" />
-        <FontAwesomeIcon icon={faMessage} className=" text-lg" />
-        <FontAwesomeIcon icon={faEnvelope} className=" text-lg" />
-        <FontAwesomeIcon icon={faCalendarDay} className=" text-lg" />
-      </div>
-      <div className="w-3/4 h-[65px] ">
-        <div className="relative flex justify-end items-center">
-          <Search />
-          <div className="bg-white w-44 h-[65px] flex items-center">
-            <div className=" ml-auto">
+      {Mobile ? (
+        ""
+      ) : (
+        <div
+          className={
+            Tablet
+              ? "w-11/12 h-[65px] flex space-x-7 items-center pl-8"
+              : "w-1/4 h-[65px] flex space-x-7 items-center pl-8"
+          }
+        >
+          <FontAwesomeIcon icon={faListCheck} className=" text-lg" />
+          <FontAwesomeIcon icon={faMessage} className=" text-lg" />
+          <FontAwesomeIcon icon={faEnvelope} className=" text-lg" />
+          <FontAwesomeIcon icon={faCalendarDay} className=" text-lg" />
+        </div>
+      )}
+
+      <div className={Tablet ? "w-full h-[65px]" : "w-3/4 h-[65px] "}>
+        <div
+          className={
+            Tablet
+              ? "relative flex md:ml-6 "
+              : "relative flex justify-end items-center"
+          }
+        >
+          <div
+            className={
+              Mobile
+                ? "w-64 h-[65px] flex items-center"
+                : "bg-white w-44 h-[65px] flex items-center"
+            }
+          >
+            <div className="ml-auto">
               <h1 className="font-poppins">
                 {fName} {lName}
               </h1>

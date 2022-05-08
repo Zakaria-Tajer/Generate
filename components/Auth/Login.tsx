@@ -46,8 +46,8 @@ export const Login: FC = () => {
     req.send(`email=${email}&password=${password}`);
   };
   return (
-    <div className="min-h-screen flex items-center justify-center ">
-      <div className="absolute top-10 left-24 xl:left-44 xl:top-2 2xl:top-6 space-x-2">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="absolute top-14 xl:left-44 xl:top-14 2xl:top-6 2xl:left-[15%] space-x-2">
         <a className="font-poppins text-gray-400">
           New Here?{" "}
           <span className="text-main cursor-pointer" onClick={switchToRegister}>
@@ -61,8 +61,9 @@ export const Login: FC = () => {
           </span>
         </a>
       </div>
+
       <div className="bg-white py-3 px-10 rounded shadow-xl space-y-4">
-        <div className=" space-y-3 text-center">
+        <div className=" space-y-10 text-center">
           <h1 className="font-Lato text-4xl uppercase tracking-wide">
             Welcome to Back
           </h1>
@@ -111,7 +112,7 @@ export const Login: FC = () => {
           </form>
           <div className="mt-10 relative">
             <div className="md:w-[460px] w-96 border-[1px]">
-              <p className="text-gray-400 absolute -top-3 left-44 font-poppins z-10 w-[120px] bg-white">
+              <p className="text-gray-400 absolute -top-3 left-[35%] xl:left-44 font-poppins z-10 w-[120px] bg-white">
                 Or sign up with
               </p>
             </div>

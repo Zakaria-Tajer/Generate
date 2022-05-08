@@ -1,16 +1,16 @@
-import { NextPage } from "next";
 import { MainSnc } from "@/components/clients/MainSnc";
+import React from "react";
 import Head from "next/head";
 
-const Home: NextPage = () => {
+const Profile = () => {
   return (
     <>
       <Head>
-        <title>Dashboard</title>
+        <title>Profile</title>
       </Head>
       <MainSnc />
     </>
   );
 };
 
-export default Home;
+export default Profile;

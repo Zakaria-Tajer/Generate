@@ -5,7 +5,8 @@ export const store = configureStore({
   reducer: {
     switch: switchReducer,
     loaded: switchReducer,
-    sucessRef: switchReducer
+    sucessRef: switchReducer,
+    ToggleBars: switchReducer
   },
 });
 
