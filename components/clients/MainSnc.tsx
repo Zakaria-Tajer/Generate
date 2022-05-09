@@ -10,6 +10,9 @@ import { useMediaQuery } from "react-responsive";
 import { RooteState } from "store/store";
 import { useSelector } from "react-redux";
 import { ResSidebar } from "../Layouts/Sidebar/ResSidebar";
+import { ProjectStatus } from "./projectDetails/ProjectStatus";
+import { ProjectDeadline } from "./projectDetails/ProjectDeadline";
+import { MainProject } from "./MainProject";
 
 export const MainSnc = () => {
   const [loaded, setLoaded] = useState<boolean>(false);
@@ -80,25 +83,38 @@ export const MainSnc = () => {
   }, [email]);
 
   const Mobile = useMediaQuery({ query: "(max-width: 425px)" });
-  const Tablet = useMediaQuery({ query: "(max-width: 768px)" });
+  const Lg = useMediaQuery({ query: "(max-width: 1024px)" });
+  const Devices = useMediaQuery({ query: "(min-width: 1440px)" });
+
   const toggle = useSelector((state: RooteState) => state.ToggleBars.toggleBar);
   return (
     <UserContext.Provider value={{ fName, lName, img, loaded }}>
       {loaded ? (
         <div className="min-h-screen flex bg-gray-400 w-full">
-          <div className="w-full bg-blue-400 flex relative">
+          <div className="w-full flex">
             {isExpired && <Expired />}
-            <div className={Mobile ? "-left-24 absolute": "absolute"}>
-             {toggle ? <ResSidebar /> : <Sidebar />}
-            </div>
             <div
-              className={
-                Tablet
-                  ? "bg-white h-[65px] w-full md:w-3/5 mx-auto rounded mt-4"
-                  : "max-w-2xl bg-white h-[65px] mx-auto lg:w-3/4 2xl:w-1/2 rounded mt-4"
-              }
+              className={Mobile ? "-left-24 absolute" : isExpired ? "" : "z-10"}
             >
-              <Navbar />
+              {Devices ? (
+                <Sidebar />
+              ) : (
+                <>
+                  {Mobile ? (
+                    <>{toggle ? <ResSidebar /> : <Sidebar />}</>
+                  ) : (
+                    <ResSidebar />
+                  )}
+                </>
+              )}
+            </div>
+            <div className="w-full h-[75px] flex absolute">
+              <div className="bg-white h-[65px] w-full md:w-3/5 max-w-2xl mx-auto rounded mt-4">
+                <Navbar />
+              </div>
+            </div>
+            <div className="w-full mt-24 bg-blue-900 ">
+              <MainProject />
             </div>
           </div>
         </div>

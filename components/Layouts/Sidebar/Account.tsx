@@ -5,12 +5,14 @@ import { faBell } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useMediaQuery } from "react-responsive";
 export const Account = () => {
   const router = useRouter();
   const Logout = () => {
     Cookies.remove("token");
-    router.push("/");
+    router.reload();
   };
+  const Tablet = useMediaQuery({ query: "(max-width: 768px)" });
   return (
     <>
       <Link href="/client/settings" passHref>

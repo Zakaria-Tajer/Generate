@@ -7,15 +7,22 @@ import {
   faEnvelope,
   faCalendarDay,
 } from "@fortawesome/free-solid-svg-icons";
-
+import { PoweroffOutlined } from "@ant-design/icons";
 import { UserContext } from "context/AuthContext";
 import { useMediaQuery } from "react-responsive";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export const Navbar: FC = () => {
   const Mobile = useMediaQuery({ query: "(max-width: 425px)" });
   const Tablet = useMediaQuery({ query: "(max-width: 768px)" });
   const { fName, lName, img } = useContext(UserContext);
+  const router = useRouter();
 
+  const Logout = () => {
+    Cookies.remove("token");
+    router.reload();
+  };
   return (
     <div className="flex">
       <div className="flex items-center space-x-6 ml-3 w-1/2">
@@ -24,6 +31,7 @@ export const Navbar: FC = () => {
         <FontAwesomeIcon icon={faEnvelope} className=" text-lg" />
         <FontAwesomeIcon icon={faCalendarDay} className=" text-lg" />
       </div>
+
       <div className={Tablet ? "w-full h-[65px]" : "w-3/4 h-[65px] "}>
         <div
           className={
@@ -35,8 +43,8 @@ export const Navbar: FC = () => {
           <div
             className={
               Mobile
-                ? "w-44 h-[65px] ml-auto flex items-center"
-                : "bg-white w-44 h-[65px] flex items-center md:ml-auto"
+                ? "w-44 h-[65px] flex ml-auto items-center"
+                : "bg-white rounded-md w-44 h-[65px] flex items-center md:ml-auto"
             }
           >
             <div className="ml-auto">

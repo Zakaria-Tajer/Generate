@@ -1,11 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { requestCreator } from "lib/requestCreator";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { display } from "slices/switchSlice";
 import { AppDispatch } from "store/store";
-import ReactLoading from "react-loading";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
@@ -34,7 +32,7 @@ export const Login: FC = () => {
             Cookies.set("token", token);
             router.push("/client");
           } else {
-            toast.error(datas);
+            toast.error(bodyMessage);
           }
           console.log(datas);
         }

@@ -6,6 +6,7 @@ export const initialState: Auth = {
   load: false,
   success: false,
   toggleBar: false,
+  Search: false,
 };
 
 export const switchSlice = createSlice({
@@ -24,8 +25,11 @@ export const switchSlice = createSlice({
     ToggleBar: (state, action: PayloadAction<boolean>) => {
       state.toggleBar = action.payload;
     },
+    Searching: (state, action: PayloadAction<boolean>) => {
+      state.Search = action.payload;
+    },
   },
 });
-export const { display, loading, getLoginSuccess, ToggleBar } =
+export const { display, loading, getLoginSuccess, ToggleBar, Searching } =
   switchSlice.actions;
 export default switchSlice.reducer;

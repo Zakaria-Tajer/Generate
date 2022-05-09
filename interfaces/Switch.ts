@@ -4,4 +4,5 @@ export interface Auth {
     load: boolean,
     success: boolean,
     toggleBar: boolean,
+    Search: boolean,
 }
