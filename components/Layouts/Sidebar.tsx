@@ -15,7 +15,7 @@ export const Sidebar: FC = () => {
       <div className=" py-2 flex items-center justify-center relative">
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
-          className="absolute left-6 text-xl text-gray-500"
+          className="absolute left-4 md:left-6 text-xl text-gray-500"
         />
         <input
           type="text"

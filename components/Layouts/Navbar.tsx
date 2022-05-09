@@ -18,23 +18,12 @@ export const Navbar: FC = () => {
 
   return (
     <div className="flex">
-      {Mobile ? (
-        ""
-      ) : (
-        <div
-          className={
-            Tablet
-              ? "w-11/12 h-[65px] flex space-x-7 items-center pl-8"
-              : "w-1/4 h-[65px] flex space-x-7 items-center pl-8"
-          }
-        >
-          <FontAwesomeIcon icon={faListCheck} className=" text-lg" />
-          <FontAwesomeIcon icon={faMessage} className=" text-lg" />
-          <FontAwesomeIcon icon={faEnvelope} className=" text-lg" />
-          <FontAwesomeIcon icon={faCalendarDay} className=" text-lg" />
-        </div>
-      )}
-
+      <div className="flex items-center space-x-6 ml-3 w-1/2">
+        <FontAwesomeIcon icon={faListCheck} className=" text-lg" />
+        <FontAwesomeIcon icon={faMessage} className=" text-lg" />
+        <FontAwesomeIcon icon={faEnvelope} className=" text-lg" />
+        <FontAwesomeIcon icon={faCalendarDay} className=" text-lg" />
+      </div>
       <div className={Tablet ? "w-full h-[65px]" : "w-3/4 h-[65px] "}>
         <div
           className={
@@ -46,8 +35,8 @@ export const Navbar: FC = () => {
           <div
             className={
               Mobile
-                ? "w-64 h-[65px] flex items-center"
-                : "bg-white w-44 h-[65px] flex items-center"
+                ? "w-44 h-[65px] ml-auto flex items-center"
+                : "bg-white w-44 h-[65px] flex items-center md:ml-auto"
             }
           >
             <div className="ml-auto">

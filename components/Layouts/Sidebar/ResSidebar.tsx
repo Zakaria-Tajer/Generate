@@ -94,7 +94,7 @@ export const ResSidebar = () => {
         <div
           className={
             Mobile
-              ? "w-8 h-8 -right-4 top-[100%] cursor-pointer absolute rounded-full flex items-center justify-center bg-white"
+              ? "w-8 h-8 -right-5 top-[100%] cursor-pointer absolute rounded-full flex items-center justify-center bg-white"
               : "w-8 h-8 -right-4 top-2 cursor-pointer absolute rounded-full flex items-center justify-center bg-white"
           }
           onClick={Toggle}
@@ -106,7 +106,7 @@ export const ResSidebar = () => {
       <div className="flex flex-col justify-center items-center space-y-6">
         {Menu.map((items) => (
           <>
-            <Link href={items.Link} passHref>
+            <Link href={items.Link} passHref key={items.id}>
               <li
                 key={items.id}
                 className="list-none flex relative items-center justify-center text-xl cursor-pointer hover:bg-gray-400/25 hover:text-blue-700 hover:duration-700 text-gray-500 w-[4.7rem] rounded-md py-3"

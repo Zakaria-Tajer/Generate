@@ -94,8 +94,8 @@ export const MainSnc = () => {
             <div
               className={
                 Tablet
-                  ? "bg-white h-[65px] w-full rounded mt-4"
-                  : "max-w-3xl bg-white h-[65px] mx-auto lg:w-3/4 2xl:w-1/2 rounded mt-4"
+                  ? "bg-white h-[65px] w-full md:w-3/5 mx-auto rounded mt-4"
+                  : "max-w-2xl bg-white h-[65px] mx-auto lg:w-3/4 2xl:w-1/2 rounded mt-4"
               }
             >
               <Navbar />
