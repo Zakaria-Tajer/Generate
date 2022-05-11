@@ -94,13 +94,13 @@ export const ResSidebar = () => {
     <>
       {search ? <SearchRes /> : ""}
 
-      <div className="bg-white w-24 -z-10 h-screen space-y-4 overflow-hidden">
+      <div className="bg-white w-24 h-screen space-y-4 ">
         <div className="bg-gray-400 h-28 relative">
           {Mobile ? (
             <div
               className={
                 Mobile
-                  ? "w-8 h-8 -right-5 top-[100%] cursor-pointer absolute rounded-full flex items-center justify-center bg-white"
+                  ? "w-8 h-8 left-20 top-[100%] cursor-pointer absolute rounded-full flex items-center justify-center bg-white"
                   : "w-8 h-8 -right-4 top-2 cursor-pointer absolute rounded-full flex items-center justify-center bg-white"
               }
               onClick={Toggle}

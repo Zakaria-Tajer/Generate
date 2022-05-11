@@ -8,11 +8,10 @@ export const ProjectStatus = () => {
       <div className="pl-3">
         <h1 className="font-poppins text-2xl">Dashboard</h1>
       </div>
-
-      <div className="flex justify-between bg-white w-3/4 ml-4 rounded pl-10">
-        <div className="flex flex-col w-fit space-y-6 mb-7">
-          <h1 className="pt-6 font-poppins">Project Status</h1>
-          <div className="flex py-4 items-center bg-gray-400">
+      <div className="lg:flex lg:w-11/12 lg:mx-auto xl:ml-4 2xl:max-w-5xl justify-between bg-white 2xl:w-4/5 rounded lg:pl-10">
+        <div className="flex flex-col lg:w-fit space-y-6 mb-7">
+          <h1 className="pt-6 font-poppins pl-4 lg:pl-0">Project Status</h1>
+          <div className="flex py-4 items-center bg-gray-400 mx-auto">
             <div className="py-3 p-4">
               <h1 className="text-6xl ">16</h1>
             </div>
@@ -27,10 +26,11 @@ export const ProjectStatus = () => {
             </div>
           </div>
         </div>
-        <div className="bg-blue-400 w-1/2 rounded flex items-center">
-          <div className="flex ml-5 space-x-4">
-            <div className="w-24 h-24 rounded-full p-2 bg-white"></div>
-            <div className="w-56 bg-white p-4 space-y-2">
+
+        <div className="bg-blue-400 pl-2  lg:w-1/2 rounded flex items-center">
+          <div className="flex md:mx-auto xl:ml-5 space-x-4">
+            <div className="w-24 h-24 rounded-full p-2 bg-white my-auto"></div>
+            <div className="lg:w-56 bg-white p-4 space-y-2">
               <div className="flex items-center space-x-3">
                 <div className="w-12 rounded-md h-4 bg-blue-400"></div>
                 <h1>In Progress</h1>
