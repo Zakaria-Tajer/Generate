@@ -12,17 +12,19 @@ import { UserContext } from "context/AuthContext";
 import { useMediaQuery } from "react-responsive";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { RooteState } from "store/store";
 
 export const Navbar: FC = () => {
   const Mobile = useMediaQuery({ query: "(max-width: 425px)" });
   const Tablet = useMediaQuery({ query: "(max-width: 768px)" });
-  const { fName, lName, img } = useContext(UserContext);
   const router = useRouter();
 
   const Logout = () => {
     Cookies.remove("token");
     router.reload();
   };
+  const data = useSelector((state:RooteState)=> state.Data)
   return (
     <div className="flex">
       <div className="flex items-center space-x-6 ml-3 w-1/2">
@@ -49,13 +51,13 @@ export const Navbar: FC = () => {
           >
             <div className="ml-auto">
               <h1 className="font-poppins">
-                {fName} {lName}
+                {data.fName} {data.lName}
               </h1>
               <p className="font-poppins">Active</p>
             </div>
             <div className="w-14 h-14 bg-gray-400 rounded-full ml-auto mr-2">
               <img
-                src={`http://localhost:8000/uploads/${img}`}
+                src={`http://localhost:8000/uploads/${data.img}`}
                 alt="profile"
                 className="object-cover rounded-full w-full h-full"
               />

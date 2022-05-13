@@ -10,8 +10,12 @@ import { useMediaQuery } from "react-responsive";
 import { RooteState } from "store/store";
 import { useSelector } from "react-redux";
 import { ResSidebar } from "../Layouts/Sidebar/ResSidebar";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "store/store";
+import { updateCred } from "slices/DataSlice";
 
 export const MainSnc = () => {
+  const dispatch: AppDispatch = useDispatch();
   const [loaded, setLoaded] = useState<boolean>(false);
   const [expired, setExpired] = useState<boolean>(false);
   const [isExpired, setIsExpired] = useState<boolean>(false);
@@ -19,6 +23,7 @@ export const MainSnc = () => {
   const [fName, setFname] = useState<string>("");
   const [lName, setLname] = useState<string>("");
   const [img, setImg] = useState<string>("");
+  const [uniqueId, setUniqueId] = useState<string>("");
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -66,25 +71,29 @@ export const MainSnc = () => {
             const data = res.data;
             console.log(data);
             if (data !== "") {
-              const { first_name, last_name, image } = data.data;
-              if (first_name || last_name !== "") {
+              const { first_name, last_name, image,id } = data.data;
+              if (first_name !== undefined || last_name !== undefined) {
                 setFname(first_name);
                 setLname(last_name);
                 setImg(image);
+                setUniqueId(id);
                 setLoaded(true);
+
+              }else {
+                setIsExpired(true);
               }
             }
           });
       }
     }
-  }, [email]);
+    dispatch(updateCred({ fName, lName,img,uniqueId }));
+  }, [dispatch, email, expired, fName, img, lName, uniqueId]);
 
   const Mobile = useMediaQuery({ query: "(max-width: 425px)" });
   const Devices = useMediaQuery({ query: "(min-width: 1440px)" });
-
   const toggle = useSelector((state: RooteState) => state.ToggleBars.toggleBar);
   return (
-    <UserContext.Provider value={{ fName, lName, img, loaded }}>
+    <>
       {loaded ? (
         <>
           {isExpired && <Expired />}
@@ -110,11 +119,11 @@ export const MainSnc = () => {
               <Navbar />
             </div>
           </div>
-          
         </>
       ) : (
         <Loading />
       )}
-    </UserContext.Provider>
+      </>
+    
   );
 };

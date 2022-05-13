@@ -11,7 +11,11 @@ module.exports = {
         'Lato': 'Lato , sans-serif'
       },
       colors: {
-        'main': '#2028EB'
+        'main': '#2028EB',
+        'DarkOne': '#222831',
+        'DarkGrey': '#393E46',
+        'Teal': '#00ADB5',
+        'PureGrey': '#EEEEEE',
       },
       screens: {
         'xsm': '375px',

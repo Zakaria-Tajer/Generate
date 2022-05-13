@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import switchReducer from "slices/switchSlice";
+import userReducers from "slices/DataSlice";
 
 export const store = configureStore({
   reducer: {
@@ -8,6 +9,7 @@ export const store = configureStore({
     sucessRef: switchReducer,
     ToggleBars: switchReducer,
     Searched: switchReducer,
+    Data: userReducers,
   },
 });
 
