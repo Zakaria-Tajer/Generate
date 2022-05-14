@@ -7,10 +7,11 @@ import { Account } from "./Sidebar/Account";
 import { useMediaQuery } from "react-responsive";
 import { Logo } from "./Sidebar/Logo";
 
+
 export const Sidebar: FC = () => {
   const Mobile = useMediaQuery({ query: "(max-width: 425px)" });
   return (
-    <div className={Mobile ? "bg-white absolute left-[6rem] z-10 h-screen space-y-4" : "bg-white w-[320px] -z-10 h-screen space-y-4"}>
+    <div className={Mobile ? "bg-white absolute left-[6rem] z-10 min-h-screen space-y-4" : "bg-white w-[320px] -z-10 h-screen space-y-4"}>
       <Logo />
       <div className=" py-2 flex items-center justify-center relative">
         <FontAwesomeIcon

@@ -3,13 +3,31 @@ import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { store } from "store/store";
 import { Toaster } from "react-hot-toast";
-export default function MyApp({ Component, pageProps }: AppProps) {
+import React from "react";
+
+type ComponentWithPageLayout = AppProps & {
+  Component: AppProps["Component"] & {
+    PageLayout?: React.ComponentType;
+  };
+};
+
+export default function MyApp({
+  Component,
+  pageProps,
+}: ComponentWithPageLayout) {
   return (
     <>
-    <Provider store={store}>
-      <Component {...pageProps} />
-      <Toaster />
-    </Provider>
+      <Provider store={store}>
+        {Component.PageLayout ? (
+          <Component.PageLayout>
+            <Component {...pageProps} />
+          </Component.PageLayout>
+        ) : (
+          <Component {...pageProps} />
+        )}
+
+        <Toaster />
+      </Provider>
     </>
   );
 }

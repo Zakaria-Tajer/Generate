@@ -85,7 +85,7 @@ export const ProfileSection = () => {
               Email
             </label>
             <input
-              className="bg-[#f6f6f8] font-poppins h-12 outline-none ring-2 focus:ring-black focus:ring-offset-4 rounded w-full md:w-[29.6rem] flex items-center pl-3"
+              className="bg-[#f6f6f8] font-poppins h-12 outline-none focus:ring-2 focus:ring-black focus:ring-offset-4 rounded w-full md:w-[29.6rem] flex items-center pl-3"
               placeholder="Jhon@Doe.com"
               type="email"
               onChange={(e) => setEmail(e.target.value)}
@@ -94,7 +94,7 @@ export const ProfileSection = () => {
               Contact Number
             </label>
             <input
-              className="bg-[#f6f6f8] font-poppins h-12 outline-none ring-2 focus:ring-black focus:ring-offset-4 rounded w-full md:w-[29.6rem] flex items-center pl-3"
+              className="bg-[#f6f6f8] font-poppins h-12 outline-none focus:ring-2 focus:ring-black focus:ring-offset-4 rounded w-full md:w-[29.6rem] flex items-center pl-3"
               placeholder=" 661-744-9908"
               type="number"
               onChange={(e) => setNumber(e.target.value)}
@@ -103,7 +103,7 @@ export const ProfileSection = () => {
               Address
             </label>
             <input
-              className="bg-[#f6f6f8] font-poppins h-12 outline-none ring-2 focus:ring-black focus:ring-offset-4 rounded w-full md:w-[29.6rem] flex items-center pl-3"
+              className="bg-[#f6f6f8] font-poppins h-12 outline-none focus:ring-2 focus:ring-black focus:ring-offset-4 rounded w-full md:w-[29.6rem] flex items-center pl-3"
               placeholder="1773 Lane"
               onChange={(e) => setAddress(e.target.value)}
             />
@@ -117,7 +117,7 @@ export const ProfileSection = () => {
                 City
               </label>
               <input
-                className="bg-[#f6f6f8] font-poppins h-12 outline-none ring-2 focus:ring-black focus:ring-offset-4 rounded w-44 md:w-56 flex items-center pl-3"
+                className="bg-[#f6f6f8] font-poppins h-12 outline-none focus:ring-2 focus:ring-black focus:ring-offset-4 rounded w-44 md:w-56 flex items-center pl-3"
                 placeholder="Brc"
                 onChange={(e) => setCity(e.target.value)}
               />
@@ -130,7 +130,7 @@ export const ProfileSection = () => {
                 State
               </label>
               <input
-                className="bg-[#f6f6f8] font-poppins h-12 outline-none ring-2 focus:ring-black focus:ring-offset-4 rounded w-44 md:w-56 flex items-center pl-3"
+                className="bg-[#f6f6f8] font-poppins h-12 outline-none focus:ring-2 focus:ring-black focus:ring-offset-4 rounded w-44 md:w-56 flex items-center pl-3"
                 placeholder="New York"
                 onChange={(e) => setState(e.target.value)}
               />
@@ -145,7 +145,7 @@ export const ProfileSection = () => {
                 Zip code
               </label>
               <input
-                className="bg-[#f6f6f8] font-poppins h-12 outline-none ring-2 focus:ring-black focus:ring-offset-4 rounded w-44 md:w-56 flex items-center pl-3"
+                className="bg-[#f6f6f8] font-poppins h-12 outline-none focus:ring-2 focus:ring-black focus:ring-offset-4 rounded w-44 md:w-56 flex items-center pl-3"
                 placeholder="24000"
                 onChange={(e) => setZipCode(e.target.value)}
               />
@@ -158,7 +158,7 @@ export const ProfileSection = () => {
                 Country
               </label>
               <input
-                className="bg-[#f6f6f8] font-poppins h-12 outline-none ring-2 focus:ring-black focus:ring-offset-4 rounded w-44 md:w-56 flex items-center pl-3"
+                className="bg-[#f6f6f8] font-poppins h-12 outline-none focus:ring-2 focus:ring-black focus:ring-offset-4 rounded w-44 md:w-56 flex items-center pl-3"
                 placeholder="US"
                 onChange={(e) => setCountry(e.target.value)}
               />
