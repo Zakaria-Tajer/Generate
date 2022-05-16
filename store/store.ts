@@ -10,6 +10,9 @@ export const store = configureStore({
     ToggleBars: switchReducer,
     Searched: switchReducer,
     Data: userReducers,
+    ComposeEmail:switchReducer,
+    EmojiSwitcher:switchReducer,
+    EmojiIcon:userReducers,
   },
 });
 

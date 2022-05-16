@@ -6,6 +6,7 @@ export const initialState: userData = {
   lName: "",
   img: "",
   uniqueId: "",
+  emoji: '',
 };
 
 export const dataSlice = createSlice({
@@ -18,7 +19,10 @@ export const dataSlice = createSlice({
       state.img = action.payload.img;
       state.uniqueId = action.payload.uniqueId;
     },
+    getEmoji: (state, action: PayloadAction<any>) => {
+      state.emoji = action.payload;
+    },
   },
 });
-export const { updateCred } = dataSlice.actions;
+export const { updateCred,getEmoji } = dataSlice.actions;
 export default dataSlice.reducer;

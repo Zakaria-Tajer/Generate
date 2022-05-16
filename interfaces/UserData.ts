@@ -3,6 +3,7 @@ export interface userData {
     lName: string,
     img: string,
     uniqueId: string,
+    emoji: any,
 }
 export interface updatedData {
     Email: string,
@@ -12,4 +13,9 @@ export interface updatedData {
     State: string,
     ZipCode: number,
     Country: string,
+}
+
+
+export interface Emojis {
+    emoji: any
 }

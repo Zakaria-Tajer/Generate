@@ -7,6 +7,8 @@ export const initialState: Auth = {
   success: false,
   toggleBar: false,
   Search: false,
+  Compose: false,
+  Emojis: false,
 };
 
 export const switchSlice = createSlice({
@@ -28,8 +30,22 @@ export const switchSlice = createSlice({
     Searching: (state, action: PayloadAction<boolean>) => {
       state.Search = action.payload;
     },
+    Composing: (state, action: PayloadAction<boolean>) => {
+      state.Compose = action.payload;
+    },
+    ShowEmoji: (state, action: PayloadAction<boolean>) => {
+      state.Emojis = action.payload;
+    },
   },
 });
-export const { display, loading, getLoginSuccess, ToggleBar, Searching } =
-  switchSlice.actions;
+
+export const {
+  display,
+  loading,
+  getLoginSuccess,
+  ToggleBar,
+  Searching,
+  Composing,
+  ShowEmoji,
+} = switchSlice.actions;
 export default switchSlice.reducer;
