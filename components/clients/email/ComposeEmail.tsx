@@ -2,19 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faMinus, faGrin } from "@fortawesome/free-solid-svg-icons";
-import { Emojis } from "./Emojis";
 import { useSelector } from "react-redux";
 import { RooteState } from "store/store";
 import { useDispatch } from "react-redux";
 import { Composing, ShowEmoji } from "slices/switchSlice";
 import { AppDispatch } from "store/store";
 import Picker from "emoji-picker-react";
+import { sendEmails } from "lib/RequestApi";
 
 export const ComposeEmail = () => {
-  const [chosenEmoji, setChosenEmoji] = useState<any>([]);
-  const [recipent, setRecipent] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
+  const [recipent, setRecipent] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
   const [show, setShow] = useState<boolean>(false);
   const compsoeEmail = useSelector(
@@ -23,17 +22,17 @@ export const ComposeEmail = () => {
   const showEmoji = useSelector(
     (state: RooteState) => state.EmojiSwitcher.Emojis
   );
+  const userData = useSelector((state: RooteState) => state.Data);
+  console.log(userData.uniqueId);
+
   const dispatch: AppDispatch = useDispatch();
   const Compose = () => {
     dispatch(Composing(false));
   };
-  const ShowEmojiPicker = () => {
-    setShow(!show);
-    dispatch(ShowEmoji(!show));
-  };
-  const onEmojiClick = (event: any, emojiObject: any) => {
-    setChosenEmoji(emojiObject);
-  };
+  useEffect(()=> {
+
+  },[])
+  
 
   const sendEmail = () => {
     const req = new XMLHttpRequest();
@@ -52,13 +51,14 @@ export const ComposeEmail = () => {
     req.setRequestHeader("Content-Type", "multipart/form-data");
 
     req.send(`recipents=${recipent}&title=${title}&message=${message}`);
+
   };
 
   return (
     <div className="relative">
       <Transition
         as="div"
-        className="w-2/5 bg-white shadow-xl p-4 right-2 rounded-lg -top-24 absolute"
+        className="w-2/5 bg-white shadow-xl p-4 right-2 rounded-lg top-80 absolute"
         show={compsoeEmail}
         enter="transition-opacity duration-200"
         enterFrom="opacity-0"
@@ -84,7 +84,7 @@ export const ComposeEmail = () => {
           <input
             type="text"
             className="h-full w-1/2 outline-none font-poppins"
-            onChange={e => setRecipent(e.target.value)}
+            onChange={(e) => setRecipent(e.target.value)}
           />
         </div>
 
@@ -93,20 +93,17 @@ export const ComposeEmail = () => {
             type="text"
             className="h-full outline-none w-full font-poppins px-5"
             placeholder="Title"
-            onChange={e => setTitle(e.target.value)}
-
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-        <textarea className="outline-none w-full h-64 mt-2" onChange={e => setMessage(e.target.value)}>
-          {chosenEmoji ? chosenEmoji.emoji : ''}
+        <textarea
+          className="outline-none w-full h-64 mt-2"
+          onChange={(e) => setMessage(e.target.value)}
+        >
         </textarea>
         <div className="w-full bg-PureGrey relative flex items-center justify-end py-2 space-x-4 pr-3">
           <div className="w-10 h-10 rounded-full hover:bg-gray-400 hover:duration-700 cursor-pointer flex items-center justify-center">
-            <FontAwesomeIcon
-              icon={faGrin}
-              className="text-xl text-gray-300"
-              onClick={ShowEmojiPicker}
-            />
+           
           </div>
           <button
             className="bg-DarkOne rounded-md text-white px-10 py-3 font-poppins"
@@ -115,13 +112,7 @@ export const ComposeEmail = () => {
             Send Now
           </button>
         </div>
-        {showEmoji ? (
-          <div className="absolute top-44 right-60">
-            <Picker onEmojiClick={onEmojiClick} />
-          </div>
-        ) : (
-          ""
-        )}
+        
       </Transition>
     </div>
   );

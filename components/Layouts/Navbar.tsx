@@ -24,6 +24,7 @@ export const Navbar: FC = () => {
     Cookies.remove("token");
     router.reload();
   };
+  
   const data = useSelector((state:RooteState)=> state.Data)
   return (
     <div className="flex">
