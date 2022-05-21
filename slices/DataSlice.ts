@@ -7,6 +7,7 @@ export const initialState: userData = {
   img: "",
   uniqueId: "",
   emoji: '',
+  expiring: false,
 };
 
 export const dataSlice = createSlice({
@@ -22,7 +23,10 @@ export const dataSlice = createSlice({
     getEmoji: (state, action: PayloadAction<any>) => {
       state.emoji = action.payload;
     },
+    isExpiredSess: (state, action: PayloadAction<boolean>) => {
+      state.expiring = action.payload;
+    },
   },
 });
-export const { updateCred,getEmoji } = dataSlice.actions;
+export const { updateCred,getEmoji,isExpiredSess } = dataSlice.actions;
 export default dataSlice.reducer;

@@ -13,6 +13,8 @@ export const store = configureStore({
     ComposeEmail:switchReducer,
     EmojiSwitcher:switchReducer,
     EmojiIcon:userReducers,
+    Sidebar:switchReducer,
+    ExpiredSession:userReducers,
   },
 });
 

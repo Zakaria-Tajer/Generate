@@ -3,7 +3,9 @@ export interface userData {
     lName: string,
     img: string,
     uniqueId: string,
-    emoji: any,
+    emoji?: any,
+    expiring?: any,
+
 }
 export interface updatedData {
     Email: string,

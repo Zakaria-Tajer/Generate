@@ -7,4 +7,5 @@ export interface Auth {
     Search: boolean,
     Compose:boolean,
     Emojis:boolean,
+    showBar: boolean,
 }

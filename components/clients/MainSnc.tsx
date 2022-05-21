@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { ResSidebar } from "../Layouts/Sidebar/ResSidebar";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store/store";
-import { updateCred } from "slices/DataSlice";
+import { isExpiredSess, updateCred } from "slices/DataSlice";
 
 export const MainSnc = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -87,6 +87,8 @@ export const MainSnc = () => {
       }
     }
     dispatch(updateCred({ fName, lName,img,uniqueId }));
+    dispatch(isExpiredSess(true))
+
   }, [dispatch, email, expired, fName, img, lName, uniqueId]);
 
   const Mobile = useMediaQuery({ query: "(max-width: 425px)" });

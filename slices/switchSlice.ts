@@ -9,6 +9,7 @@ export const initialState: Auth = {
   Search: false,
   Compose: false,
   Emojis: false,
+  showBar: false,
 };
 
 export const switchSlice = createSlice({
@@ -36,6 +37,9 @@ export const switchSlice = createSlice({
     ShowEmoji: (state, action: PayloadAction<boolean>) => {
       state.Emojis = action.payload;
     },
+    showSidebar: (state, action: PayloadAction<boolean>) => {
+      state.showBar = action.payload;
+    },
   },
 });
 
@@ -47,5 +51,6 @@ export const {
   Searching,
   Composing,
   ShowEmoji,
+  showSidebar,
 } = switchSlice.actions;
 export default switchSlice.reducer;

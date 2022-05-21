@@ -4,3 +4,4 @@ export interface Auth {
   img: string,
   loaded: boolean
 }
+
