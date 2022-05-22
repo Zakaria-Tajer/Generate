@@ -59,7 +59,7 @@ export function AdminNav({ children }: Layouts) {
           </div>
         </div>
       </div>
-      <div className="w-full flex">
+      <div className="flex">
         <div className="w-28 h-[907px] flex flex-col items-center bg-white">
           <div className=" mt-10 space-y-6 w-full flex flex-col items-center py-2">
             <div className="relative flex items-center ">
@@ -142,7 +142,7 @@ export function AdminNav({ children }: Layouts) {
             </div>
           </div>
         </div>
-        {children}
+        <div className="w-full">{children}</div>
       </div>
     </div>
   );
