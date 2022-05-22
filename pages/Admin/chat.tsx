@@ -3,17 +3,17 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import React from 'react'
 
-function Dashboard(){
+function Chat(){
   return (
     <div>
       <Head>
-        <title>Dashboard</title>
+        <title>Chat</title>
       </Head>
-
+        chat
     </div>
   )
 }
 
-Dashboard.PageLayout = AdminNav
+Chat.PageLayout = AdminNav
 
-export default Dashboard
+export default Chat

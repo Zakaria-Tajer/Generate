@@ -13,7 +13,7 @@ export const Login: FC = () => {
     dispatch(display(true));
   };
   const switchToPortal = () => {
-    
+    router.push('/Admin')
   };
 
   const [email, setEmail] = useState<string>("");
