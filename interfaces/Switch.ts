@@ -9,3 +9,10 @@ export interface Auth {
     Emojis:boolean,
     showBar: boolean,
 }
+
+export interface UsersFiltring{
+    Client?: boolean,
+    Moderator?: boolean,
+    Developer?: boolean,
+    CloseFilter?: boolean,
+}

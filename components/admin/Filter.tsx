@@ -4,8 +4,23 @@ import {
   FilterOutlined,
   DownOutlined,
 } from "@ant-design/icons";
+import { AppDispatch, RooteState } from "store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { Filtring } from "slices/filterSlice";
 export const Filter: FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [Open, setOpen] = useState<boolean>(false);
+
+  const dispatch: AppDispatch = useDispatch();
+  
+  const FliterClient = () => {
+    dispatch(Filtring({ Client: true }));
+  };
+  const FliterDeveloper = () => {
+    dispatch(Filtring({ Developer: true }));
+  };
+  const FliterModerator = () => {
+    dispatch(Filtring({ Moderator: true }));
+  };
   return (
     <div className="bg-white w-1/2 mx-auto rounded-md h-16 mt-8 flex">
       <div className="w-1/2 relative flex items-center">
@@ -22,17 +37,26 @@ export const Filter: FC = () => {
           <h1 className="font-poppins">Filter</h1>
           <DownOutlined
             className="cursor-pointer"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setOpen(!Open)}
           />
-          {isOpen && (
+          {Open && (
             <div className="absolute z-10 w-44 py-2 bg-white shadow-xl list-none space-y-2 top-14 -right-3 rounded">
-              <li className="w-full font-poppins hover:bg-gray-200 py-2 px-5 hover:duration-700 cursor-pointer">
+              <li
+                className="w-full font-poppins hover:bg-gray-200 py-2 px-5 hover:duration-700 cursor-pointer"
+                onClick={FliterClient}
+              >
                 <a>Clients</a>
               </li>
-              <li className="w-full font-poppins hover:bg-gray-200 py-2 px-5 hover:duration-700 cursor-pointer">
+              <li
+                className="w-full font-poppins hover:bg-gray-200 py-2 px-5 hover:duration-700 cursor-pointer"
+                onClick={FliterModerator}
+              >
                 <a>Moderators</a>
               </li>
-              <li className="w-full font-poppins hover:bg-gray-200 py-2 px-5 hover:duration-700 cursor-pointer">
+              <li
+                className="w-full font-poppins hover:bg-gray-200 py-2 px-5 hover:duration-700 cursor-pointer"
+                onClick={FliterDeveloper}
+              >
                 <a>Developers</a>
               </li>
             </div>

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import switchReducer from "slices/switchSlice";
 import userReducers from "slices/DataSlice";
+import FilterReducers from "slices/filterSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     EmojiIcon:userReducers,
     Sidebar:switchReducer,
     ExpiredSession:userReducers,
+    UsersFiltiring: FilterReducers
   },
 });
 
