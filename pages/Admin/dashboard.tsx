@@ -1,7 +1,7 @@
 import { AdminNav } from '@/components/admin/Layouts/AdminNav'
-import { NextPage } from 'next'
 import Head from 'next/head'
 import React from 'react'
+import { motion } from "framer-motion"
 
 function Dashboard(){
   return (
@@ -9,7 +9,7 @@ function Dashboard(){
       <Head>
         <title>Dashboard</title>
       </Head>
-
+      dled
     </div>
   )
 }

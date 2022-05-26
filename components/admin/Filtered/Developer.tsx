@@ -1,8 +1,13 @@
-import React from 'react'
+import React from "react";
+import { motion } from "framer-motion";
 
 export const Developer = () => {
   return (
-    <tr>
+    <motion.tr
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 5 }}
+    >
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <div className="flex items-center">
           <div className="flex-shrink-0 w-10 h-10">
@@ -13,7 +18,9 @@ export const Developer = () => {
             />
           </div>
           <div className="ml-3">
-            <p className="text-gray-900 whitespace-no-wrap">Vera Carpenter Dev</p>
+            <p className="text-gray-900 whitespace-no-wrap">
+              Vera Carpenter Dev
+            </p>
           </div>
         </div>
       </td>
@@ -35,6 +42,6 @@ export const Developer = () => {
           <span className="relative">New</span>
         </span>
       </td>
-    </tr>
-  )
-}
+    </motion.tr>
+  );
+};

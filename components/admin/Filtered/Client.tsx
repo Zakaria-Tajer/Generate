@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export const Client = () => {
   const [data, setData] = useState<any>([]);
@@ -74,7 +75,14 @@ export const Client = () => {
             | null
             | undefined;
         }) => (
-          <tr key={items.id}>
+          <motion.tr key={items.id}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{delay: 0.5}}
+          exit={{ opacity: 5 }}
+
+          
+          >
             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
               <div className="flex items-center">
                 <div className="flex-shrink-0 w-10 h-10">
@@ -111,7 +119,7 @@ export const Client = () => {
                 <span className="relative">{items.status}</span>
               </span>
             </td>
-          </tr>
+          </motion.tr>
         )
       )}
     </>

@@ -5,7 +5,9 @@ export const initialState: UsersFiltring = {
   Client: false,
   Moderator: false,
   Developer: false,
-  CloseFilter: false
+  CloseFilter: false,
+  Notifications: false,
+  AddUser: false
 };
 
 export const filterSlice = createSlice({
@@ -13,13 +15,22 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     Filtring: (state, action: PayloadAction<UsersFiltring>) => {
-        state.Client = action.payload.Client
-        state.Moderator = action.payload.Moderator
-        state.Developer = action.payload.Developer
-        state.CloseFilter = action.payload.CloseFilter
+      state.Client = action.payload.Client;
+      state.Moderator = action.payload.Moderator;
+      state.Developer = action.payload.Developer;
+      state.CloseFilter = action.payload.CloseFilter;
     },
+
+    showNotifications: (state, action: PayloadAction<UsersFiltring>) => {
+      state.Notifications = action.payload.Notifications;
+    },
+    
+    AddUsers: (state, action: PayloadAction<UsersFiltring>) => {
+      state.AddUser = action.payload.AddUser;
+    },
+
   },
 });
 
-export const { Filtring } = filterSlice.actions;
+export const { Filtring, showNotifications,AddUsers } = filterSlice.actions;
 export default filterSlice.reducer;

@@ -1,15 +1,23 @@
 import {
-  SearchOutlined,
+  PlusOutlined,
   BellOutlined,
   MessageOutlined,
   DownOutlined,
-  PlusOutlined,
+  UserOutlined,
   SettingOutlined,
+  NotificationOutlined,
 } from "@ant-design/icons";
 import { Layouts } from "interfaces/Layouts";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+
+import { AnimatePresence, motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RooteState } from "store/store";
+import { Notifications } from "../Notifications";
+import { AddUsers, showNotifications } from "slices/filterSlice";
+import { AddMultiUsers } from "../AddMultiUsers";
 
 export function AdminNav({ children }: Layouts) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -17,21 +25,73 @@ export function AdminNav({ children }: Layouts) {
   const [hoverdPlus, setHoverdPlus] = useState<boolean>(false);
   const [hoverdChat, setHoverdChat] = useState<boolean>(false);
   const [hoverdSett, setHoverdSett] = useState<boolean>(false);
+  const [hoverdNotif, setHoverdNotif] = useState<boolean>(false);
+
+  const notified = useSelector(
+    (state: RooteState) => state.UsersFiltiring.Notifications
+  );
+
+  const AddingUsers = useSelector(
+    (state: RooteState) => state.UsersFiltiring.AddUser
+  );
+  
+
+  const dispatch: AppDispatch = useDispatch();
 
   return (
     <div className="min-h-screen bg-PureGrey">
       <div className="bg-white h-[70px] flex  justify-between">
-        <div className="flex space-x-10 w-1/2">
+        <div className="flex items-center space-x-4">
           <div className="bg-gray-400 w-28">
             <h1>Logo here</h1>
           </div>
-          <div className="w-2/5 flex items-center relative">
-            <input
-              type="text"
-              placeholder="Search for new Clients etc..."
-              className="w-full py-3 bg-gray-100 px-14 font-poppins outline-none rounded"
-            />
-            <SearchOutlined className="absolute left-4 top-4.1 text-xl text-gray-500" />
+          <div className="pl-10 flex">
+            <Link href="/Admin/dashboard" passHref>
+              <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex">
+                <Image
+                  src="/images/icons/dashboard-5481.svg"
+                  width="20"
+                  height="20"
+                  alt="idk"
+                  className="pr-2"
+                />
+                <h1 className="font-poppins">Dashboard</h1>
+              </div>
+            </Link>
+            <Link href="/Admin/user" passHref>
+              <div className="cursor-pointer space-x-2 w-44  py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center">
+                <UserOutlined className="text-gray-500 " />
+                <h1 className="font-poppins">Users</h1>
+              </div>
+            </Link>
+            <Link href="/Admin/chat" passHref>
+              <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center">
+                <MessageOutlined className="text-gray-500" />
+                <h1 className="font-poppins">Chat</h1>
+              </div>
+            </Link>
+            <Link href="/Admin/settings" passHref>
+              <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center">
+                <SettingOutlined className="text-gray-500" />
+                <h1 className="font-poppins">Settings</h1>
+              </div>
+            </Link>
+            <div
+              className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center"
+              onClick={() =>
+                dispatch(showNotifications({ Notifications: true }))
+              }
+            >
+              <NotificationOutlined className="text-gray-500" />
+              <h1 className="font-poppins">notifications</h1>
+            </div>
+            <div
+              className="cursor-pointer space-x-2 w-44 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center"
+              onClick={() => dispatch(AddUsers({ AddUser: true }))}
+            >
+              <PlusOutlined className="text-gray-500" />
+              <h1 className="font-poppins">Add users</h1>
+            </div>
           </div>
         </div>
         <div className="w-1/2 flex items-center justify-end space-x-4">
@@ -59,90 +119,28 @@ export function AdminNav({ children }: Layouts) {
           </div>
         </div>
       </div>
-      <div className="flex">
-        <div className="w-28 h-[907px] flex flex-col items-center bg-white">
-          <div className=" mt-10 space-y-6 w-full flex flex-col items-center py-2">
-            <div className="relative flex items-center ">
-              <Link href="/Admin/dashboard" passHref>
-                <div
-                  className="px-8 bg-white py-3 rounded flex items-center hover:bg-gray-200 hover:duration-700 cursor-pointer"
-                  onMouseOver={() => setHoverdDash(true)}
-                  onMouseOut={() => setHoverdDash(false)}
-                >
-                  <Image
-                    src="/images/icons/dashboard-5481.svg"
-                    width="20"
-                    height="20"
-                    alt="idk"
-                    className=""
-                  />
-                </div>
-              </Link>
-              {hoverdDash ? (
-                <li className="absolute list-none w-40 text-center py-2 bg-white shadow-xl hover:bg-gray-200 hover:duration-700 left-[6.2rem] rounded cursor-pointer font-poppins text-sm">
-                  Dashboard
-                </li>
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="relative flex items-center ">
-              <Link href="/Admin/user" passHref>
-                <div
-                  className="w-20 bg-white  py-2 rounded flex hover:text-blue-700 items-center justify-center hover:bg-gray-100 hover:duration-700 cursor-pointer"
-                  onMouseOver={() => setHoverdPlus(true)}
-                  onMouseOut={() => setHoverdPlus(false)}
-                >
-                  <PlusOutlined className="text-gray-400 text-lg" />
-                </div>
-              </Link>
-              {hoverdPlus ? (
-                <li className="absolute list-none w-40 text-center py-2 bg-white shadow-xl hover:bg-gray-200 hover:duration-700 left-[6.1rem] rounded cursor-pointer font-poppins text-sm">
-                  Add users
-                </li>
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="relative flex items-center ">
-              <Link href="/Admin/chat" passHref>
-                <div
-                  className="w-20 bg-white  py-2 rounded flex hover:text-blue-700 items-center justify-center hover:bg-gray-100 hover:duration-700 cursor-pointer"
-                  onMouseOver={() => setHoverdChat(true)}
-                  onMouseOut={() => setHoverdChat(false)}
-                >
-                  <MessageOutlined className="text-gray-400 text-lg" />
-                </div>
-              </Link>
-              {hoverdChat ? (
-                <li className="absolute list-none w-40 text-center py-2 bg-white shadow-xl hover:bg-gray-100 hover:duration-700 left-[6.1rem] rounded cursor-pointer font-poppins text-sm">
-                  Chat
-                </li>
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="relative flex items-center ">
-              <Link href="/Admin/settings" passHref>
-                <div
-                  className="w-20 bg-white  py-2 rounded flex hover:text-blue-700 items-center justify-center hover:bg-gray-100 hover:duration-700 cursor-pointer"
-                  onMouseOver={() => setHoverdSett(true)}
-                  onMouseOut={() => setHoverdSett(false)}
-                >
-                  <SettingOutlined className="text-gray-400 text-lg" />
-                </div>
-              </Link>
-              {hoverdSett ? (
-                <li className="absolute list-none w-40 text-center py-2 bg-white shadow-xl hover:bg-gray-100 hover:duration-700 left-[6.1rem] rounded cursor-pointer font-poppins text-sm">
-                  Settings
-                </li>
-              ) : (
-                ""
-              )}
-            </div>
-          </div>
-        </div>
-        <div className="w-full">{children}</div>
+      <div className="">
+        <AnimatePresence>
+          {notified && (
+            <motion.div
+              exit={{ y: "-100vh", opacity: 0, transition: { duration: 0.6 } }}
+              className=""
+            >
+              <Notifications />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {AddingUsers && (
+            <motion.div
+              exit={{ y: "-100vh", opacity: 0, transition: { duration: 0.6 } }}
+              className=""
+            >
+               <AddMultiUsers />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <div className="w-full ">{children}</div>
       </div>
     </div>
   );

@@ -15,4 +15,6 @@ export interface UsersFiltring{
     Moderator?: boolean,
     Developer?: boolean,
     CloseFilter?: boolean,
+    Notifications?: boolean,
+    AddUser?: boolean,
 }
