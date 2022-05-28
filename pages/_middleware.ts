@@ -10,6 +10,10 @@ export function middleware(req: NextRequest, ev: NextFetchEvent) {
         return NextResponse.next()
     }else if(pathname.includes('/client') && !token){
         return NextResponse.redirect(new URL('/', req.url))
+    }else if(pathname.includes('/Admin') && token){
+        return NextResponse.next()
+    }else if(pathname.includes('/Admin/') && !token){
+        return NextResponse.redirect(new URL('/', req.url))
     }
     
 }

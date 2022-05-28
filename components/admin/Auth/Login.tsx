@@ -11,24 +11,27 @@ export const Login = () => {
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
   const Login = () => {
-    let formdata = new FormData();
-    formdata.append("email", email);
-    formdata.append("password", password);
-
-    axios
-      .post("http://localhost:8000/api/adminLogin", formdata, {})
-      .then((res) => {
-        console.log(res);
-        const { bodyMessage, status,token } = res.data;
-
-        if (status == 400) {
-          toast.error(bodyMessage);
-        }else if(status == 201){
-            Cookies.set('token', token)
-            router.push('/Admin/dashboard')
+    const req = new XMLHttpRequest();
+    req.open("POST", "http://localhost:8000/api/SupersUsersLogin", true);
+    req.onload = () => {
+      if (req.readyState === XMLHttpRequest.DONE) {
+        if (req.status === 200) {
+          let response = JSON.parse(req.response.trim());
+          const { bodyMessage, token } = response;
+          if (bodyMessage == "success") {
+            Cookies.set("token", token);
+            router.push("/Admin/dashboard");
+          } else {
+            toast.error(bodyMessage);
+          }
+          console.log(response);
         }
-      });
-    
+      }
+    };
+    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.setRequestHeader("Content-Type", "multipart/form-data");
+
+    req.send(`email=${email}&password=${password}`);
   };
 
   return (

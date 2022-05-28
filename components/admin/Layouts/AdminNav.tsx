@@ -18,15 +18,12 @@ import { AppDispatch, RooteState } from "store/store";
 import { Notifications } from "../Notifications";
 import { AddUsers, showNotifications } from "slices/filterSlice";
 import { AddMultiUsers } from "../AddMultiUsers";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export function AdminNav({ children }: Layouts) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [hoverdDash, setHoverdDash] = useState<boolean>(false);
-  const [hoverdPlus, setHoverdPlus] = useState<boolean>(false);
-  const [hoverdChat, setHoverdChat] = useState<boolean>(false);
-  const [hoverdSett, setHoverdSett] = useState<boolean>(false);
-  const [hoverdNotif, setHoverdNotif] = useState<boolean>(false);
-
+  const router = useRouter();
   const notified = useSelector(
     (state: RooteState) => state.UsersFiltiring.Notifications
   );
@@ -34,8 +31,11 @@ export function AdminNav({ children }: Layouts) {
   const AddingUsers = useSelector(
     (state: RooteState) => state.UsersFiltiring.AddUser
   );
-  
 
+  const Logout = () => {
+    Cookies.remove('token')
+    router.push('/Admin')
+  };
   const dispatch: AppDispatch = useDispatch();
 
   return (
@@ -111,7 +111,10 @@ export function AdminNav({ children }: Layouts) {
             />
             {isOpen && (
               <div className="bg-gray-400 py-2 w-full right-8 rounded absolute top-[4.4rem] list-none space-y-3">
-                <li className="w-full bg-white py-2 px-4 hover:bg-gray-100 hover:duration-700 cursor-pointer">
+                <li
+                  className="w-full bg-white py-2 px-4 hover:bg-gray-100 hover:duration-700 cursor-pointer"
+                  onClick={Logout}
+                >
                   <a className="font-poppins">Logout</a>
                 </li>
               </div>
@@ -136,7 +139,7 @@ export function AdminNav({ children }: Layouts) {
               exit={{ y: "-100vh", opacity: 0, transition: { duration: 0.6 } }}
               className=""
             >
-               <AddMultiUsers />
+              <AddMultiUsers />
             </motion.div>
           )}
         </AnimatePresence>

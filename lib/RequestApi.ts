@@ -41,5 +41,29 @@ function BasicRequest(methods: string, url: string, values?: string) {
 
   req.send(values);
 }
+function SuperUsers(methods: string, url: string, values: string) {
+  const req = new XMLHttpRequest();
+  req.open(methods, url, true);
+  req.onload = () => {
+    if (req.readyState === XMLHttpRequest.DONE) {
+      if (req.status === 200) {
+        // Todo: implement parsing data
+        let data = JSON.parse(req.response.trim())
+        const { bodyMessage } = data
 
-export { BasicRequest,sendEmails};
+        if(bodyMessage == 'Success')
+        {
+          toast.success('Created')
+        }else {
+          toast.error(bodyMessage)
+        }
+      }
+    }
+  };
+  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  req.setRequestHeader("Content-Type", "multipart/form-data");
+
+  req.send(values);
+}
+
+export { BasicRequest,sendEmails , SuperUsers};

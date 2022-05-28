@@ -15,11 +15,12 @@ export const Reference: FC = () => {
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
-          let data = req.response.trim();
-          if (data == "success") {
+          let data = JSON.parse(req.response.trim());
+          const { bodyMessage } = data;
+          if (bodyMessage == "success") {
             dispatch(getLoginSuccess(true));
           } else {
-            toast.error(data);
+            toast.error(bodyMessage);
           }
         }
       }
