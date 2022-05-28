@@ -1,0 +1,7 @@
+{
+    "require": {
+        "altorouter/altorouter": "^2.0",
+        "firebase/php-jwt": "^6.1",
+        "phpmailer/phpmailer": "^6.6"
+    }
+}
