@@ -148,7 +148,3 @@ export function AdminNav({ children }: Layouts) {
     </div>
   );
 }
-
-{
-  /* <SettingOutlined />} */
-}

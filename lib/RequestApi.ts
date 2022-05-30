@@ -49,14 +49,16 @@ function SuperUsers(methods: string, url: string, values: string) {
       if (req.status === 200) {
         // Todo: implement parsing data
         let data = JSON.parse(req.response.trim())
-        const { bodyMessage } = data
+        const { bodyMessage: {Message, role} } = data
 
-        if(bodyMessage == 'Success')
+        if(Message == 'Success')
         {
           toast.success('Created')
         }else {
-          toast.error(bodyMessage)
+          toast.error(Message)
         }
+        console.log(data);
+        
       }
     }
   };

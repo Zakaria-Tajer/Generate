@@ -17,10 +17,17 @@ export const Login = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
           let response = JSON.parse(req.response.trim());
-          const { bodyMessage, token } = response;
+          const { bodyMessage, token, data } = response;
           if (bodyMessage == "success") {
             Cookies.set("token", token);
-            router.push("/Admin/dashboard");
+            Cookies.set("role", data);
+            if (data == "Moderator") {
+              router.push("/moderator");
+            } else if (data == "admin") {
+              router.push("/Admin/dashboard");
+            } else if (data == "Developer") {
+              router.push("/developer");
+            }
           } else {
             toast.error(bodyMessage);
           }

@@ -10,25 +10,31 @@ export const Reference: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const chekKey = () => {
-    const req = new XMLHttpRequest();
-    req.open("POST", "http://localhost:8000/api/ReferenceKey", true);
-    req.onload = () => {
-      if (req.readyState === XMLHttpRequest.DONE) {
-        if (req.status === 200) {
-          let data = JSON.parse(req.response.trim());
-          const { bodyMessage } = data;
-          if (bodyMessage == "success") {
-            dispatch(getLoginSuccess(true));
-          } else {
-            toast.error(bodyMessage);
+    if (key === "") {
+      toast.error("Please fill out the field");
+    } else {
+      const req = new XMLHttpRequest();
+      req.open("POST", "http://localhost:8000/api/ReferenceKey", true);
+      req.onload = () => {
+        if (req.readyState === XMLHttpRequest.DONE) {
+          if (req.status === 200) {
+            let data = JSON.parse(req.response.trim());
+            const { bodyMessage } = data;
+            console.log(data);
+
+            if (bodyMessage == "success") {
+              dispatch(getLoginSuccess(true));
+            } else {
+              toast.error(bodyMessage);
+            }
           }
         }
-      }
-    };
-    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    req.setRequestHeader("Content-Type", "multipart/form-data");
+      };
+      req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      req.setRequestHeader("Content-Type", "multipart/form-data");
 
-    req.send(`Key=${key}`);
+      req.send(`Key=${key}`);
+    }
   };
   return (
     <div className="fixed inset-0 min-h-screen bg-gray-400 flex flex-col items-center justify-center">
