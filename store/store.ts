@@ -3,6 +3,8 @@ import switchReducer from "slices/switchSlice";
 import userReducers from "slices/DataSlice";
 import FilterReducers from "slices/filterSlice";
 import MultiRedecuers from "slices/MultiSlice";
+import SuperUsersInfo from "slices/SuperUsersSlice";
+import ProjectHandler from 'slices/ProjectSlice'
 export const store = configureStore({
   reducer: {
     switch: switchReducer,
@@ -18,6 +20,8 @@ export const store = configureStore({
     ExpiredSession: userReducers,
     UsersFiltiring: FilterReducers,
     HandleMultiUsers: MultiRedecuers,
+    SuperUsers: SuperUsersInfo,
+    ProjectDetails: ProjectHandler,
   },
 });
 

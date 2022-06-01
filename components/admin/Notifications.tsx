@@ -10,7 +10,7 @@ export const Notifications = () => {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 bg-black/10">
+      <div className="fixed z-10 inset-0 bg-black/10">
         <motion.div
           className="w-2/5 rounded-md mx-auto h-[600px] bg-white"
           initial={{ y: "-100vh" }}

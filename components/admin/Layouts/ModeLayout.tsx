@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   PlusOutlined,
   BellOutlined,
@@ -10,8 +11,7 @@ import {
 import { Layouts } from "interfaces/Layouts";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,10 +22,15 @@ import { AddMultiUsers } from "../AddMultiUsers";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 
-export function AdminNav({ children }: Layouts) {
+export function ModeLayout({ children }: Layouts) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [image, setImage] = useState<string>("");
   const router = useRouter();
-
+  useEffect(() => {
+    const datas = localStorage.getItem("dats") || "{}";
+    const { image } = JSON.parse(datas);
+    setImage(image);
+  }, []);
   const notified = useSelector(
     (state: RooteState) => state.UsersFiltiring.Notifications
   );
@@ -33,10 +38,11 @@ export function AdminNav({ children }: Layouts) {
   const AddingUsers = useSelector(
     (state: RooteState) => state.UsersFiltiring.AddUser
   );
+  const img = useSelector((state: RooteState) => state.SuperUsers.img);
 
   const Logout = () => {
-    Cookies.remove('token')
-    router.push('/Admin')
+    Cookies.remove("token");
+    router.push("/Admin");
   };
   const dispatch: AppDispatch = useDispatch();
 
@@ -48,7 +54,7 @@ export function AdminNav({ children }: Layouts) {
             <h1>Logo here</h1>
           </div>
           <div className="pl-10 flex">
-            <Link href="/Admin/dashboard" passHref>
+            <Link href="/moderator" passHref>
               <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex">
                 <Image
                   src="/images/icons/dashboard-5481.svg"
@@ -60,19 +66,14 @@ export function AdminNav({ children }: Layouts) {
                 <h1 className="font-poppins">Dashboard</h1>
               </div>
             </Link>
-            <Link href="/Admin/user" passHref>
-              <div className="cursor-pointer space-x-2 w-44  py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center">
-                <UserOutlined className="text-gray-500 " />
-                <h1 className="font-poppins">Users</h1>
-              </div>
-            </Link>
-            <Link href="/Admin/chat" passHref>
+
+            <Link href="/moderator/chat" passHref>
               <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center">
                 <MessageOutlined className="text-gray-500" />
                 <h1 className="font-poppins">Chat</h1>
               </div>
             </Link>
-            <Link href="/Admin/settings" passHref>
+            <Link href="/moderator/settings" passHref>
               <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center">
                 <SettingOutlined className="text-gray-500" />
                 <h1 className="font-poppins">Settings</h1>
@@ -87,13 +88,6 @@ export function AdminNav({ children }: Layouts) {
               <NotificationOutlined className="text-gray-500" />
               <h1 className="font-poppins">notifications</h1>
             </div>
-            <div
-              className="cursor-pointer space-x-2 w-44 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center"
-              onClick={() => dispatch(AddUsers({ AddUser: true }))}
-            >
-              <PlusOutlined className="text-gray-500" />
-              <h1 className="font-poppins">Add users</h1>
-            </div>
           </div>
         </div>
         <div className="w-1/2 flex items-center justify-end space-x-4">
@@ -106,7 +100,17 @@ export function AdminNav({ children }: Layouts) {
             <BellOutlined className="text-gray-500 text-2xl" />
           </div>
           <div className="flex w-44 h-full items-center justify-evenly relative">
-            <div className="bg-gray-400 w-14 h-14 rounded-full"></div>
+            <div className="bg-gray-400 w-14 h-14 rounded-full">
+              <img
+                src={
+                  img == ""
+                    ? `http://localhost:8000/adminUploads/${image}`
+                    : `http://localhost:8000/adminUploads/${img}`
+                }
+                className="object-cover h-full w-full rounded-full"
+                alt="progile"
+              />
+            </div>
             <DownOutlined
               className="text-gray-500 cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}

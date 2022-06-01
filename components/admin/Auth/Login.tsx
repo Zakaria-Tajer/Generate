@@ -17,21 +17,27 @@ export const Login = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
           let response = JSON.parse(req.response.trim());
-          const { bodyMessage, token, data } = response;
-          if (bodyMessage == "success") {
+          console.log(response);
+          if (response.bodyMessage == "Password Incorrect") {
+            toast.error("Password Incorrect");
+          } else if (response.bodyMessage == "success") {
+            const {
+              token,
+              data: { role, unique_id },
+            } = response;
             Cookies.set("token", token);
-            Cookies.set("role", data);
-            if (data == "Moderator") {
+            Cookies.set("role", role);
+            Cookies.set("unique_id", unique_id);
+            if (role == "Moderator") {
               router.push("/moderator");
-            } else if (data == "admin") {
+            } else if (role == "admin") {
               router.push("/Admin/dashboard");
-            } else if (data == "Developer") {
+            } else if (role == "Developer") {
               router.push("/developer");
             }
           } else {
-            toast.error(bodyMessage);
+            toast.error(response.bodyMessage);
           }
-          console.log(response);
         }
       }
     };

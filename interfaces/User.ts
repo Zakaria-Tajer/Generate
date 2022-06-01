@@ -4,4 +4,9 @@ export interface Auth {
   img: string,
   loaded: boolean
 }
+export interface Project {
+  isOpened?: boolean,
+  nextItems?: boolean,
+  TnxComp?: boolean,
+}
 

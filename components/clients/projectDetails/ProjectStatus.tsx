@@ -5,10 +5,7 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 export const ProjectStatus = () => {
   return (
     <div className="space-y-4">
-      <div className="pl-3">
-        <h1 className="font-poppins text-2xl">Dashboard</h1>
-      </div>
-      <div className="lg:flex lg:w-11/12 lg:mx-auto xl:ml-4 2xl:max-w-5xl justify-between bg-white 2xl:w-4/5 rounded lg:pl-10">
+      <div className="shadow-lg lg:flex lg:w-11/12 lg:mx-auto xl:ml-4 2xl:max-w-5xl justify-between  bg-white 2xl:w-4/5 rounded lg:pl-10">
         <div className="flex flex-col lg:w-fit space-y-6 mb-7">
           <h1 className="pt-6 font-poppins pl-4 lg:pl-0">Project Status</h1>
           <div className="flex py-4 items-center bg-gray-400 mx-auto">
