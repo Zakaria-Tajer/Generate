@@ -8,7 +8,6 @@ import {
   faCalendarDay,
 } from "@fortawesome/free-solid-svg-icons";
 import { PoweroffOutlined } from "@ant-design/icons";
-import { UserContext } from "context/AuthContext";
 import { useMediaQuery } from "react-responsive";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
@@ -17,18 +16,19 @@ import { AppDispatch, RooteState } from "store/store";
 import { projectCreator } from "slices/ProjectSlice";
 import { Create } from "../clients/projectDetails/Create";
 import { AnimatePresence, motion } from "framer-motion";
+import { Notifications } from "../clients/Notifications";
 
 export const Navbar: FC = () => {
   const Mobile = useMediaQuery({ query: "(max-width: 425px)" });
   const Tablet = useMediaQuery({ query: "(max-width: 768px)" });
   const router = useRouter();
 
-  const Logout = () => {
-    Cookies.remove("token");
-    router.reload();
-  };
 
   const data = useSelector((state: RooteState) => state.Data);
+  const Notifiy = useSelector(
+    (state: RooteState) => state.ProjectDetails.Notifiy
+  );
+
   const isCreating = useSelector(
     (state: RooteState) => state.ProjectDetails.isOpened
   );
@@ -45,6 +45,15 @@ export const Navbar: FC = () => {
             exit={{ y: "-100vh", opacity: 0, transition: { duration: 0.7 } }}
           >
             <Create />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {Notifiy && (
+          <motion.div
+            exit={{ y: "-100vh", opacity: 0, transition: { duration: 0.7 } }}
+          >
+            <Notifications />
           </motion.div>
         )}
       </AnimatePresence>

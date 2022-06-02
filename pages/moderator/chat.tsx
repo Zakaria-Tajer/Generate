@@ -1,4 +1,4 @@
-import { ModeLayout } from "@/components/admin/Layouts/ModeLayout";
+import { ModeLayout } from "@/components/moderator/Layouts/ModeLayout";
 
 function Home() {
   

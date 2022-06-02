@@ -55,7 +55,7 @@ export const ComposeEmail = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative z-10">
       <Transition
         as="div"
         className="w-2/5 bg-white shadow-xl p-4 right-2 rounded-lg top-80 absolute"

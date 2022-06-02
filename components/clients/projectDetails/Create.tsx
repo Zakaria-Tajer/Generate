@@ -3,12 +3,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CloseOutlined, DownOutlined } from "@ant-design/icons";
 import { AppDispatch, RooteState } from "store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { NavigateNextItems, projectCreator } from "slices/ProjectSlice";
+import {
+  NavigateNextItems,
+  projectCreator,
+  projectDatas,
+} from "slices/ProjectSlice";
 import Image from "next/image";
 import { NextBtn } from "./NextBtn";
 import { Finalise } from "./Finalise";
 import toast from "react-hot-toast";
-
+import { createProject } from "lib/RequestApi";
+import { nanoid } from "nanoid";
 export const Create = () => {
   const dispatch: AppDispatch = useDispatch();
   const [isTimed, setIsTimed] = useState<boolean>(false);
@@ -22,7 +27,10 @@ export const Create = () => {
   setTimeout(() => {
     setIsTimed(true);
   }, 3500);
+
   const datas = useSelector((state: RooteState) => state.Data);
+  const client_id = useSelector((state: RooteState) => state.Data.uniqueId);
+
   const nextItem = useSelector(
     (state: RooteState) => state.ProjectDetails.nextItems
   );
@@ -40,6 +48,19 @@ export const Create = () => {
         setIsEmpty(true);
         toast.error(" All fields are required");
       } else {
+        const uniqueId = nanoid(10);
+        dispatch(
+          projectDatas({
+            projectName: projectName,
+            projectDesc: description,
+            deliverType: isType,
+          })
+        );
+        createProject(
+          "POST",
+          "http://localhost:8000/api/createProject",
+          `projectName=${projectName}&Delivery=${isType}&birefProjectDesc=${description}&Project_unique_id=${uniqueId}&client_id=${client_id}`
+        );
         setTnxCom(true);
       }
     }

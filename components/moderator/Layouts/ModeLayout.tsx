@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import {
-  PlusOutlined,
   BellOutlined,
   MessageOutlined,
   DownOutlined,
-  UserOutlined,
   SettingOutlined,
   NotificationOutlined,
 } from "@ant-design/icons";
@@ -16,11 +14,11 @@ import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RooteState } from "store/store";
-import { Notifications } from "../Notifications";
-import { AddUsers, showNotifications } from "slices/filterSlice";
-import { AddMultiUsers } from "../AddMultiUsers";
+import { showNotifications } from "slices/filterSlice";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { revalidate } from "lib/revalidating";
+import { NotificationsMod } from "../NotificationsMod";
 
 export function ModeLayout({ children }: Layouts) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -46,6 +44,10 @@ export function ModeLayout({ children }: Layouts) {
   };
   const dispatch: AppDispatch = useDispatch();
 
+  const getNot = () => {
+    revalidate();
+    dispatch(showNotifications({ Notifications: true }));
+  };
   return (
     <div className="min-h-screen bg-PureGrey">
       <div className="bg-white h-[70px] flex  justify-between">
@@ -81,9 +83,7 @@ export function ModeLayout({ children }: Layouts) {
             </Link>
             <div
               className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center"
-              onClick={() =>
-                dispatch(showNotifications({ Notifications: true }))
-              }
+              onClick={getNot}
             >
               <NotificationOutlined className="text-gray-500" />
               <h1 className="font-poppins">notifications</h1>
@@ -135,20 +135,11 @@ export function ModeLayout({ children }: Layouts) {
               exit={{ y: "-100vh", opacity: 0, transition: { duration: 0.6 } }}
               className=""
             >
-              <Notifications />
+              <NotificationsMod />
             </motion.div>
           )}
         </AnimatePresence>
-        <AnimatePresence>
-          {AddingUsers && (
-            <motion.div
-              exit={{ y: "-100vh", opacity: 0, transition: { duration: 0.6 } }}
-              className=""
-            >
-              <AddMultiUsers />
-            </motion.div>
-          )}
-        </AnimatePresence>
+
         <div className="w-full ">{children}</div>
       </div>
     </div>

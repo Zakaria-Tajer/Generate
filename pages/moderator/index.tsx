@@ -1,15 +1,45 @@
-import { ModeLayout } from "@/components/admin/Layouts/ModeLayout";
+import { ClientProjectRequests } from "@/components/moderator/ClientProjectRequests";
+import { ModeLayout } from "@/components/moderator/Layouts/ModeLayout";
+import axios from "axios";
 import { Layouts } from "interfaces/Layouts";
 import Cookies from "js-cookie";
+import { revalidate } from "lib/revalidating";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getSuperUsersInfo } from "slices/SuperUsersSlice";
 import { AppDispatch } from "store/store";
 
-function Home() {
+export const getStaticProps: GetStaticProps = async () => {
+
+  const res = await fetch("http://localhost:8000/api/ModNotifications" , {
+    method: "POST",
+    headers: {
+      "Content-Type": 'multipart/form-data'
+    },
+    body: JSON.stringify('37')
+  });
+  const posts = await res.json();
+  console.log(posts);
+  return {
+    props: {
+      posts,
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 10 seconds
+    revalidate: 5, // In seconds
+  };
+
+};
+
+function Home({ posts }: any) {
+  console.log(posts);
+
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
+    revalidate();
     const unique_id = Cookies.get("unique_id");
     const req = new XMLHttpRequest();
     req.open("POST", "http://localhost:8000/api/SupersUsersInfo", true);
@@ -51,6 +81,7 @@ function Home() {
       <Head>
         <title>Dashboard</title>
       </Head>
+      {/* <ClientProjectRequests /> */}
     </>
   );
 }

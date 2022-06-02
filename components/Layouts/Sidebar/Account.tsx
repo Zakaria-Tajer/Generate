@@ -6,13 +6,22 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "store/store";
+import { NotificationsHandling } from "slices/ProjectSlice";
+
 export const Account = () => {
   const router = useRouter();
   const Logout = () => {
     Cookies.remove("token");
     router.reload();
   };
+  
   const Tablet = useMediaQuery({ query: "(max-width: 768px)" });
+  const dispatch: AppDispatch = useDispatch();
+  const notificationsBtn = () => {
+    dispatch(NotificationsHandling({ Notifiy: true }));
+  };
   return (
     <>
       <Link href="/client/settings" passHref>
@@ -21,7 +30,10 @@ export const Account = () => {
           <a className="font-poppins text-lg py-3">Settings</a>
         </li>
       </Link>
-      <li className="flex items-center w-72 rounded-md mx-auto px-16 cursor-pointer text-gray-400 hover:bg-gray-400/25 hover:text-blue-700 hover:duration-700">
+      <li
+        className="flex items-center w-72 rounded-md mx-auto px-16 cursor-pointer text-gray-400 hover:bg-gray-400/25 hover:text-blue-700 hover:duration-700"
+        onClick={notificationsBtn}
+      >
         <FontAwesomeIcon icon={faBell} className="mr-3 text-lg " />
         <a className="font-poppins text-lg py-3">Notifications</a>
       </li>
