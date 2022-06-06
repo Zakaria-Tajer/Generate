@@ -4,26 +4,15 @@ import {
   MessageOutlined,
   PhoneOutlined,
 } from "@ant-design/icons";
-import { UserContext } from "context/AuthContext";
 import { motion } from "framer-motion";
-import { Datas, NotificationModerator } from "interfaces/User";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NotificationsDataHandler } from "slices/NotificationSlice";
-// import { NotificationsDataHandler } from "slices/NotificationSlice";
-import { AppDispatch, RooteState } from "store/store";
-import { Details } from "./notificationDetails/Details";
 
 export const ClientNotifications = () => {
-  let arr: any[] = [];
   const [isShowing, setIsShowing] = useState<boolean>(false);
   const [isChat, setIsChat] = useState<boolean>(false);
   const [isData, setIsData] = useState<any>([]);
-  const dispatch: AppDispatch = useDispatch();
-  // const Notifications = useSelector((state: Datas) => state.ClientData.map((item)=> (
-  //   arr.push(item)
-  // )));
+
   useEffect(() => {
     const req = new XMLHttpRequest();
     req.open("POST", "http://localhost:8000/api/ModNotifications", true);
@@ -54,7 +43,13 @@ export const ClientNotifications = () => {
     <>
       {isData.map(
         (
-          item: { img: any; first_name: any; CLientLastName: any; email: any },
+          item: {
+            img: any;
+            first_name: any;
+            CLientLastName: any;
+            email: any;
+            last_name: any;
+          },
           i: React.Key | null | undefined
         ) => (
           <div
@@ -127,7 +122,7 @@ export const ClientNotifications = () => {
               </div>
               <div className="ml-3 text-sm font-normal">
                 <h4 className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {`${item.first_name}${" "}${item.CLientLastName}`}
+                  {`${item.first_name}${" "}${item.last_name}`}
                 </h4>
                 <div className="text-sm font-normal font-poppins ">
                   Requesting new project
