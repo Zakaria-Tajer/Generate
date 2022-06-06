@@ -2,6 +2,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { createContext } from "react";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "store/store";
 
 function sendEmails(methods: string, url: string, values?: string) {
   const req = new XMLHttpRequest();
@@ -73,11 +75,10 @@ function createProject(methods: string, url: string, values: string) {
       if (req.status === 200) {
         let data = JSON.parse(req.response.trim());
         console.log(data);
-        const { bodyMessage } = data
-        if(bodyMessage == 'success'){
-
-        }else {
-          toast.error(bodyMessage)
+        const { bodyMessage } = data;
+        if (bodyMessage == "success") {
+        } else {
+          toast.error(bodyMessage);
         }
       }
     }
@@ -87,5 +88,6 @@ function createProject(methods: string, url: string, values: string) {
 
   req.send(values);
 }
+
 
 export { BasicRequest, sendEmails, SuperUsers, createProject };

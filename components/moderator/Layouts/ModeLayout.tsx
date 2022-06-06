@@ -45,7 +45,6 @@ export function ModeLayout({ children }: Layouts) {
   const dispatch: AppDispatch = useDispatch();
 
   const getNot = () => {
-    revalidate();
     dispatch(showNotifications({ Notifications: true }));
   };
   return (

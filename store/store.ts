@@ -5,6 +5,7 @@ import FilterReducers from "slices/filterSlice";
 import MultiRedecuers from "slices/MultiSlice";
 import SuperUsersInfo from "slices/SuperUsersSlice";
 import ProjectHandler from 'slices/ProjectSlice'
+import NotificationsHandlingDatas from 'slices/NotificationSlice'
 export const store = configureStore({
   reducer: {
     switch: switchReducer,
@@ -22,6 +23,7 @@ export const store = configureStore({
     HandleMultiUsers: MultiRedecuers,
     SuperUsers: SuperUsersInfo,
     ProjectDetails: ProjectHandler,
+    NotoficationsDetails: NotificationsHandlingDatas,
   },
 });
 

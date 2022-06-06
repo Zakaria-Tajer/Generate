@@ -1,8 +1,8 @@
 // ProjectSlice
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Auth, NotificationModerator } from "interfaces/User";
+import { Auth, Project } from "interfaces/User";
 
-export const initialState: NotificationModerator = {
+export const initialState: Project = {
   isOpened: false,
   nextItems: false,
   TnxComp: false,
@@ -10,45 +10,26 @@ export const initialState: NotificationModerator = {
   projectName: "",
   deliverType: "",
   Notifiy: false,
-  CLientFirstName: "",
-  CLientLastName: "",
-  CLientImage: "",
-  CLientId: "",
 };
 
 export const ProjectSlice = createSlice({
   name: "MultiUsers",
   initialState,
   reducers: {
-    projectCreator: (state, action: PayloadAction<NotificationModerator>) => {
+    projectCreator: (state, action: PayloadAction<Project>) => {
       state.isOpened = action.payload.isOpened;
     },
-    NavigateNextItems: (
-      state,
-      action: PayloadAction<NotificationModerator>
-    ) => {
+    NavigateNextItems: (state, action: PayloadAction<Project>) => {
       state.nextItems = action.payload.nextItems;
       state.TnxComp = action.payload.TnxComp;
     },
-    projectDatas: (state, action: PayloadAction<NotificationModerator>) => {
+    projectDatas: (state, action: PayloadAction<Project>) => {
       state.projectDesc = action.payload.projectDesc;
       state.projectName = action.payload.projectName;
       state.deliverType = action.payload.deliverType;
     },
-    NotificationsHandling: (
-      state,
-      action: PayloadAction<NotificationModerator>
-    ) => {
+    NotificationsHandling: (state, action: PayloadAction<Project>) => {
       state.Notifiy = action.payload.Notifiy;
-    },
-    NotificationsDataHandler: (
-      state,
-      action: PayloadAction<NotificationModerator>
-    ) => {
-      state.CLientFirstName = action.payload.CLientFirstName;
-      state.CLientLastName = action.payload.CLientLastName;
-      state.CLientImage = action.payload.CLientImage;
-      state.CLientId = action.payload.CLientId;
     },
   },
 });
@@ -57,6 +38,5 @@ export const {
   NavigateNextItems,
   projectDatas,
   NotificationsHandling,
-  NotificationsDataHandler
 } = ProjectSlice.actions;
 export default ProjectSlice.reducer;
