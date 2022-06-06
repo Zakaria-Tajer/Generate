@@ -53,7 +53,7 @@ export const MainSnc = () => {
         let formdata = new FormData();
         formdata.append("email", email);
         axios
-          .post("http://localhost:8000/api/clientCredential", formdata, {})
+          .post(`${process.env.NEXT_PUBLIC_API_URL_Generate}api/clientCredential`, formdata, {})
           .then((res) => {
             const data = res.data;
             console.log(data);
@@ -66,7 +66,7 @@ export const MainSnc = () => {
         let formdata = new FormData();
         formdata.append("email", email);
         axios
-          .post("http://localhost:8000/api/clientCredential", formdata, {})
+          .post(`${process.env.NEXT_PUBLIC_API_URL_Generate}api/clientCredential`, formdata, {})
           .then((res) => {
             const data = res.data;
             console.log(data);

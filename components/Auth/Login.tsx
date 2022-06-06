@@ -21,7 +21,7 @@ export const Login: FC = () => {
   const router = useRouter();
   const save = () => {
     const req = new XMLHttpRequest();
-    req.open("POST", "generate-backend.vercel.app/api/userLogin", true);
+    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/userLogin`, true);
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {

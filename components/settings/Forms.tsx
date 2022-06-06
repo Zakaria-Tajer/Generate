@@ -31,7 +31,7 @@ export const Forms = () => {
     setIsImg(image);
 
     const req = new XMLHttpRequest();
-    req.open("POST", "http://localhost:8000/api/CheckAdditionalInfo", true);
+    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/CheckAdditionalInfo`, true);
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
@@ -69,7 +69,7 @@ export const Forms = () => {
       formdata.append("emailAdress", email);
 
       axios
-        .post("http://localhost:8000/api/AdditionalInfo", formdata, {})
+        .post(`${process.env.NEXT_PUBLIC_API_URL_Generate}api/AdditionalInfo`, formdata, {})
         .then((res) => {
           const { data } = res;
           console.log(data);

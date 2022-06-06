@@ -36,7 +36,7 @@ export const ComposeEmail = () => {
 
   const sendEmail = () => {
     const req = new XMLHttpRequest();
-    req.open("POST", "http://localhost:8000/api/Emailing", true);
+    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/Emailing`, true);
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {

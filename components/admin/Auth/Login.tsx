@@ -12,7 +12,7 @@ export const Login = () => {
   const router = useRouter();
   const Login = () => {
     const req = new XMLHttpRequest();
-    req.open("POST", "http://localhost:8000/api/SupersUsersLogin", true);
+    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/SupersUsersLogin`, true);
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {

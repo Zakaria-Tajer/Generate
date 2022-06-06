@@ -19,7 +19,7 @@ export const ProfileSection = () => {
 
   const SaveChanges = () => {
     const req = new XMLHttpRequest();
-    req.open("POST", "http://localhost:8000/api/updateCredential", true);
+    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/updateCredential`, true);
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {

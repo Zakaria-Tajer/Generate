@@ -8,7 +8,7 @@ export const Client = () => {
 
   useEffect(() => {
     const req = new XMLHttpRequest();
-    req.open("POST", "http://localhost:8000/api/getClients", true);
+    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/getClients`, true);
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {

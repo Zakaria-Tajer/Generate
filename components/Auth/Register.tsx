@@ -50,7 +50,7 @@ export const Register: FC = () => {
         formdata.append("confirmationPassword", confirmationPassword);
         formdata.append("unique_id", unique_id);
 
-        axios.post("http://localhost:8000/api/user", formdata, {}).then((res) => {
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL_Generate}api/user`, formdata, {}).then((res) => {
           const { data } = res;
           console.log(data);
           if(data.bodyMessage == 'success'){

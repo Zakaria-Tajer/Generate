@@ -5,17 +5,21 @@ import {
   PhoneOutlined,
 } from "@ant-design/icons";
 import { motion } from "framer-motion";
+import { setNotToIsDeleted } from "lib/RequestApi";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { NotificationsDataHandler } from "slices/NotificationSlice";
+import { AppDispatch } from "store/store";
 
 export const ClientNotifications = () => {
   const [isShowing, setIsShowing] = useState<boolean>(false);
   const [isChat, setIsChat] = useState<boolean>(false);
   const [isData, setIsData] = useState<any>([]);
-
+  const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
     const req = new XMLHttpRequest();
-    req.open("POST", "http://localhost:8000/api/ModNotifications", true);
+    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/ModNotifications`, true);
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
@@ -23,13 +27,15 @@ export const ClientNotifications = () => {
 
           console.log(data);
           setIsData(data);
+
+          dispatch(NotificationsDataHandler({ ClientData: data }));
         }
       }
     };
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     req.setRequestHeader("Content-Type", "multipart/form-data");
     req.send();
-  }, []);
+  }, [dispatch]);
   const Message = () => {
     // Todo: Invite the client to a room
   };
@@ -38,6 +44,9 @@ export const ClientNotifications = () => {
   };
   const Mail = () => {
     // Todo: Send Emails for clients
+  };
+  const setDelete = () => {
+    setNotToIsDeleted("POST",`${process.env.NEXT_PUBLIC_API_URL_Generate}api/`,'')
   };
   return (
     <>
@@ -63,10 +72,7 @@ export const ClientNotifications = () => {
               </span>
               <div className="flex ml-auto space-x-2">
                 {/* Todo:click event */}
-                <span
-                  className="mb-1 ml-auto cursor-pointer text-sm font-semibold text-gray-900 dark:text-white"
-                  onClick={() => setIsShowing(!isShowing)}
-                >
+                <span className="mb-1 ml-auto cursor-pointer text-sm font-semibold text-gray-900 dark:text-white">
                   <Image
                     src="/images/icons/5107639.png"
                     width="20"
@@ -79,6 +85,7 @@ export const ClientNotifications = () => {
                   className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
                   data-dismiss-target="#toast-notification"
                   aria-label="Close"
+                  onClick={setDelete}
                 >
                   <span className="sr-only">Close</span>
                   <svg
@@ -132,44 +139,20 @@ export const ClientNotifications = () => {
                 </span>
               </div>
             </div>
-            {isShowing && (
-              <motion.div
-                className=" w-full max-w-lg p-4 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ type: "spring", delay: 0.4 }}
-              >
-                <div className="py-3 border-b-[1px] flex space-x-3">
-                  <div className="w-14 h-14 rounded-full">
-                    <img
-                      className="w-14 h-14 object-cover rounded-full"
-                      width="14"
-                      height="14"
-                      alt="profile pic"
-                      src={`http://localhost:8000/uploads/${item.img}`}
-                    />
-                  </div>
-                  <div className="">
-                    <h1 className="text-lg font-poppins">{item.email}</h1>
-                    <p className="text-sm font-normal font-poppins">Client</p>
-                  </div>
-                </div>
-                <div className="w-full mt-2 flex">
-                  <MessageOutlined
-                    className="w-1/3 py-4 bg-white border-r-[1px] cursor-pointer"
-                    onClick={Message}
-                  />
-                  <PhoneOutlined
-                    className="w-1/3 py-4 bg-white border-r-[1px] cursor-pointer"
-                    onClick={VideoCall}
-                  />
-                  <MailOutlined
-                    className="w-1/3 py-4 bg-white border-r-[1px] cursor-pointer"
-                    onClick={Mail}
-                  />
-                </div>
-              </motion.div>
-            )}
+            <div className="w-full mt-2 flex">
+              <MessageOutlined
+                className="w-1/3 py-4 bg-white border-r-[1px] cursor-pointer"
+                // onClick={Message}
+              />
+              <PhoneOutlined
+                className="w-1/3 py-4 bg-white border-r-[1px] cursor-pointer"
+                // onClick={VideoCall}
+              />
+              <MailOutlined
+                className="w-1/3 py-4 bg-white border-r-[1px] cursor-pointer"
+                // onClick={Mail}
+              />
+            </div>
           </div>
         )
       )}

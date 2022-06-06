@@ -4,7 +4,8 @@ import { Datas } from "interfaces/User";
 export const initialState: Datas = {
   ClientData: [],
 };
-
+export interface Opn {
+}
 export const NotificationSlice = createSlice({
   name: "MultiUsers",
   initialState,

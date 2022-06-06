@@ -12,7 +12,7 @@ export const Developer = () => {
 
     SuperUsers(
       "POST",
-      "http://localhost:8000/api/SuperUsers",
+      `${process.env.NEXT_PUBLIC_API_URL_Generate}api/SuperUsers`,
       `FirstName=${fname}&LastName=${lname}&email=${email}&password=${password}&unique_id=${unique_id}&role=${"Developer"}`
     );
   };
