@@ -45,33 +45,7 @@ function Home() {
     req.send(`unique_id=${unique_id}`);
   }, [dispatch]);
 
-  useEffect(() => {
-    const req = new XMLHttpRequest();
-    req.open("POST", "http://localhost:8000/api/ModNotifications", true);
-    req.onload = () => {
-      if (req.readyState === XMLHttpRequest.DONE) {
-        if (req.status === 200) {
-          let data = JSON.parse(req.response.trim());
-
-          console.log(data);
-
-          let arr: Datas[] = [];
-          data.map((item: any) => {
-            arr.push(item);
-            dispatch(
-              NotificationsDataHandler({
-                ClientData: arr,
-              })
-            );
-            console.log(item);
-          });
-        }
-      }
-    };
-    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    req.setRequestHeader("Content-Type", "multipart/form-data");
-    req.send();
-  }, [dispatch]);
+  
   return (
     <>
       <Head>
