@@ -1,19 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Datas } from "interfaces/User";
+import { Datas, notes } from "interfaces/User";
 
 export const initialState: Datas = {
   ClientData: [],
 };
-export interface Opn {
-}
+
 export const NotificationSlice = createSlice({
   name: "MultiUsers",
   initialState,
   reducers: {
-    NotificationsDataHandler: (state, action: PayloadAction<Datas>) => {
-      let array: Datas[] = [];
+    NotificationsDataHandler: (
+      state = initialState,
+      action: PayloadAction<Datas>
+    ) => {
+      let array: notes[] = [];
       array.push(...state.ClientData, ...action.payload.ClientData);
     },
+    
   },
 });
 export const { NotificationsDataHandler } = NotificationSlice.actions;

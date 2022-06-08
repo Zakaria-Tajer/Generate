@@ -25,7 +25,21 @@ export interface NotificationModerator {
   showDetails?: boolean;
   E_mail?: string[];
 }
+export interface notes {
+  CLientFirstName?: string[];
+  CLientLastName?: string[];
+  img?: string[];
+  id?: string;
+  Project_unique_id?: string[];
+  deliverType?: string[];
+  projectDesc?: string[];
+  projectName?: string[];
+  last_name?: string[];
+  first_name?: string[];
+}
 
 export interface Datas {
-  ClientData: any[];
+  ClientData: notes[];
 }
+
+

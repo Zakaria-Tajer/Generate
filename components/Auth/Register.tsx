@@ -6,7 +6,7 @@ import { AppDispatch } from "store/store";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import ReactLoading from 'react-loading';
+import ReactLoading from "react-loading";
 import shortUUID from "short-uuid";
 
 export const Register: FC = () => {
@@ -27,7 +27,7 @@ export const Register: FC = () => {
     setFile(e.target.files[0]);
   };
   const getRegisterData = () => {
-    const unique_id = shortUUID.generate()
+    const unique_id = shortUUID.generate();
     if (
       firstName !== "" &&
       LastName !== "" &&
@@ -49,23 +49,28 @@ export const Register: FC = () => {
         formdata.append("password", password);
         formdata.append("confirmationPassword", confirmationPassword);
         formdata.append("unique_id", unique_id);
+        formdata.append("NotAdded", "NotAdded");
 
-        axios.post(`${process.env.NEXT_PUBLIC_API_URL_Generate}api/user`, formdata, {}).then((res) => {
-          const { data } = res;
-          console.log(data);
-          if(data.bodyMessage == 'success'){
-              Cookies.set('token', data.token)
-              router.push('/client')
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_API_URL_Generate}api/user`,
+            formdata,
+            {}
+          )
+          .then((res) => {
+            const { data } = res;
+            console.log(data);
+            if (data.bodyMessage == "success") {
+              Cookies.set("token", data.token);
+              router.push("/client");
               console.log(unique_id);
-          }else {
-            toast.error(data.bodyMessage)
-          }
-        });
-    
+            } else {
+              toast.error(data.bodyMessage);
+            }
+          });
       }
     } else {
       toast.error("All fields are required");
-      
     }
   };
 

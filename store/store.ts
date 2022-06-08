@@ -4,8 +4,9 @@ import userReducers from "slices/DataSlice";
 import FilterReducers from "slices/filterSlice";
 import MultiRedecuers from "slices/MultiSlice";
 import SuperUsersInfo from "slices/SuperUsersSlice";
-import ProjectHandler from 'slices/ProjectSlice'
-import NotificationsHandlingDatas from 'slices/NotificationSlice'
+import ProjectHandler from "slices/ProjectSlice";
+import NotificationsHandlingDatas from "slices/NotificationSlice";
+import ChatDataHandler from "slices/ChatSlice";
 export const store = configureStore({
   reducer: {
     switch: switchReducer,
@@ -24,6 +25,7 @@ export const store = configureStore({
     SuperUsers: SuperUsersInfo,
     ProjectDetails: ProjectHandler,
     NotoficationsDetails: NotificationsHandlingDatas,
+    ChatClient: ChatDataHandler,
   },
 });
 
