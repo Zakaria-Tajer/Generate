@@ -1,5 +1,4 @@
 import Cookies from "js-cookie";
-import { UserContext } from "context/AuthContext";
 import axios from "axios";
 import { Loading } from "@/components/Layouts/Loading";
 import React, { useEffect, useState } from "react";
