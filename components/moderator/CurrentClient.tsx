@@ -2,7 +2,7 @@
 import { SpecClient } from "interfaces/Chat";
 import React, { useContext, useEffect, useState } from "react";
 
-export const Chat = ({ currentId }: SpecClient) => {
+export const CurrentClient = ({ currentId }: SpecClient) => {
   const [chatData, setChatData] = useState<any>([]);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export const Chat = ({ currentId }: SpecClient) => {
     };
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     req.setRequestHeader("Content-Type", "multipart/form-data");
-    req.send(`id=${currentId.current.value}`);
+    req.send(`id=${currentId}`);
   }, [currentId]);
 
   return (

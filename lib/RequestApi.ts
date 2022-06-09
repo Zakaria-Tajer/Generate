@@ -1,3 +1,4 @@
+import axios from "axios";
 import toast from "react-hot-toast";
 
 function sendEmails(methods: string, url: string, values?: string) {
@@ -100,6 +101,7 @@ function setNotToIsDeleted(methods: string, url: string, values: string) {
 
   req.send(values);
 }
+
 
 export {
   BasicRequest,

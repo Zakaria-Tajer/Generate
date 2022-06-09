@@ -9,8 +9,19 @@ export interface SpecClient {
   first_name?: string;
   last_name?: string;
   img?: string;
-  id?: string,
+  id: string,
 }
 export interface ChatNotes {
     Chat_Data_Users?: Chat_Users[],
+}
+
+export interface MessagesData {
+  ModeratorText?: string;
+  id?: number;
+  CLientText?: string,
+  CurrentClientId?: string,
+  CurrentModeratorId?: string,
+}
+export interface MsgAllData {
+  ChatModClientData: MsgAllData[]
 }
