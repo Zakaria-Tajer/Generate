@@ -21,6 +21,7 @@ export interface MessagesData {
   CLientText?: string,
   CurrentClientId?: string,
   CurrentModeratorId?: string,
+  moderatorId?: string,
 }
 export interface MsgAllData {
   ChatModClientData: MsgAllData[]

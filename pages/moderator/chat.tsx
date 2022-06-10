@@ -3,7 +3,16 @@ import { CurrentClient } from "@/components/moderator/CurrentClient";
 import { ModeLayout } from "@/components/moderator/Layouts/ModeLayout";
 import { MessageSys } from "@/components/moderator/MessageSys";
 import { RightOutlined } from "@ant-design/icons";
-import { addDoc, collection, doc,query, onSnapshot, orderBy, limit } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  query,
+  onSnapshot,
+  orderBy,
+  limit,
+  where,
+} from "firebase/firestore";
 import { Chat_Users, SpecClient } from "interfaces/Chat";
 import Cookies from "js-cookie";
 import { db } from "lib/firebase";
@@ -12,21 +21,55 @@ import { Key, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ChatData } from "slices/ChatSlice";
 import { AppDispatch, RooteState } from "store/store";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { useFirestoreQuery } from "@react-query-firebase/firestore";
 
-function Home() {
+export interface Text {
+  ModeratorText: string;
+  CLientText: string;
+  id: string;
+}
+
+function Chat() {
   const [isData, setIsData] = useState<any>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isMsg, setIsMsg] = useState<boolean>(false);
   const [isId, setIsId] = useState<string>("");
- 
+  const [Fname, setFname] = useState<string>("");
+  const [Lname, setLname] = useState<string>("");
+  const [modId, setModId] = useState<string>("");
+  const MessageCollection = collection(db, "messages");
+  const [ModMessage, setModMessage] = useState<string>("");
+  const [messages, setMessages] = useState<any>([]);
+  const clientText = "bruueedededjuh";
+
   let color = randColor();
   const dispatch: AppDispatch = useDispatch();
-  // const reference = useRef<HTMLInputElement>(null);
-  const moderatorData = useSelector((state: RooteState) => state.SuperUsers);
-  const MessageCollection = collection(db, "messages");
+  const date = new Date();
+
+  const ref = query(
+    collection(db, "messages"),
+    limit(50)
+    // where("createdAt", "<=", date),
+  );
 
   useEffect(() => {
-    
+    onSnapshot(ref, (snapshot) => {
+      setMessages(snapshot.docs.map((doc) => doc.data()));
+    });
+  }, []);
+
+  useEffect(() => {
+    const { fname, lname, id } = JSON.parse(
+      localStorage.getItem("dats") || "{}"
+    );
+    setFname(fname);
+    setLname(lname);
+    setModId(id);
+    console.log(messages);
+  }, []);
+
+  useEffect(() => {
     const req = new XMLHttpRequest();
     req.open(
       "POST",
@@ -50,11 +93,18 @@ function Home() {
     req.send(`id=${isId}`);
   }, [dispatch, isId]);
 
-  const getTheClient = async () => {
-    // console.log(isId);
-    // await addDoc(MessageCollection, {Client_id: 1, Moderator_id: 12,ModeratorText: 'ModMessage',CLientText: ''})
-
+  const getTheClient = () => {
     setIsOpen(true);
+  };
+
+  const sendMsg = async () => {
+    await addDoc(MessageCollection, {
+      CurrentClientId: isId,
+      CurrentModeratorId: modId,
+      ModeratorText: ModMessage,
+      CLientText: clientText,
+      createdAt: date,
+    });
   };
 
   return (
@@ -71,7 +121,6 @@ function Home() {
                 onClick={() => setIsId(item.id)}
               >
                 <div className="flex">
-                  {/* <input type="hidden" value={item.id} ref={reference} /> */}
                   <div className="w-12 h-12 rounded-full bg-gray-400">
                     <img
                       src={`${process.env.NEXT_PUBLIC_API_URL_Generate}uploads/${item.img}`}
@@ -91,13 +140,43 @@ function Home() {
             ))}
           </div>
         </div>
-        {isOpen && <CurrentClient id="1" currentId={isId} />}
-        <MessageSys  id={1} CurrentClientId={isId}/>
+        {isOpen && (
+          <div className="bg-white w-2/3 flex">
+            <CurrentClient id="1" currentId={isId} />
+            <div className="h-[908px] w-3/5 ml-auto relative bg-blue-400">
+              <div className="mt-6 w-full h-[800px] overflow-auto overflow-x-hidden">
+                {/* <MessageSys  */}
+                {messages.map(({ ModeratorText, CLientText, id }: Text) => (
+                  <MessageSys
+                    ModeratorText={ModeratorText}
+                    CLientText={CLientText}
+                    key={id}
+                    id={id}
+                  />
+                ))}
+              </div>
+              <div className="bottom-5 absolute w-full flex justify-center items-center space-x-4">
+                <input
+                  type="text"
+                  className="w-3/4 py-3 border-2 outline-none px-4 focus:border-Teal rounded-md focus:duration-500"
+                  placeholder="message here..."
+                  onChange={(e) => setModMessage(e.target.value)}
+                />
+                <button
+                  className="bg-[#4169e1] text-white py-3 focus:ring-offset-2 ring-Teal focus:ring-2 focus:duration-500 px-10 rounded-md"
+                  onClick={sendMsg}
+                >
+                  Send
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
 }
 
-Home.PageLayout = ModeLayout;
+Chat.PageLayout = ModeLayout;
 
-export default Home;
+export default Chat;

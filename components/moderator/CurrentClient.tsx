@@ -31,7 +31,7 @@ export const CurrentClient = ({ currentId }: SpecClient) => {
       {chatData.map((item: SpecClient) => (
         <div
           key={item.id}
-          className="w-1/4 pt-16 space-y-4 border-l-2 border-blue-500"
+          className="w-1/3 pt-16 space-y-4 border-l-2 border-blue-500"
         >
           <div className="flex py-2 rounded-md ml-4 w-4/5 bg-purple-400">
             <div className="w-12 h-12 rounded-full bg-gray-400 ml-3">
