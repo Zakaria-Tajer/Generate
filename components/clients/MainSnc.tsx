@@ -85,7 +85,7 @@ export const MainSnc = () => {
           });
       }
     }
-    dispatch(updateCred({ fName, lName,img,uniqueId }));
+    dispatch(updateCred({ fName, lName,img,uniqueId}));
     dispatch(isExpiredSess(true))
 
   }, [dispatch, email, expired, fName, img, lName, uniqueId]);

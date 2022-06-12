@@ -103,7 +103,7 @@ function Chat() {
       CurrentClientId: isId,
       CurrentModeratorId: modId,
       ModeratorText: ModMessage,
-      CLientText: clientText,
+      CLientText: "",
       createdAt: date,
     });
   };

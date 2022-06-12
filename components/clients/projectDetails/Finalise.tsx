@@ -1,8 +1,22 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { AppDispatch, RooteState } from "store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { projectCreator } from "slices/ProjectSlice";
+import { BasicRequest } from "lib/RequestApi";
 
 export const Finalise = () => {
+  const dispatch:AppDispatch = useDispatch()
+  const id = useSelector((state:RooteState) => state.Data.uniqueId)
+    console.log(id);
+    
+  const updateState = () => {
+    BasicRequest("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/updateState`,`id=${id}`)
+    setTimeout(()=> {
+      dispatch(projectCreator({isOpened: false}))
+    },1200)
+  }
   return (
     <motion.div
       className=" rounded-md   mx-auto  bg-white"
@@ -20,6 +34,7 @@ export const Finalise = () => {
         <h1 className="text-xl font-poppins">
           We will contact you soon stay tuned!
         </h1>
+        <button onClick={updateState}>get back to your work</button>
       </div>
     </motion.div>
   );
