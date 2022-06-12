@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { SpecClient } from "interfaces/Chat";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const CurrentClient = ({ currentId }: SpecClient) => {
   const [chatData, setChatData] = useState<any>([]);

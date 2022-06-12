@@ -10,6 +10,7 @@ export const initialState: Auth = {
   Compose: false,
   Emojis: false,
   showBar: false,
+  DispalyChat: false
 };
 
 export const switchSlice = createSlice({
@@ -40,6 +41,9 @@ export const switchSlice = createSlice({
     showSidebar: (state, action: PayloadAction<boolean>) => {
       state.showBar = action.payload;
     },
+    getChat: (state, action: PayloadAction<boolean>) => {
+      state.DispalyChat = action.payload;
+    },
   },
 });
 
@@ -52,5 +56,6 @@ export const {
   Composing,
   ShowEmoji,
   showSidebar,
+  getChat
 } = switchSlice.actions;
 export default switchSlice.reducer;

@@ -8,6 +8,8 @@ export interface Auth {
     Compose:boolean,
     Emojis:boolean,
     showBar: boolean,
+    DispalyChat?: boolean,
+
 }
 
 export interface UsersFiltring{

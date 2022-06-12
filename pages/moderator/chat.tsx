@@ -21,8 +21,11 @@ import { Key, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ChatData } from "slices/ChatSlice";
 import { AppDispatch, RooteState } from "store/store";
-import { useCollection } from "react-firebase-hooks/firestore";
-import { useFirestoreQuery } from "@react-query-firebase/firestore";
+import Image from "next/image";
+import ScrollToBottom, {
+  useScrollToBottom,
+  useSticky,
+} from "react-scroll-to-bottom";
 
 export interface Text {
   ModeratorText: string;
@@ -42,13 +45,14 @@ function Chat() {
   const [ModMessage, setModMessage] = useState<string>("");
   const [messages, setMessages] = useState<any>([]);
   const clientText = "bruueedededjuh";
-
   let color = randColor();
   const dispatch: AppDispatch = useDispatch();
   const date = new Date();
 
   const ref = query(
     collection(db, "messages"),
+    orderBy("createdAt"),
+    // where("CurrentClientId", "==", isId),
     limit(50)
     // where("createdAt", "<=", date),
   );
@@ -140,20 +144,22 @@ function Chat() {
             ))}
           </div>
         </div>
-        {isOpen && (
+        {isOpen ? (
           <div className="bg-white w-2/3 flex">
             <CurrentClient id="1" currentId={isId} />
-            <div className="h-[908px] w-3/5 ml-auto relative bg-blue-400">
-              <div className="mt-6 w-full h-[800px] overflow-auto overflow-x-hidden">
-                {/* <MessageSys  */}
-                {messages.map(({ ModeratorText, CLientText, id }: Text) => (
-                  <MessageSys
-                    ModeratorText={ModeratorText}
-                    CLientText={CLientText}
-                    key={id}
-                    id={id}
-                  />
-                ))}
+            <div className="h-[908px] w-3/5 ml-auto relative">
+              <div className="mt-6 w-full h-[800px] overflow-auto overflow-x-hidden scrollBar track thumb">
+                <ScrollToBottom>
+                  {/* <MessageSys  */}
+                  {messages.map(({ ModeratorText, CLientText, id }: Text) => (
+                    <MessageSys
+                      ModeratorText={ModeratorText}
+                      CLientText={CLientText}
+                      key={id}
+                      id={id}
+                    />
+                  ))}
+                </ScrollToBottom>
               </div>
               <div className="bottom-5 absolute w-full flex justify-center items-center space-x-4">
                 <input
@@ -161,6 +167,7 @@ function Chat() {
                   className="w-3/4 py-3 border-2 outline-none px-4 focus:border-Teal rounded-md focus:duration-500"
                   placeholder="message here..."
                   onChange={(e) => setModMessage(e.target.value)}
+                  value={ModMessage}
                 />
                 <button
                   className="bg-[#4169e1] text-white py-3 focus:ring-offset-2 ring-Teal focus:ring-2 focus:duration-500 px-10 rounded-md"
@@ -168,6 +175,26 @@ function Chat() {
                 >
                   Send
                 </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white w-2/3 flex justify-center items-center">
+            <div className="">
+              <Image
+                src="/images/cheerful-positive-smiling-standing-boy-sportive-clothing_213110-2471.webp"
+                width={500}
+                height={500}
+                alt="message"
+              />
+              <div className="space-y-2 text-center">
+                <h1 className="text-3xl font-poppins font-semibold">
+                  It&apos;s nice to chat with someone
+                </h1>
+                <p className="text-xl font-poppins text-gray-500 font-semibold">
+                  Pick a person from left menu<br></br>and start your
+                  conversation
+                </p>
               </div>
             </div>
           </div>

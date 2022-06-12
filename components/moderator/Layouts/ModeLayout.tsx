@@ -90,14 +90,6 @@ export function ModeLayout({ children }: Layouts) {
           </div>
         </div>
         <div className="w-1/2 flex items-center justify-end space-x-4">
-          <div className="relative w-8">
-            <div className="w-3 h-3 rounded-full bg-red-600 absolute right-0"></div>
-            <MessageOutlined className="text-gray-500 text-2xl" />
-          </div>
-          <div className="relative w-8">
-            <div className="w-3 h-3 rounded-full bg-red-600 absolute right-0"></div>
-            <BellOutlined className="text-gray-500 text-2xl" />
-          </div>
           <div className="flex w-44 h-full items-center justify-evenly relative">
             <div className="bg-gray-400 w-14 h-14 rounded-full">
               <img
