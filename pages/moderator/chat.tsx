@@ -11,6 +11,7 @@ import {
   onSnapshot,
   orderBy,
   limit,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { Chat_Users, SpecClient } from "interfaces/Chat";
@@ -22,10 +23,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { ChatData } from "slices/ChatSlice";
 import { AppDispatch, RooteState } from "store/store";
 import Image from "next/image";
-import ScrollToBottom, {
-  useScrollToBottom,
-  useSticky,
-} from "react-scroll-to-bottom";
 
 export interface Text {
   ModeratorText: string;
@@ -45,15 +42,15 @@ function Chat() {
   const [ModMessage, setModMessage] = useState<string>("");
   const [messages, setMessages] = useState<any>([]);
   const clientText = "bruueedededjuh";
-  let color = randColor();
+  // let color = randColor();
   const dispatch: AppDispatch = useDispatch();
   const date = new Date();
 
   const ref = query(
     collection(db, "messages"),
     orderBy("createdAt"),
-    // where("CurrentClientId", "==", isId),
-    limit(50)
+    where("CurrentClientId", "==", isId)
+    // limit(50)
     // where("createdAt", "<=", date),
   );
 
@@ -61,7 +58,7 @@ function Chat() {
     onSnapshot(ref, (snapshot) => {
       setMessages(snapshot.docs.map((doc) => doc.data()));
     });
-  }, []);
+  }, [ref]);
 
   useEffect(() => {
     const { fname, lname, id } = JSON.parse(
@@ -71,7 +68,7 @@ function Chat() {
     setLname(lname);
     setModId(id);
     console.log(messages);
-  }, []);
+  }, [messages]);
 
   useEffect(() => {
     const req = new XMLHttpRequest();
@@ -119,8 +116,8 @@ function Chat() {
             <h1 className="pl-8 font-poppins text-2xl">All Clients</h1>
             {isData.map((item: SpecClient, i: Key | null | undefined) => (
               <div
-                className={`w-2/3 rounded-md cursor-pointer items-center flex justify-between ml-8 p-2`}
-                style={{ background: color }}
+                className={`w-2/3 bg-blue-400 rounded-md cursor-pointer items-center flex justify-between ml-8 p-2`}
+                // style={{ background: color }}
                 key={item.id}
                 onClick={() => setIsId(item.id)}
               >
@@ -149,17 +146,14 @@ function Chat() {
             <CurrentClient id="1" currentId={isId} />
             <div className="h-[908px] w-3/5 ml-auto relative">
               <div className="mt-6 w-full h-[800px] overflow-auto overflow-x-hidden scrollBar track thumb">
-                <ScrollToBottom>
-                  {/* <MessageSys  */}
-                  {messages.map(({ ModeratorText, CLientText, id }: Text) => (
-                    <MessageSys
-                      ModeratorText={ModeratorText}
-                      CLientText={CLientText}
-                      key={id}
-                      id={id}
-                    />
-                  ))}
-                </ScrollToBottom>
+                {messages.map(({ ModeratorText, CLientText, id }: Text) => (
+                  <MessageSys
+                    ModeratorText={ModeratorText}
+                    CLientText={CLientText}
+                    key={id}
+                    id={id}
+                  />
+                ))}
               </div>
               <div className="bottom-5 absolute w-full flex justify-center items-center space-x-4">
                 <input
