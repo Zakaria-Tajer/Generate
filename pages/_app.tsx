@@ -9,7 +9,7 @@ type ComponentWithPageLayout = AppProps & {
     PageLayout?: React.ComponentType;
   };
 };
-
+// commn
 export default function MyApp({
   Component,
   pageProps,
