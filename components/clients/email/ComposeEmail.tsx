@@ -19,9 +19,7 @@ export const ComposeEmail = () => {
   const compsoeEmail = useSelector(
     (state: RooteState) => state.ComposeEmail.Compose
   );
-  const showEmoji = useSelector(
-    (state: RooteState) => state.EmojiSwitcher.Emojis
-  );
+ 
   const userData = useSelector((state: RooteState) => state.Data);
   console.log(userData.uniqueId);
 
@@ -29,9 +27,6 @@ export const ComposeEmail = () => {
   const Compose = () => {
     dispatch(Composing(false));
   };
-  useEffect(()=> {
-
-  },[])
   
 
   const sendEmail = () => {

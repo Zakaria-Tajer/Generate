@@ -1,15 +1,17 @@
+import { ComposeEmail } from "@/components/clients/email/ComposeEmail";
 import { ModeLayout } from "@/components/moderator/Layouts/ModeLayout";
 import { Datas } from "interfaces/User";
 import Cookies from "js-cookie";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NotificationsDataHandler } from "slices/NotificationSlice";
 import { getSuperUsersInfo } from "slices/SuperUsersSlice";
-import { AppDispatch } from "store/store";
+import { AppDispatch, RooteState } from "store/store";
 
 function Home() {
   const dispatch: AppDispatch = useDispatch();
+  const isOpening = useSelector((state:RooteState) => state.ComposeEmail.Compose)
   useEffect(() => {
     const unique_id = Cookies.get("unique_id");
     const req = new XMLHttpRequest();
@@ -51,6 +53,8 @@ function Home() {
       <Head>
         <title>Dashboard</title>
       </Head>
+     
+      {isOpening &&  <ComposeEmail />}
       {/* <ClientProjectRequests /> */}
     </>
   );

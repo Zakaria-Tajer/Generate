@@ -19,6 +19,9 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { revalidate } from "lib/revalidating";
 import { NotificationsMod } from "../NotificationsMod";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { Composing } from "slices/switchSlice";
 
 export function ModeLayout({ children }: Layouts) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -74,12 +77,17 @@ export function ModeLayout({ children }: Layouts) {
                 <h1 className="font-poppins">Chat</h1>
               </div>
             </Link> */}
+            
             <Link href="/moderator/settings" passHref>
               <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center">
                 <SettingOutlined className="text-gray-500" />
                 <h1 className="font-poppins">Settings</h1>
               </div>
             </Link>
+              <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center" onClick={() => dispatch(Composing(true))}>
+                <FontAwesomeIcon icon={faEnvelope} className="mr-3 text-lg text-gray-500" />
+                <h1 className="font-poppins">Emails</h1>
+              </div>
             <div
               className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center"
               onClick={getNot}
