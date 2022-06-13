@@ -78,39 +78,7 @@ export const Forms = () => {
   };
   return (
     <div className="flex">
-      <div className="bg-gray-400/5 w-[500px]">
-        <div className="h-20 p-5 border-b-[1px] border-gray-400">
-          <h1 className="font-poppins font-bold text-lg">Settings</h1>
-        </div>
-        <div className="h-28 cursor-pointer space-x-5 pl-4 items-center bg-blue-50 border-b-[1px] border-gray-400 flex">
-          <SettingOutlined className="text-xl mb-6" />
-          <div className="">
-            <h1 className="font-poppins">Account</h1>
-            <p className="font-poppins text-gray-400">
-              eiopjiowejoiwjeroijweoij
-            </p>
-          </div>
-        </div>
-        <div className="h-28 cursor-pointer break-normal w-auto space-x-5 pl-4 items-center bg-blue-50 border-b-[1px] border-gray-400 flex">
-          <BellOutlined className="text-xl mb-6" />
-          <div className="">
-            <h1 className="font-poppins">Account</h1>
-            <p className="font-poppins text-gray-400">
-              eiopjdeeddeddeiowejoiwjeroijweoij
-            </p>
-          </div>
-        </div>
-        <div className="h-28 cursor-pointer space-x-5 pl-4 items-center bg-blue-50 border-b-[1px] border-gray-400 flex">
-          <KeyOutlined className="text-xl mb-6" />
-          <div className="">
-            <h1 className="font-poppins">Account</h1>
-            <p className="font-poppins text-gray-400">
-              eiopjiowejoiwjeroijweoij
-            </p>
-          </div>
-        </div>
-      </div>
-
+      
       <div className="bg-[#F8FAFC] h-[900px] w-full pl-40 pt-14 space-y-4">
         <h1 className="text-2xl font-poppins font-semibold">Account</h1>
         <div className="h-14">

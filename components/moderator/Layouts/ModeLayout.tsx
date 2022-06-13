@@ -68,12 +68,12 @@ export function ModeLayout({ children }: Layouts) {
               </div>
             </Link>
 
-            <Link href="/moderator/chat" passHref>
+            {/* <Link href="/moderator/chat" passHref>
               <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center">
                 <MessageOutlined className="text-gray-500" />
                 <h1 className="font-poppins">Chat</h1>
               </div>
-            </Link>
+            </Link> */}
             <Link href="/moderator/settings" passHref>
               <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center">
                 <SettingOutlined className="text-gray-500" />

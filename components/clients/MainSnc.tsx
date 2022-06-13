@@ -77,7 +77,6 @@ export const MainSnc = () => {
                 setImg(image);
                 setUniqueId(id);
                 setLoaded(true);
-
               }else {
                 setIsExpired(true);
               }

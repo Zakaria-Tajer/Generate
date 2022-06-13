@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { ProfileSection } from "@/components/clients/Profile/ProfileSection";
-import { IndexLayout } from "Layout";
+import { IndexLayout } from "@/components/clients/Layout";
 
 function Profile() {
   return (

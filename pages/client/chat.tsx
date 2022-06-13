@@ -8,7 +8,7 @@ import React from 'react'
 import { RightSidebar } from '@/components/Layouts/chat/RightSidebar'
 import { useSelector } from 'react-redux'
 import { RooteState } from 'store/store'
-import { IndexLayout } from 'Layout'
+import { IndexLayout } from '@/components/clients/Layout'
 import { Expired } from '@/components/clients/Expired'
 
 function Chat(){

@@ -26,8 +26,9 @@ import Image from "next/image";
 
 export interface Text {
   ModeratorText: string;
-  CLientText: string;
-  id: string;
+  ClientText?: string;
+  id?: string;
+  CurrentModeratorId?: string;
 }
 
 function Chat() {
@@ -38,27 +39,25 @@ function Chat() {
   const [Fname, setFname] = useState<string>("");
   const [Lname, setLname] = useState<string>("");
   const [modId, setModId] = useState<string>("");
-  const MessageCollection = collection(db, "messages");
+  const MessageCollection = collection(db, "ModeratorMessages");
   const [ModMessage, setModMessage] = useState<string>("");
   const [messages, setMessages] = useState<any>([]);
-  const clientText = "bruueedededjuh";
-  // let color = randColor();
   const dispatch: AppDispatch = useDispatch();
   const date = new Date();
 
-  const ref = query(
-    collection(db, "messages"),
-    orderBy("createdAt"),
-    where("CurrentClientId", "==", isId)
-    // limit(50)
-    // where("createdAt", "<=", date),
-  );
-
   useEffect(() => {
+    const ref = query(
+      collection(db, "ModeratorMessages"),
+      orderBy("createdAt"),
+      where("ModeratorId", "==", modId)
+      // where("CurrentModeratorId", "==", "17"),
+      // limit(50)
+    );
     onSnapshot(ref, (snapshot) => {
       setMessages(snapshot.docs.map((doc) => doc.data()));
     });
-  }, [ref]);
+  }, [isId, modId]);
+
 
   useEffect(() => {
     const { fname, lname, id } = JSON.parse(
@@ -100,11 +99,10 @@ function Chat() {
 
   const sendMsg = async () => {
     await addDoc(MessageCollection, {
-      CurrentClientId: isId,
-      CurrentModeratorId: modId,
+      ClientId: isId,
+      ModeratorId: modId,
       ModeratorText: ModMessage,
-      CLientText: "",
-      createdAt: date,
+      SentAT: date,
     });
   };
 
@@ -146,12 +144,14 @@ function Chat() {
             <CurrentClient id="1" currentId={isId} />
             <div className="h-[908px] w-3/5 ml-auto relative">
               <div className="mt-6 w-full h-[800px] overflow-auto overflow-x-hidden scrollBar track thumb">
-                {messages.map(({ ModeratorText, CLientText, id }: Text) => (
+                {messages.map(({ ModeratorText }: Text) => (
                   <MessageSys
                     ModeratorText={ModeratorText}
-                    CLientText={CLientText}
-                    key={id}
-                    id={id}
+                    key={1}
+                    // ClientText={ClientText}
+                    // key={id}
+                    // id={id}
+                    // CurrentModeratorId={CurrentModeratorId}
                   />
                 ))}
               </div>

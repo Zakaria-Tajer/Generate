@@ -13,13 +13,13 @@ export const Apps: FC = () => {
   };
   return (
     <ul className="space-y-3 flex items-center flex-col justify-center">
-      <li
+      {/* <li
         className="flex items-center w-72 rounded-md px-16 cursor-pointer text-gray-400 hover:bg-gray-400/25 hover:text-blue-700 hover:duration-700"
         onClick={() => dispatch(getChat(true))}
       >
         <FontAwesomeIcon icon={faMessage} className="mr-3 text-lg" />
         <a className="font-poppins text-lg py-3">Chat</a>
-      </li>
+      </li> */}
 
       <li
         className="flex items-center w-72 rounded-md px-16 cursor-pointer text-gray-400 hover:bg-gray-400/25 hover:text-blue-700 hover:duration-700"
