@@ -4,14 +4,17 @@ import {
   MessageOutlined,
   PhoneOutlined,
 } from "@ant-design/icons";
+import { BasicRequest } from "lib/RequestApi";
 
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showNotifications } from "slices/filterSlice";
 import { NotificationsDataHandler } from "slices/NotificationSlice";
-import { AppDispatch } from "store/store";
+import { confirmingProject } from "slices/ProjectSlice";
+import { Composing } from "slices/switchSlice";
+import { AppDispatch, RooteState } from "store/store";
 
 export const ClientNotifications = () => {
   const [isShowing, setIsShowing] = useState<boolean>(false);
@@ -31,7 +34,7 @@ export const ClientNotifications = () => {
         if (req.status === 200) {
           let data = JSON.parse(req.response.trim());
 
-          console.log(data);
+          console.log(req.response.trim());
           setIsData(data);
 
           dispatch(NotificationsDataHandler({ ClientData: data }));
@@ -46,14 +49,18 @@ export const ClientNotifications = () => {
   const VideoCall = () => {
     // Todo: Generate a key for client to join calls
   };
-  const getValue = () => {
-    // Todo: Send Emails for clients
-  };
-  const addToChat = (e: any) => {
-    toast.success("Client has been added to chat");
-    router.push("/moderator/chat");
-    localStorage.setItem('ids', e.target.value)
-    dispatch(showNotifications({ Notifications: false }));
+  const addToChat = (e:any) => {
+    const value = e.target.value
+    console.log(value);
+    
+    BasicRequest(
+      "POST",
+      `${process.env.NEXT_PUBLIC_API_URL_Generate}api/confirmProject`,
+      `id=${value}`
+    );
+    dispatch(confirmingProject({ isConfirmed: true }));
+    dispatch(showNotifications({ Notifications: false}))
+
   };
 
   return (
@@ -82,9 +89,9 @@ export const ClientNotifications = () => {
                   <button
                     value={item.id ? item.id : ""}
                     onClick={addToChat}
-                    className="font-poppins"
+                    className="font-poppins py-2 bg-blue-600 text-md px-10 text-white rounded-md"
                   >
-                    Hide
+                    Confirm
                   </button>
                 </div>
               </div>
@@ -125,15 +132,13 @@ export const ClientNotifications = () => {
                 </div>
               </div>
 
-              <div className="w-full mt-2 flex">
-                <MessageOutlined
-                  className="w-1/3 py-4 bg-white border-r-[1px] cursor-pointer"
-                  onClick={addToChat}
+              <div className="w-full mt-2 flex pt-3">
+                <PhoneOutlined className="w-1/2 py-4 bg-white border-r-[1px] cursor-pointer hover:bg-gray-100 duration-700" />
+                <MailOutlined
+                  className="w-1/2 py-4 bg-white border-r-[1px] cursor-pointer hover:bg-gray-100 duration-700"
+                  onClick={() => dispatch(Composing(true))}
                 />
-                <PhoneOutlined className="w-1/3 py-4 bg-white border-r-[1px] cursor-pointer" />
-                <MailOutlined className="w-1/3 py-4 bg-white border-r-[1px] cursor-pointer" />
               </div>
-              {/* <input value={item.id} ref={refe} /> */}
             </div>
           );
         }

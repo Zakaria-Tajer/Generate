@@ -12,6 +12,7 @@ export interface Project {
   projectDesc?: string;
   projectName?: string;
   Notifiy?: boolean;
+  isConfirmed?: boolean;
 }
 export interface NotificationModerator {
   CLientFirstName?: string[];

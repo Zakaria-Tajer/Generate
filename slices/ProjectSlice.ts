@@ -10,6 +10,7 @@ export const initialState: Project = {
   projectName: "",
   deliverType: "",
   Notifiy: false,
+  isConfirmed: false
 };
 
 export const ProjectSlice = createSlice({
@@ -31,6 +32,10 @@ export const ProjectSlice = createSlice({
     NotificationsHandling: (state, action: PayloadAction<Project>) => {
       state.Notifiy = action.payload.Notifiy;
     },
+    confirmingProject: (state, action: PayloadAction<Project>) => {
+      state.isConfirmed = action.payload.isConfirmed;
+    },
+
   },
 });
 export const {
@@ -38,5 +43,6 @@ export const {
   NavigateNextItems,
   projectDatas,
   NotificationsHandling,
+  confirmingProject
 } = ProjectSlice.actions;
 export default ProjectSlice.reducer;
