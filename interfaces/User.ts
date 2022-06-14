@@ -43,4 +43,11 @@ export interface Datas {
   ClientData: notes[];
 }
 
-
+export interface Mods {
+  first_name: string
+  last_name: string
+  img: string
+  unique_id: string
+  email: string
+  id: string
+}

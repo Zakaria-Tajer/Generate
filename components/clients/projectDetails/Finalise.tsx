@@ -34,7 +34,7 @@ export const Finalise = () => {
         <h1 className="text-xl font-poppins">
           We will contact you soon stay tuned!
         </h1>
-        <button onClick={updateState}>get back to your work</button>
+        <button onClick={updateState} className="text-blue-400 underline underline-offset-2 font-poppins mt-2">get back to your work</button>
       </div>
     </motion.div>
   );

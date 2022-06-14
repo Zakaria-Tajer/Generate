@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   PlusOutlined,
   BellOutlined,
@@ -10,7 +11,7 @@ import {
 import { Layouts } from "interfaces/Layouts";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -25,7 +26,27 @@ import { useRouter } from "next/router";
 export function AdminNav({ children }: Layouts) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
+  const [img,setImg] = useState<any>([])
+  useEffect(() => {
+    const dats = localStorage.getItem('dats') || "{}"
+    const {id} = JSON.parse(dats)
+    const req = new XMLHttpRequest();
+    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/adminsInfo`, true);
+    req.onload = () => {
+      if (req.readyState === XMLHttpRequest.DONE) {
+        if (req.status === 200) {
+          // Todo: implement parsing data
+          let response = JSON.parse(req.response);
+          setImg(response.data.img);
+          // const idk = Object.fromEntries(response)
+        }
+      }
+    };
+    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.setRequestHeader("Content-Type", "multipart/form-data");
 
+    req.send(`id=${id}`);
+  },[])
   const notified = useSelector(
     (state: RooteState) => state.UsersFiltiring.Notifications
   );
@@ -50,12 +71,14 @@ export function AdminNav({ children }: Layouts) {
           <div className="pl-10 flex">
             <Link href="/Admin/dashboard" passHref>
               <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex">
+                
                 <Image
                   src="/images/icons/dashboard-5481.svg"
                   width="20"
                   height="20"
                   alt="idk"
                   className="pr-2"
+                
                 />
                 <h1 className="font-poppins">Dashboard</h1>
               </div>
@@ -97,22 +120,17 @@ export function AdminNav({ children }: Layouts) {
           </div>
         </div>
         <div className="w-1/2 flex items-center justify-end space-x-4">
-          <div className="relative w-8">
-            <div className="w-3 h-3 rounded-full bg-red-600 absolute right-0"></div>
-            <MessageOutlined className="text-gray-500 text-2xl" />
-          </div>
-          <div className="relative w-8">
-            <div className="w-3 h-3 rounded-full bg-red-600 absolute right-0"></div>
-            <BellOutlined className="text-gray-500 text-2xl" />
-          </div>
+          
           <div className="flex w-44 h-full items-center justify-evenly relative">
-            <div className="bg-gray-400 w-14 h-14 rounded-full"></div>
+            <div className="bg-gray-400 w-14 h-14 rounded-full">
+              <img src={`http://localhost:8000/adminUploads/${img}`} alt='profile pic' width='20' height='20' className="w-full h-full rounded-full object-cover"/>
+            </div>
             <DownOutlined
               className="text-gray-500 cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             />
             {isOpen && (
-              <div className="bg-gray-400 py-2 w-full right-8 rounded absolute top-[4.4rem] list-none space-y-3">
+              <div className="bg-white shadow-md py-2 w-full right-8 rounded absolute top-[4.4rem] list-none space-y-3">
                 <li
                   className="w-full bg-white py-2 px-4 hover:bg-gray-100 hover:duration-700 cursor-pointer"
                   onClick={Logout}

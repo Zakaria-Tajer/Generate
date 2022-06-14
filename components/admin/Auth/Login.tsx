@@ -54,7 +54,7 @@ export const Login = () => {
         <div className="shadow-2xl rounded-md w-3/4 py-4">
           <form
             action=""
-            className="space-y-4 flex flex-col items-center"
+            className="space-y-4 py-4 flex flex-col items-center"
             onSubmit={(e) => e.preventDefault()}
           >
             <div className="text-center">

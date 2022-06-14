@@ -37,9 +37,9 @@ export const Reference: FC = () => {
     }
   };
   return (
-    <div className="fixed inset-0 min-h-screen bg-gray-400 flex flex-col items-center justify-center">
-      <div className="bg-white p-2 rounded space-y-4 flex flex-col items-center justify-center">
-        <h1 className="text-center">For Security Purpuses</h1>
+    <div className="fixed inset-0 min-h-screen bg-PureGrey flex flex-col items-center justify-center">
+      <div className="bg-white p-2 rounded space-y-4  px-10 py-5 flex flex-col items-center justify-center">
+        <h1 className="text-center font-poppins uppercase">For Security Purpuses</h1>
 
         <div className="w-96 py-2">
           <input
@@ -50,10 +50,10 @@ export const Reference: FC = () => {
           />
         </div>
         <button
-          className="px-14 py-2 bg-blue-600 text-white rounded-md"
+          className="px-14 py-2 bg-blue-600 text-white rounded-md font-poppins"
           onClick={chekKey}
         >
-          chek
+          check
         </button>
       </div>
     </div>

@@ -100,7 +100,7 @@ export const Register: FC = () => {
           encType="multipart/form-data"
           onSubmit={(e) => e.preventDefault()}
         >
-          <div className="2xl:space-x-1 md:flex xl:mt-4 md:space-x-4 ml-4 xl:ml-[3rem] md:ml-0 space-y-2 md:space-y-0 justify-center">
+          <div className="2xl:space-x-1 md:flex xl:mt-4 md:space-x-4 ml-4 2xl:space-x-4  md:ml-0 space-y-2 md:space-y-0 justify-center">
             <input
               type="text"
               className="py-2 pl-4 w-96 xl:py-3 md:w-[223px] border-2 xl:-ml-1 rounded font-poppins outline-none focus:border-blue-600"
@@ -114,7 +114,7 @@ export const Register: FC = () => {
               onChange={(e) => setLastName(e.target.value)}
             />
           </div>
-          <div className="flex flex-col py-3 space-y-3 md:ml-4 xl:ml-16 md:-translate-x-2">
+          <div className="flex flex-col py-3 space-y-3 md:ml-4  md:-translate-x-2">
             <input
               type="email"
               className="md:w-[460px] w-96 xl:py-3 py-2 rounded pl-4 outline-none border-2 focus:border-blue-600"

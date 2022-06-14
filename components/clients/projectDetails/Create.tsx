@@ -59,7 +59,7 @@ export const Create = () => {
         createProject(
           "POST",
           `${process.env.NEXT_PUBLIC_API_URL_Generate}api/createProject`,
-          `projectName=${projectName}&Delivery=${isType}&birefProjectDesc=${description}&Project_unique_id=${uniqueId}&client_id=${client_id}&isDeleted=${'no'}`
+          `projectName=${projectName}&Delivery=${isType}&birefProjectDesc=${description}&Project_unique_id=${uniqueId}&client_id=${client_id}`
         );
         setTnxCom(true);
       }
