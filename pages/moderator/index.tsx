@@ -1,6 +1,7 @@
 import { ComposeEmail } from "@/components/clients/email/ComposeEmail";
 import { ClientProjectRequests } from "@/components/moderator/ClientProjectRequests";
 import { ModeLayout } from "@/components/moderator/Layouts/ModeLayout";
+import { AnimatePresence, motion } from "framer-motion";
 import { Datas } from "interfaces/User";
 import Cookies from "js-cookie";
 import Head from "next/head";
@@ -112,7 +113,14 @@ function Home() {
           <>
             {confirmedData.map(({ projectName, id, Project_unique_id, birefProjectDesc, ProjectDetails, Delivery }: ProjectDetails) => (
               <>
-                <ClientProjectRequests key={id} projectName={projectName} Project_unique_id={Project_unique_id} birefProjectDesc={birefProjectDesc} ProjectDetails={ProjectDetails} Delivery={Delivery} id={""} />
+                <AnimatePresence>
+                  <motion.div
+                    transition={{ type: "spring", delay: 0.5 }}
+
+                  >
+                    <ClientProjectRequests key={id} projectName={projectName} Project_unique_id={Project_unique_id} birefProjectDesc={birefProjectDesc} ProjectDetails={ProjectDetails} Delivery={Delivery} id={""} />
+                  </motion.div>
+                </AnimatePresence>
               </>
             ))}
           </>

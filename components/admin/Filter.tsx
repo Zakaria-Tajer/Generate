@@ -22,17 +22,9 @@ export const Filter: FC = () => {
     dispatch(Filtring({ Moderator: true }));
   };
   return (
-    <div className="bg-white w-1/2 mx-auto rounded-md h-16 mt-8 flex">
-      <div className="w-1/2 relative flex items-center">
-        <SearchOutlined className="absolute left-4 text-xl text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search for users..."
-          className="w-3/4 h-full px-14 outline-none rounded "
-        />
-      </div>
-      <div className="ml-auto flex items-center mr-2 rounded">
-        <div className="py-2 px-4 relative border-[1px] rounded flex items-center space-x-2">
+    <div className="xl:w-5/6 mx-auto rounded-md h-16 mt-8 flex">
+      <div className="ml-auto flex items-center mr-5 md:mr-7 xl:mr-2 2xl:mr-14 rounded">
+        <div className="py-2 bg-white px-4 relative border-[1px] rounded flex items-center space-x-2">
           <FilterOutlined className="" />
           <h1 className="font-poppins">Filter</h1>
           <DownOutlined

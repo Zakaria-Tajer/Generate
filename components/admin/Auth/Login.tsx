@@ -5,12 +5,17 @@ import toast from "react-hot-toast";
 import { Vector } from "./Vector";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { AppDispatch } from "store/store";
+import { useDispatch } from "react-redux";
+import { getSuperUsersInfo } from "slices/SuperUsersSlice";
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
+  const dispatch:AppDispatch = useDispatch()
   const Login = () => {
+    let arr: any[] = []
     const req = new XMLHttpRequest();
     req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/SupersUsersLogin`, true);
     req.onload = () => {
@@ -23,14 +28,21 @@ export const Login = () => {
           } else if (response.bodyMessage == "success") {
             const {
               token,
-              data: { role, unique_id },
+              data: { role, unique_id,id },
             } = response;
+            console.log(response);
+            
             Cookies.set("token", token);
             Cookies.set("role", role);
             Cookies.set("unique_id", unique_id);
             if (role == "Moderator") {
               router.push("/moderator");
             } else if (role == "admin") {
+              
+             arr.push(response.data)
+              // localStorage.setItem('datas',JSON.stringify(arr))
+              dispatch(getSuperUsersInfo({id: id}))
+              // localStorage.setItem('id',id)
               router.push("/Admin/dashboard");
             } else if (role == "Developer") {
               router.push("/developer");
@@ -48,10 +60,10 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center ">
+    <div className="xl:flex min-h-screen items-center ">
       <Vector />
-      <div className="bg-white p-3 ml-14 w-1/2 flex justify-center">
-        <div className="shadow-2xl rounded-md w-3/4 py-4">
+      <div className="bg-white p-3 xl:ml-14 xl:w-1/2 flex justify-center">
+        <div className="shadow-2xl rounded-md md:w-3/4 w-full py-4">
           <form
             action=""
             className="space-y-4 py-4 flex flex-col items-center"
@@ -69,13 +81,13 @@ export const Login = () => {
             <div className="flex flex-col items-center justify-center space-y-3">
               <input
                 type="email"
-                className="w-96 py-3 px-10 rounded-md border-2 focus:border-blue-600 outline-none"
+                className="md:w-96 py-3 px-10 rounded-md border-2 focus:border-blue-600 outline-none"
                 placeholder="E-mail Address"
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
-                className="w-96 py-3 px-10 rounded-md border-2 focus:border-blue-600 outline-none"
+                className="md:w-96 py-3 px-10 rounded-md border-2 focus:border-blue-600 outline-none"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
               />

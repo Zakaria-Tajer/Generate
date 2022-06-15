@@ -19,7 +19,7 @@ export const ComposeEmail = () => {
   const compsoeEmail = useSelector(
     (state: RooteState) => state.ComposeEmail.Compose
   );
- 
+
   const userData = useSelector((state: RooteState) => state.Data);
   console.log(userData.uniqueId);
 
@@ -27,7 +27,7 @@ export const ComposeEmail = () => {
   const Compose = () => {
     dispatch(Composing(false));
   };
-  
+
 
   const sendEmail = () => {
     const req = new XMLHttpRequest();
@@ -53,7 +53,7 @@ export const ComposeEmail = () => {
     <div className="relative z-10">
       <Transition
         as="div"
-        className="w-2/5 bg-white shadow-xl p-4 right-2 rounded-lg top-80 absolute"
+        className="xl:w-2/5 w-3/4 bg-white shadow-xl p-4 right-2 rounded-lg xl:top-80 top-24 absolute"
         show={compsoeEmail}
         enter="transition-opacity duration-200"
         enterFrom="opacity-0"
@@ -96,9 +96,9 @@ export const ComposeEmail = () => {
           onChange={(e) => setMessage(e.target.value)}
         >
         </textarea>
-        <div className="w-full bg-PureGrey relative flex items-center justify-end py-2 space-x-4 pr-3">
+        <div className="w-full relative flex items-center justify-end py-2 space-x-4 pr-3">
           <div className="w-10 h-10 rounded-full hover:bg-gray-400 hover:duration-700 cursor-pointer flex items-center justify-center">
-           
+
           </div>
           <button
             className="bg-DarkOne rounded-md text-white px-10 py-3 font-poppins"
@@ -107,7 +107,7 @@ export const ComposeEmail = () => {
             Send Now
           </button>
         </div>
-        
+
       </Transition>
     </div>
   );

@@ -12,7 +12,7 @@ export const Notifications = () => {
     <AnimatePresence>
       <div className="fixed z-10 inset-0 bg-black/10">
         <motion.div
-          className="w-2/5 rounded-md mx-auto h-[600px] bg-white"
+          className="2xl:w-2/5 lg:w-2/3  rounded-md mx-auto h-[600px] bg-white"
           initial={{ y: "-100vh" }}
           animate={{ y: "10vh" }}
           transition={{ type: "spring", delay: 0.5 }}

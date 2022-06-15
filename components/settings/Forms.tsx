@@ -5,30 +5,25 @@ import { useSelector } from "react-redux";
 import { RooteState } from "store/store";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useMediaQuery } from "react-responsive";
 
 export const Forms = () => {
-  const datas = useSelector((state: RooteState) => state.SuperUsers);
-  const [fName, setFname] = useState<string>("");
-  const [lName, setLname] = useState<string>("");
-  const [id, setId] = useState<string>("");
+
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [number, setNumber] = useState<string>("");
   const [img, setImg] = useState<string>("");
   const [isImg, setIsImg] = useState<string>("");
+  // const [id, setId] = useState<string>("");
 
   const [isAdressEmail, setAdressEmail] = useState<string>("");
   const [isUsername, setIsUsername] = useState<string>("");
   const [isPhoneNumber, setIsPhoneNumber] = useState<string>("");
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
-
+  const id = useSelector((state: RooteState) => state.SuperUsers.id)
+  const user = useSelector((state: RooteState) => state.SuperUsers)
   useEffect(() => {
-    const datas = localStorage.getItem("dats") || "{}";
-    const { fname, lname, id, image } = JSON.parse(datas);
-    setFname(fname);
-    setLname(lname);
-    setId(id);
-    setIsImg(image);
+
 
     const req = new XMLHttpRequest();
     req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/CheckAdditionalInfo`, true);
@@ -53,7 +48,7 @@ export const Forms = () => {
     req.setRequestHeader("Content-Type", "multipart/form-data");
 
     req.send(`user_id=${id}`);
-  }, []);
+  }, [id]);
   const getFile = (e: any) => {
     setImg(e.target.files[0]);
   };
@@ -63,7 +58,7 @@ export const Forms = () => {
     } else {
       let formdata = new FormData();
       formdata.append("file", img);
-      formdata.append("id", id);
+      formdata.append("id", id as string);
       formdata.append("username", username);
       formdata.append("number", number);
       formdata.append("emailAdress", email);
@@ -76,43 +71,43 @@ export const Forms = () => {
         });
     }
   };
+  const imgs = useSelector((state: RooteState) => state.SuperUsers)
+  const Mobile = useMediaQuery({ query: "(max-width: 1024px)" });
+
   return (
     <div className="flex">
-      
-      <div className="bg-[#F8FAFC] h-[900px] w-full pl-40 pt-14 space-y-4">
-        <h1 className="text-2xl font-poppins font-semibold">Account</h1>
-        <div className="h-14">
-          <h3 className="font-poppins text-lg">Profile</h3>
-          <p className="text-gray-400 text-sm font-poppins">
-            This infoThis infoThis infoThis infoThis info
-          </p>
+
+      <div className="bg-[#F8FAFC] h-[900px] w-full  2xl:pt-14 space-y-4">
+        <div className="w-full py-4 text-center xl:text-left xl:pl-44 2xl:pl-56">
+          <h1 className="text-2xl font-poppins font-semibold">Account</h1>
+          <h3 className="font-poppins text-lg ">Profile</h3>
         </div>
         <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-          <div className="flex">
+          <div className="md:flex space-y-5 md:space-y-0 ml-4 2xl:ml-[14.5rem] md:space-x-6 md:ml-5 lg:w-3/4 lg:mx-auto ">
             <div>
               <label htmlFor="" className="block mb-1 font-poppins">
                 First name
               </label>
-              <div className="w-96 py-2 px-6 font-poppins border-2 outline-none rounded-md">
-                <h1>{datas.FirstName == "" ? fName : datas.FirstName}</h1>
+              <div className="w-96 md:w-80 py-2 px-6 font-poppins border-2 outline-none rounded-md">
+                <h1>{user.FirstName}</h1>
               </div>
             </div>
 
-            <div className="space-x-7">
-              <label htmlFor="" className="block mb-1 ml-8 font-poppins">
+            <div className="lg:space-x-7">
+              <label htmlFor="" className="block mb-1 2xl:ml-8 md:ml-0 font-poppins">
                 Last name
               </label>
-              <div className="w-96 py-2 px-6 font-poppins border-2 outline-none rounded-md">
-                <h1>{datas.LastName == "" ? lName : datas.LastName}</h1>
+              <div className="w-96 py-2 md:w-80 px-6 font-poppins border-2 outline-none rounded-md">
+                <h1>{user.LastName}</h1>
               </div>
             </div>
           </div>
-          <div className="mt-6">
+          <div className="mt-6 ml-4 md:ml-5 lg:pl-[6.5rem] xl:pl-40 2xl:pl-[13.5rem]">
             <label htmlFor="" className="block mb-1 font-poppins">
               Username
             </label>
             {isUsername ? (
-              <div className="w-96 py-2 px-6 font-poppins border-2 outline-none rounded-md">
+              <div className="w-96 md:w-80 py-2 px-6 font-poppins border-2 outline-none rounded-md">
                 <h1>{isUsername}</h1>
               </div>
             ) : (
@@ -124,18 +119,14 @@ export const Forms = () => {
               />
             )}
           </div>
-          <div className="mt-6 flex items-center space-x-10">
+          <div className="mt-6 pl-6 lg:pl-32 xl:pl-44 xl:pt-4 2xl:pl-[14.5rem] 2xl:pt-2 flex items-center space-x-10">
             <div>
               <label htmlFor="" className="block mb-1 font-poppins">
                 Photo
               </label>
               <div className="w-14 h-14 rounded-full bg-blue-400">
                 <img
-                  src={
-                    datas.img == ""
-                      ? `http://localhost:8000/adminUploads/${isImg}`
-                      : `http://localhost:8000/adminUploads/${datas.img}`
-                  }
+                  src={`http://localhost:8000/adminUploads/${imgs ? imgs.img : imgs}`}
                   className="object-cover h-full w-full rounded-full"
                   alt="profile"
                 />
@@ -166,11 +157,11 @@ export const Forms = () => {
               </label>
             </div>
           </div>
-          <div className="w-1/2 bg-gray-400 h-[1px] mt-14"></div>
-          <div className="mt-6 space-y-6">
-            <h1 className="text-xl font-poppins">Personal informations</h1>
-            <div className=" space-y-3">
-              <label htmlFor="" className="block mb-1  font-poppins">
+          {!Mobile && <div className="xl:ml-44 w-1/2 bg-gray-400 h-[1px] mt-14"></div>}
+          <div className="mt-6 space-y-6 ml-4 pt-4 lg:pl-24 2xl:pl-[12rem] xl:pl-[9.4rem]">
+            <h1 className="text-xl font-poppins lg:ml-3">Personal informations</h1>
+            <div className=" space-y-3  lg:flex xl:block xl:space-y-4 lg:relative lg:space-x-3">
+              <label htmlFor="" className="block mb-1 lg:ml-3 font-poppins xl:relative lg:absolute xl:bottom-0 bottom-10">
                 Email Address
               </label>
               {isAdressEmail ? (
@@ -186,26 +177,28 @@ export const Forms = () => {
                 />
               )}
 
-              <label htmlFor="" className="block mb-1  font-poppins">
-                Phone number
-              </label>
-              {isPhoneNumber ? (
-                <div className="w-96 py-2 px-6 font-poppins border-2 outline-none rounded-md">
-                  <h1>{isPhoneNumber}</h1>
-                </div>
-              ) : (
-                <input
-                  type="text"
-                  placeholder=""
-                  className="w-96 py-2 px-6 font-poppins border-2 outline-none rounded-md"
-                  onChange={(e) => setNumber(e.target.value)}
-                />
-              )}
+              <div className="relative xl:space-y-4">
+                <label htmlFor="" className="block mb-1 lg:absolute xl:relative lg:bottom-10 xl:bottom-0 font-poppins">
+                  Phone number
+                </label>
+                {isPhoneNumber ? (
+                  <div className="w-96 py-2 px-6 font-poppins border-2 outline-none rounded-md">
+                    <h1>{isPhoneNumber}</h1>
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    placeholder=""
+                    className="w-96 py-2 px-6  font-poppins border-2 outline-none rounded-md"
+                    onChange={(e) => setNumber(e.target.value)}
+                  />
+                )}
+              </div>
             </div>
           </div>
-          <div className="w-1/2 bg-gray-400 h-[1px] mt-14"></div>
+          {!Mobile && <div className="xl:ml-44 w-1/2 bg-gray-400 h-[1px] mt-14"></div>}
           <button
-            className="px-6 py-2 mt-4 bg-blue-600 text-white rounded-md font-poppins"
+            className="px-6 py-2 ml-4 lg:ml-[7.7rem] mt-4 xl:ml-[11rem] 2xl:ml-[13.8rem] 2xl:px-14 bg-blue-600 text-white rounded-md font-poppins"
             onClick={save}
             disabled={isDisabled}
           >

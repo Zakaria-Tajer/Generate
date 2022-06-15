@@ -17,7 +17,7 @@ export const NotificationsMod = () => {
     <AnimatePresence>
       <div className="fixed z-10 inset-0 bg-black/10">
         <motion.div
-          className="w-2/5 overflow-y-auto overflow-x-hidden rounded-md mx-auto h-[600px] bg-white"
+          className="2xl:w-2/5 xl:w-3/5 md:w-3/4 overflow-y-auto overflow-x-hidden rounded-md mx-auto h-[600px] bg-white"
           initial={{ y: "-100vh" }}
           animate={{ y: "10vh" }}
           transition={{ type: "spring", delay: 0.5 }}

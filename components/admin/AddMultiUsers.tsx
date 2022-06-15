@@ -31,7 +31,7 @@ export const AddMultiUsers = () => {
     <AnimatePresence>
       <div className="fixed z-10 inset-0 bg-black/10">
         <motion.div
-          className="w-2/5 rounded-md mx-auto h-[400px] bg-white"
+          className="lg:w-2/5 rounded-md mx-auto h-[400px] bg-white"
           initial={{ y: "-100vh" }}
           animate={{ y: "10vh" }}
           transition={{ type: "spring", delay: 0.5 }}
