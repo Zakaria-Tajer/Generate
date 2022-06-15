@@ -175,7 +175,7 @@ export function ModeLayout({ children }: Layouts) {
                 className="text-gray-500 cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)} />
               {isOpen && (
-                <div className="bg-gray-400 py-2 w-full right-8 rounded absolute top-[4.4rem] list-none space-y-3">
+                <div className="bg-white shadow-lg py-2 w-full right-8 rounded absolute top-[4.4rem] list-none space-y-3">
                   <li
                     className="w-full bg-white py-2 px-4 hover:bg-gray-100 hover:duration-700 cursor-pointer"
                     onClick={Logout}
