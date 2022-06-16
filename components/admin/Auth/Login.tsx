@@ -8,12 +8,13 @@ import Cookies from "js-cookie";
 import { AppDispatch } from "store/store";
 import { useDispatch } from "react-redux";
 import { getSuperUsersInfo } from "slices/SuperUsersSlice";
+import { getDevId } from "slices/DeveloperSlice";
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
-  const dispatch:AppDispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const Login = () => {
     let arr: any[] = []
     const req = new XMLHttpRequest();
@@ -28,23 +29,25 @@ export const Login = () => {
           } else if (response.bodyMessage == "success") {
             const {
               token,
-              data: { role, unique_id,id },
+              data: { role, unique_id, id },
             } = response;
             console.log(response);
-            
+
             Cookies.set("token", token);
             Cookies.set("role", role);
             Cookies.set("unique_id", unique_id);
             if (role == "Moderator") {
               router.push("/moderator");
             } else if (role == "admin") {
-              
-             arr.push(response.data)
+
+              arr.push(response.data)
               // localStorage.setItem('datas',JSON.stringify(arr))
-              dispatch(getSuperUsersInfo({id: id}))
+              dispatch(getSuperUsersInfo({ id: id }))
               // localStorage.setItem('id',id)
               router.push("/Admin/dashboard");
             } else if (role == "Developer") {
+              console.log(response);
+              dispatch(getDevId({ id: id }))
               router.push("/developer");
             }
           } else {

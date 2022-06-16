@@ -4,15 +4,22 @@ import React, { useEffect, useState } from 'react'
 
 export const AssignedTeams = () => {
     const [devs, setDevs] = useState<any>([])
+    const [isEmpty, setIsEmpty] = useState<boolean>(false)
+
     useEffect(() => {
         const req = new XMLHttpRequest();
         req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/getDeves`, true);
         req.onload = () => {
             if (req.readyState === XMLHttpRequest.DONE) {
                 if (req.status === 200) {
-                    let response = JSON.parse(req.response.trim());
-                    console.log(response);
-                    setDevs(response)
+                    if (req.response.trim() == '') {
+                        setIsEmpty(true)
+                    } else {
+
+                        let response = JSON.parse(req.response.trim());
+                        console.log(response);
+                        setDevs(response)
+                    }
 
                 }
             }
@@ -26,11 +33,13 @@ export const AssignedTeams = () => {
     return (
 
         <div className='flex bg-gray-100 py-3 mt-2 px-3 items-center justify-between' >
-            {devs.map(({ FirstName, LastName, id }: SuperUsersData) => (
-                <><div className='flex items-center space-x-2' key={id}>
-                    <h1 className='font-poppins'>{FirstName}{" "}{LastName}</h1>
-                </div><h1 className='font-poppins'>Not Assigned to a project</h1></>
-            ))}
+            {isEmpty ? <h1 className='font-poppins'>No developer is available</h1> : <>
+                {devs.map(({ FirstName, LastName, id }: SuperUsersData) => (
+                    <><div className='flex items-center space-x-2' key={id}>
+                        <h1 className='font-poppins'>{FirstName}{" "}{LastName}</h1>
+                    </div><h1 className='font-poppins'>Not Assigned to a project</h1></>
+                ))}
+            </>}
 
         </div>
     )

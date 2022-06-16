@@ -4,5 +4,10 @@ export interface SuperUsersData {
   img?: string;
   id?: string;
   ImageAdmin?: string;
-  unique_id: string;
+  unique_id?: string;
+  isNotif?: boolean;
+}
+
+export interface Dev {
+  id: string;
 }

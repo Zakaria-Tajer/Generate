@@ -43,10 +43,10 @@ export function AdminNav({ children }: Layouts) {
           // Todo: implement parsing data
           let response = JSON.parse(req.response);
           setImg(response.data.img);
-          const { data:{img, FirstName,LastName} } = response
+          const { data: { img, FirstName, LastName } } = response
           console.log(response);
 
-          dispatch(updateImageAdmin({ ImageAdmin: img,FirstName:FirstName,LastName:LastName }))
+          dispatch(updateImageAdmin({ ImageAdmin: img, FirstName: FirstName, LastName: LastName, unique_id: "" }))
         }
       }
     };

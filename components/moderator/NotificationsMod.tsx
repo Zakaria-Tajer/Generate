@@ -15,7 +15,7 @@ export const NotificationsMod = () => {
   };
   return (
     <AnimatePresence>
-      <div className="fixed z-10 inset-0 bg-black/10">
+      <div className="fixed z-50 inset-0 bg-black/10">
         <motion.div
           className="2xl:w-2/5 xl:w-3/5 md:w-3/4 overflow-y-auto overflow-x-hidden rounded-md mx-auto h-[600px] bg-white"
           initial={{ y: "-100vh" }}

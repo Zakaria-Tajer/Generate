@@ -6,8 +6,9 @@ export const initialState: SuperUsersData = {
   LastName: "",
   img: "",
   id: "",
-  ImageAdmin: ''
-  
+  ImageAdmin: "",
+  unique_id: "",
+  isNotif: false,
 };
 
 export const SuperUsersSlice = createSlice({
@@ -21,11 +22,15 @@ export const SuperUsersSlice = createSlice({
       state.id = action.payload.id;
     },
     updateImageAdmin: (state, action: PayloadAction<SuperUsersData>) => {
-      state.ImageAdmin = action.payload.ImageAdmin
-      state.FirstName = action.payload.FirstName
-      state.LastName = action.payload.LastName
+      state.ImageAdmin = action.payload.ImageAdmin;
+      state.FirstName = action.payload.FirstName;
+      state.LastName = action.payload.LastName;
+    },
+    getDevNoti: (state, action: PayloadAction<SuperUsersData>) => {
+      state.isNotif = action.payload.isNotif;
     },
   },
 });
-export const { getSuperUsersInfo,updateImageAdmin } = SuperUsersSlice.actions;
+export const { getSuperUsersInfo, updateImageAdmin, getDevNoti } =
+  SuperUsersSlice.actions;
 export default SuperUsersSlice.reducer;

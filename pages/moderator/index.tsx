@@ -126,7 +126,7 @@ function Home() {
                       >
                         <div className="2xl:full relative h-fit mx-auto 2xl:mx-0">
 
-                          <ClientProjectRequests key={id} projectName={projectName} Project_unique_id={Project_unique_id} birefProjectDesc={birefProjectDesc} ProjectDetails={ProjectDetails} Delivery={Delivery} id={""} />
+                          <ClientProjectRequests key={id} projectName={projectName} Project_unique_id={Project_unique_id} birefProjectDesc={birefProjectDesc} ProjectDetails={ProjectDetails} Delivery={Delivery} id={id} />
                         </div>
                       </motion.div>
                     </AnimatePresence>

@@ -14,10 +14,13 @@ export const ClientProjectRequests = ({
   birefProjectDesc,
   Delivery,
   ProjectDetails,
+  id
 }: ProjectDetails) => {
   const [assign, setAssign] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [projectId, setProjectId] = useState<string>('');
+  const [devId, setDevId] = useState<string>('');
   const [data, setData] = useState<any>([])
   const [list, setList] = useState<any>([])
   useEffect(() => {
@@ -43,8 +46,31 @@ export const ClientProjectRequests = ({
     req.send();
   }, []);
 
+  const assignProject = () => {
+    const req = new XMLHttpRequest();
+    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/AssingedProject`, true);
+    req.onload = () => {
+      if (req.readyState === XMLHttpRequest.DONE) {
+        if (req.status === 200) {
+          // let response = JSON.parse(req.response);
+          // setList(response.data);
+          console.log(req.response);
+
+        }
+      }
+    };
+    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.setRequestHeader("Content-Type", "multipart/form-data");
+
+    req.send(`developer_id=${devId}&project_id=${projectId}`);
+    console.log();
+
+  }
+
+
   const getOnceDev = (e: any) => {
     setIsOpen(!isOpen)
+    setDevId(e.target.value)
     let id = e.target.value
     const req = new XMLHttpRequest();
     req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/findDevs`, true);
@@ -65,9 +91,16 @@ export const ClientProjectRequests = ({
 
     console.log(id);
 
-
+    assignProject()
   }
   console.log(list);
+
+  const AssignATeam = (e: any) => {
+    setProjectId(e.target.value)
+    setAssign(!assign)
+    console.log(e.target.value);
+
+  }
 
   return (
 
@@ -104,17 +137,18 @@ export const ClientProjectRequests = ({
           <h1 className="font-poppins">{birefProjectDesc}</h1>
         </div>
 
-        <div
+        <button
           className="w-64 bg-Teal text-white flex items-center justify-center mx-auto py-3 font-poppins  rounded cursor-pointer space-x-4"
-          onClick={() => setAssign(!assign)}
+          onClick={AssignATeam}
+          value={id}
         >
           <h1>Assign a team</h1>
           <DownOutlined className="" />
-        </div>
+        </button>
       </div>
       {assign && (
 
-        <div className="w-full inset-0 bg-transparent fixed flex justify-center top-18 ">
+        <div className="w-full inset-0 z-10 fixed flex justify-center top-18 ">
           <motion.div className="absolute bg-white shadow-xl w-full md:w-3/4 xl:w-1/2 top-0 h-96 rounded-md"
             initial={{ y: "-100vh" }}
             animate={{ y: "10vh" }}
@@ -147,7 +181,7 @@ export const ClientProjectRequests = ({
                   ))}
                 </div>
               </div>
-              {isOpen && <div className="w-2/4">
+              {isOpen && <div className="w-2/4 z-10">
                 <div className="w-5/6 rounded-md h-44 mt-10 ml-4 space-y-2">
                   <AddedDevs />
                 </div>
