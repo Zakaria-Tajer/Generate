@@ -29,7 +29,7 @@ export const Login = () => {
           } else if (response.bodyMessage == "success") {
             const {
               token,
-              data: { role, unique_id, id },
+              data: { role, unique_id, id, img },
             } = response;
             console.log(response);
 
@@ -47,7 +47,9 @@ export const Login = () => {
               router.push("/Admin/dashboard");
             } else if (role == "Developer") {
               console.log(response);
-              dispatch(getDevId({ id: id }))
+              dispatch(getDevId({ id: id, img: img }))
+              sessionStorage.setItem('id', id)
+
               router.push("/developer");
             }
           } else {

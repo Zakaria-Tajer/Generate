@@ -26,6 +26,7 @@ import { Composing } from "slices/switchSlice";
 import { useMediaQuery } from "react-responsive";
 import { NotificationsDev } from "../NotificationsDev";
 import { getDevNoti } from "slices/SuperUsersSlice";
+import { ComposeEmail } from "@/components/clients/email/ComposeEmail";
 
 export function DevLayouts({ children }: Layouts) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -43,7 +44,7 @@ export function DevLayouts({ children }: Layouts) {
     );
 
 
-    const img = useSelector((state: RooteState) => state.SuperUsers.img);
+    const img = useSelector((state: RooteState) => state.handleDev.img);
 
     const Logout = () => {
         Cookies.remove("token");
@@ -55,16 +56,20 @@ export function DevLayouts({ children }: Layouts) {
     const getNot = () => {
         dispatch(getDevNoti({ isNotif: true }));
     };
+    const composing = useSelector((state: RooteState) => state.ComposeEmail.Compose)
+
     return (
-        <div className="min-h-screen bg-PureGrey">
-            {Mobile ? <div className="z-10 w-full bg-white h-[70px] flex justify-between items-center relative">
+        <div className="min-h-screen bg-PureGrey z-10">
+            {composing && <ComposeEmail />}
+
+            {Mobile ? <div className=" w-full bg-white h-[70px] flex justify-between items-center relative">
                 <div className="bg-gray-400 w-28 h-full">
                     <h1>Logo here</h1>
                 </div>
                 <AlignLeftOutlined className="mr-4 text-xl" onClick={() => setIsNav(true)} />
 
                 {isNav && <motion.div
-                    className="w-full bg-white min-h-screen top-0 absolute"
+                    className="w-full z-10 bg-white min-h-screen top-0 absolute"
                     initial={{ x: "-100vh" }}
                     animate={{ x: "0vh" }}
                     transition={{ type: "spring", delay: 0.6 }}
@@ -78,7 +83,7 @@ export function DevLayouts({ children }: Layouts) {
                     </div>
 
                     <div className="w-full bg-white py-2 flex flex-col items-center space-y-4" >
-                        <Link href="/Admin/dashboard" passHref>
+                        <Link href="/developer" passHref>
                             <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex">
                                 <Image
                                     src="/images/icons/dashboard-5481.svg"
@@ -91,7 +96,7 @@ export function DevLayouts({ children }: Layouts) {
                             </div>
                         </Link>
 
-                        <Link href="/Admin/settings" passHref>
+                        <Link href="/developer/settings" passHref>
                             <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center">
                                 <SettingOutlined className="text-gray-500" />
                                 <h1 className="font-poppins">Settings</h1>
@@ -129,7 +134,7 @@ export function DevLayouts({ children }: Layouts) {
                             <h1>Logo here</h1>
                         </div>
                         <div className="pl-10 flex">
-                            <Link href="/moderator" passHref>
+                            <Link href="/developer" passHref>
                                 <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex">
                                     <Image
                                         src="/images/icons/dashboard-5481.svg"
@@ -140,7 +145,7 @@ export function DevLayouts({ children }: Layouts) {
                                     <h1 className="font-poppins">Dashboard</h1>
                                 </div>
                             </Link>
-                            <Link href="/moderator/settings" passHref>
+                            <Link href="/developer/settings" passHref>
                                 <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center">
                                     <SettingOutlined className="text-gray-500" />
                                     <h1 className="font-poppins">Settings</h1>
@@ -176,7 +181,7 @@ export function DevLayouts({ children }: Layouts) {
                 </div>
                 </>}
 
-            <div className="w-full bg-blue-400 flex">{children}</div>
+            <div className="w-full">{children}</div>
 
         </div>
     );

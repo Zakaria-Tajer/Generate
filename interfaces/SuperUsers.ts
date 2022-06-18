@@ -9,5 +9,15 @@ export interface SuperUsersData {
 }
 
 export interface Dev {
-  id: string;
+  id?: string;
+  img?: string;
+  projectName?: string;
+  projectId?: string;
+}
+export interface ProjectDescription {
+  id?: string;
+  projectName?: string;
+  birefProjectDesc?: string;
+  Project_unique_id?: string;
+  Delivery?: string;
 }
