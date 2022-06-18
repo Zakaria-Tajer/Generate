@@ -40,20 +40,20 @@ export function IndexLayout({ children }: Layouts) {
   const id = useSelector((state: RooteState) => state.Data.uniqueId);
   const date = new Date();
 
-  useEffect(() => {
-    const ref = query(
-      collection(db, "messages"),
-      orderBy("createdAt"),
-      where("CurrentClientId", "==", id)
+  // useEffect(() => {
+  //   const ref = query(
+  //     collection(db, "messages"),
+  //     orderBy("createdAt"),
+  //     where("CurrentClientId", "==", id)
       
-      // limit(50)
-      // where("createdAt", "<=", date),
-    );
-    onSnapshot(ref, (snapshot) => {
-      setMessages(snapshot.docs.map((doc) =>  doc.data()));
-      setDocId(snapshot.docs.map((doc) => doc.id))
-    });
-  }, [id]);
+  //     // limit(50)
+  //     // where("createdAt", "<=", date),
+  //   );
+  //   onSnapshot(ref, (snapshot) => {
+  //     setMessages(snapshot.docs.map((doc) =>  doc.data()));
+  //     setDocId(snapshot.docs.map((doc) => doc.id))
+  //   });
+  // }, [id]);
 
   const sendMsg = async () => {
     

@@ -12,7 +12,7 @@ export const MainProject = () => {
         <h1 className="font-poppins text-2xl">Dashboard</h1>
       </div>
       <ProjectStatus />
-      <div className="py-2 lg:w-full md:mx-auto lg:mx-0 xl:w-full lg:flex justify-between">
+      <div className="py-2 lg:pl-5 xl:pl-0 lg:w-full md:w-full overflow-x-hidden md:mr-auto lg:mx-0 xl:w-full lg:flex">
         <ProjectDeadline />
         {/* <div className="p-2">
           <ProjectDeadline />

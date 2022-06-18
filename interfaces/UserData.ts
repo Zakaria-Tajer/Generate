@@ -31,4 +31,11 @@ export interface ProjectClientData {
     CompletedTasks?: string,
     Progress?: string,
     starter_Tasks?: string,
+    projectIndexID?: string,
+    logo?: string,
+    developerId?:string,
+    FirstName?: string,
+    LastName?: string,
+    img?: string,
+
 }

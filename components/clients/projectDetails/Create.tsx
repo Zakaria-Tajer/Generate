@@ -44,7 +44,7 @@ export const Create = () => {
         toast.error(" All fields are required");
       }
     } else {
-      if (description == "") {
+      if (description == "" || description.length < 35) {
         setIsEmpty(true);
         toast.error(" All fields are required");
       } else {

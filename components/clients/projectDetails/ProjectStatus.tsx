@@ -43,7 +43,8 @@ export const ProjectStatus = () => {
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     req.setRequestHeader("Content-Type", "multipart/form-data");
     req.send(`clientId=${CLientId}`);
-  }, [CLientId, projectNums]);
+  }, [CLientId]);
+
   useEffect(() => {
     const req = new XMLHttpRequest();
     req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/projectClient`, true);
@@ -75,13 +76,13 @@ export const ProjectStatus = () => {
           let datas = JSON.parse(req.response.trim())
           console.log(datas);
           if (datas.data) {
-            const { data: { Completed_Tasks, Progress, Yet_to_start_Tasks, date_to_finnish, projectName } } = datas
+            const { data: { Completed_Tasks, Progress, Yet_to_start_Tasks, date_to_finnish, projectName, project_index_id } } = datas
             setCompletedTasks(Completed_Tasks)
             setInProgress(Progress)
             setTasksToStart(Yet_to_start_Tasks)
             setDateToFinnish(date_to_finnish)
             setProjectName(projectName)
-            dispatch(projectData({ CompletedTasks: Completed_Tasks, Progress: Progress, starter_Tasks: Yet_to_start_Tasks, ProjectDeadline: date_to_finnish,isProject: true, projectName: projectName }))
+            dispatch(projectData({ CompletedTasks: Completed_Tasks, Progress: Progress, starter_Tasks: Yet_to_start_Tasks, ProjectDeadline: date_to_finnish, isProject: true, projectName: projectName, projectIndexID: project_index_id }))
             // dispatch(projectData({ isProject: true, projectName: projectName }))
           }
         }
@@ -96,7 +97,7 @@ export const ProjectStatus = () => {
 
   return (
     <div className="space-y-4">
-      <div className="shadow-lg lg:flex lg:w-11/12 lg:mx-auto xl:ml-4 2xl:max-w-4xl justify-between  bg-white 2xl:w-4/5 rounded lg:pl-10">
+      <div className="lg:flex lg:w-11/12 lg:mx-auto xl:ml-4 2xl:max-w-4xl justify-between  bg-white 2xl:w-4/5 2xl:py-4 rounded lg:pl-10">
         <div className="flex flex-col lg:w-fit space-y-6 mb-7">
           <h1 className="pt-6 font-poppins pl-4 lg:pl-0">Project Status</h1>
           <div className="flex py-4 items-center mx-auto">
@@ -109,7 +110,7 @@ export const ProjectStatus = () => {
                 <div className="bg-black w-6 rounded-full h-6 flex items-center justify-center">
                   <ArrowRightOutlined className="-rotate-45 text-white" />
                 </div>
-                <h1 className="font-poppins">+{plusProject} New</h1>
+                <h1 className="font-poppins">+{plusProject == 0 as unknown ? projectNums : plusProject} New</h1>
               </div>
             </div>
           </div>
