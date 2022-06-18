@@ -63,10 +63,10 @@ function DeveloperHome() {
               {isError ? <h1>Nop</h1> : <>
                 {isData.map((item: any) => (
                   <div key={item.id}>
-                    <div className="space-x-3 pl-2 mb-2 flex">
-                      <div className="py-2 bg-Teal text-white w-1/4 pl-2 rounded font-poppins">Project Id: #{item.Project_unique_id}</div>
-                      <div className="py-2 bg-Teal text-white w-1/4 pl-2 rounded font-poppins">Project Name: {item.projectName}</div>
-                      <div className="py-2 bg-Teal text-white w-1/4 pl-2 rounded font-poppins">Project Delivery: {item.Delivery}</div>
+                    <div className="md:space-x-3 pl-2 mb-2 md:flex space-y-2 md:space-y-0">
+                      <div className="py-2 bg-Teal text-white md:w-1/4 w-5/6 pl-2 rounded font-poppins">Project Id: #{item.Project_unique_id}</div>
+                      <div className="py-2 bg-Teal text-white md:w-1/4 w-5/6 pl-2 rounded font-poppins">Project Name: {item.projectName}</div>
+                      <div className="py-2 bg-Teal text-white md:w-1/4 w-5/6 pl-2 rounded font-poppins">Project Delivery: {item.Delivery}</div>
                     </div>
                     <div className="mt-6">
                       <h1 className="font-poppins ml-3 nb-2">Project Description</h1>

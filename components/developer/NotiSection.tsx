@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
 import { RooteState } from 'store/store'
+import axios from 'axios'
 
 export const NotiSection = () => {
     const nanoids = nanoid(10)
@@ -17,12 +18,15 @@ export const NotiSection = () => {
     const [completed, setIsCompleted] = useState<string>('')
     const [Yet, setIsYet] = useState<string>('')
     const [Progress, setIsProgress] = useState<string>('')
+    const [files, setFile] = useState<string>("");
+    const [devId, setDevId] = useState<string>("");
 
     const getRandID = () => {
         setIsId(nanoids)
         console.log(id);
     }
     const indexId = useSelector((state: RooteState) => state.handleDev.projectId)
+    console.log(indexId);
 
     const verifyCompleted = (e: any) => {
         if (isNaN(e.target.value)) {
@@ -48,6 +52,10 @@ export const NotiSection = () => {
             setIsProgress(e.target.value)
         }
     }
+    useEffect(()=> {
+        const id = sessionStorage.getItem("id") || ""
+        setDevId(id)
+    },[])
 
     const submit = () => {
         console.log(indexId);
@@ -102,7 +110,30 @@ export const NotiSection = () => {
 
     }
 
-    const date: any = new Date
+    const fileSave = (e: any) => {
+        setFile(e.target.files[0]);
+    };
+
+    const save = () => {
+        let formdata = new FormData();
+        formdata.append("file", files);
+        formdata.append("projectName", projectName);
+        formdata.append("projectId", indexId as string);
+        formdata.append("devId", devId);
+
+        axios
+            .post(
+                `${process.env.NEXT_PUBLIC_API_URL_Generate}api/devliveryProject`,
+                formdata,
+                {}
+            )
+            .then((res) => {
+                const { data } = res;
+                console.log(data);
+
+            });
+    }
+
     return (
         <div className='xl:w-1/2  p-5 mt-10'>
             <div className='bg-white shadow-md  py-3 pb-5 md:pl-5 md:mx-auto space-y-6 md:w-5/6 xl:w-5/6 2xl:w-3/4 mt-4 rounded '>
@@ -154,7 +185,26 @@ export const NotiSection = () => {
                     </div>
                 </div>
             </div>
-
+            <div className='bg-white shadow-md  py-3 pb-5 md:pl-5 md:mx-auto space-y-6 md:w-5/6 xl:w-5/6 2xl:w-3/4 mt-4 rounded'>
+                <h1 className='ml-5 font-poppins uppercase text-Teal text-xl'>Project delivery</h1>
+                <div className='md:flex '>
+                    <div className='pl-4 space-y-4 md:space-y-2  md:mb-0 mb-3 md:w-1/2'>
+                        <label htmlFor="" className='block font-poppins '>Project name</label>
+                        <input type="text" className='md:w-3/4 w-5/6 py-2 pl-3 font-poppins rounded bg-gray-100 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-Teal focus:duration-500' onChange={e => setProjectName(e.target.value)} />
+                    </div>
+                    <div className='pl-4 space-y-4 mb-3 md:mb-0 md:space-y-2 md:w-1/2'>
+                        <label htmlFor="" className='block font-poppins '>Project Logo</label>
+                        <input type="file"
+                            name="upload_file"
+                            onChange={fileSave}
+                            multiple
+                            className='md:w-3/4 w-5/6 py-1 rounded font-poppins  pl-2 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-Teal focus:duration-500' />
+                    </div>
+                </div>
+                <div className='md:w-1/2'>
+                    <button className='bg-Teal text-white w-5/6 md:w-44 ml-5 mt-4 py-2  rounded font-poppins' onClick={save}>save</button>
+                </div>
+            </div>
         </div>
     )
 }

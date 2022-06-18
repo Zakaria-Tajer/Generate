@@ -31,7 +31,6 @@ export const MainSnc = () => {
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
-          // Todo: implement parsing data
           let datas = req.response.trim();
           if (datas == "Expired token") {
             setExpired(true);

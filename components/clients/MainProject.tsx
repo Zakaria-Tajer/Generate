@@ -11,14 +11,15 @@ export const MainProject = () => {
        <div className="pl-3">
         <h1 className="font-poppins text-2xl">Dashboard</h1>
       </div>
-      {/* <ProjectStatus />
-      <div className=" lg:w-full md:mx-auto lg:mx-0 xl:w-full  bg-white lg:flex justify-between">
-        <div className="p-2">
+      <ProjectStatus />
+      <div className="py-2 lg:w-full md:mx-auto lg:mx-0 xl:w-full lg:flex justify-between">
+        <ProjectDeadline />
+        {/* <div className="p-2">
           <ProjectDeadline />
         </div>
-        <TeamMem />
-      </div> */}
-      <Empty />
+        <TeamMem /> */}
+      </div>
+      {/* <Empty /> */}
     </div>
   );
 };

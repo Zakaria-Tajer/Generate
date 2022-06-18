@@ -35,13 +35,10 @@ export function DevLayouts({ children }: Layouts) {
 
     const router = useRouter();
     useEffect(() => {
-        const datas = localStorage.getItem("dats") || "{}";
-        const { image } = JSON.parse(datas);
-        setImage(image);
+        const devImg = sessionStorage.getItem("devImg") || ""
+        setImage(devImg);
     }, []);
-    const notified = useSelector(
-        (state: RooteState) => state.SuperUsers.isNotif
-    );
+    
 
 
     const img = useSelector((state: RooteState) => state.handleDev.img);
@@ -53,9 +50,6 @@ export function DevLayouts({ children }: Layouts) {
     const dispatch: AppDispatch = useDispatch();
     const Mobile = useMediaQuery({ query: "(max-width: 1024px)" });
 
-    const getNot = () => {
-        dispatch(getDevNoti({ isNotif: true }));
-    };
     const composing = useSelector((state: RooteState) => state.ComposeEmail.Compose)
 
     return (
@@ -77,7 +71,7 @@ export function DevLayouts({ children }: Layouts) {
                 >
                     <div className=" w-full py-2 flex items-center justify-between" onClick={() => setIsNav(false)}>
                         <div className="w-14 h-14 rounded-full ml-5">
-                            <img src={`http://localhost:8000/adminUploads/${img}`} className="w-full h-full object-cover rounded-full" alt="profile" />
+                            <img src={`http://localhost:8000/adminUploads/${img ? img : image}`} className="w-full h-full object-cover rounded-full" alt="profile" />
                         </div>
                         <CloseOutlined className="mr-4" />
                     </div>
@@ -102,15 +96,7 @@ export function DevLayouts({ children }: Layouts) {
                                 <h1 className="font-poppins">Settings</h1>
                             </div>
                         </Link>
-                        {/* <div
-                            className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center"
-                            onClick={() =>
-                                dispatch(showNotifications({ Notifications: true }))
-                            }
-                        >
-                            <NotificationOutlined className="text-gray-500" />
-                            <h1 className="font-poppins">notifications</h1>
-                        </div> */}
+                        
                         <div className="cursor-pointer space-x-2 px-10 py-2.5 rounded-md  hover:duration-700 hover:bg-gray-200/75 flex items-center justify-center" onClick={() => dispatch(Composing(true))}>
                             <FontAwesomeIcon icon={faEnvelope} className="mr-3 text-lg text-gray-500" />
                             <h1 className="font-poppins">Emails</h1>
@@ -161,7 +147,7 @@ export function DevLayouts({ children }: Layouts) {
                     <div className="w-1/2 flex items-center justify-end space-x-4">
                         <div className="flex w-44 h-full items-center justify-evenly relative">
                             <div className="bg-gray-400 w-14 h-14 rounded-full">
-                                <img src={`http://localhost:8000/adminUploads/${img}`} className="w-full h-full object-cover rounded-full" alt="profile" />
+                                <img src={`http://localhost:8000/adminUploads/${img ||image }`} className="w-full h-full object-cover rounded-full" alt="profile" />
                             </div>
                             <DownOutlined
                                 className="text-gray-500 cursor-pointer"

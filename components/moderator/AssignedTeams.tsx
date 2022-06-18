@@ -32,12 +32,15 @@ export const AssignedTeams = () => {
 
     return (
 
-        <div className='flex bg-gray-100 py-3 mt-2 px-3 items-center justify-between' >
+        <div className='flex flex-col space-y-3 bg-gray-100 py-3 mt-2 px-3 items-center justify-between' >
             {isEmpty ? <h1 className='font-poppins'>No developer is available</h1> : <>
                 {devs.map(({ FirstName, LastName, id }: SuperUsersData) => (
-                    <><div className='flex items-center space-x-2' key={id}>
-                        <h1 className='font-poppins'>{FirstName}{" "}{LastName}</h1>
-                    </div><h1 className='font-poppins'>Not Assigned to a project</h1></>
+                    <div key={id} className=" w-full py-2">
+                        <div className='flex items-center space-x-2'>
+                            <h1 className='font-poppins'>{FirstName}{" "}{LastName}</h1>
+                            <h1 className='font-poppins'>Not Assigned to a project</h1>
+                        </div>
+                    </div>
                 ))}
             </>}
 

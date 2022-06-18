@@ -8,6 +8,7 @@ import ProjectHandler from "slices/ProjectSlice";
 import NotificationsHandlingDatas from "slices/NotificationSlice";
 import ChatDataHandler from "slices/ChatSlice";
 import DevData from "slices/DeveloperSlice";
+import projectClientData from "slices/ClientProjectData";
 export const store = configureStore({
   reducer: {
     switch: switchReducer,
@@ -28,6 +29,7 @@ export const store = configureStore({
     NotoficationsDetails: NotificationsHandlingDatas,
     ChatClient: ChatDataHandler,
     handleDev: DevData,
+    projectData: projectClientData
   },
 });
 

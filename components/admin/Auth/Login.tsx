@@ -43,12 +43,13 @@ export const Login = () => {
               arr.push(response.data)
               // localStorage.setItem('datas',JSON.stringify(arr))
               dispatch(getSuperUsersInfo({ id: id }))
-              // localStorage.setItem('id',id)
+              localStorage.setItem('Aid',id)
               router.push("/Admin/dashboard");
             } else if (role == "Developer") {
               console.log(response);
               dispatch(getDevId({ id: id, img: img }))
               sessionStorage.setItem('id', id)
+              sessionStorage.setItem('devImg', img)
 
               router.push("/developer");
             }

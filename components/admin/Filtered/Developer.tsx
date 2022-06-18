@@ -12,10 +12,10 @@ export const Developer = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
           // Todo: implement parsing data
-          let response = JSON.parse(req.response);
+          let response = JSON.parse(req.response.trim());
           setData(response);
           // const idk = Object.fromEntries(response)
-          console.log(req.response);
+          console.log(req.response.trim());
         }
       }
     };

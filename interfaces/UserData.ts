@@ -22,3 +22,13 @@ export interface updatedData {
 export interface Emojis {
     emoji: any
 }
+
+export interface ProjectClientData {
+    ProjectDeadline?: string,
+    isProject?: boolean,
+    projectName?: string,
+    projectDescription?: string,
+    CompletedTasks?: string,
+    Progress?: string,
+    starter_Tasks?: string,
+}

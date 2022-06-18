@@ -34,26 +34,27 @@ export function AdminNav({ children }: Layouts) {
   const dispatch: AppDispatch = useDispatch();
   const id = useSelector((state: RooteState) => state.SuperUsers.id)
   useEffect(() => {
-
+    const Aid = localStorage.getItem('Aid')
     const req = new XMLHttpRequest();
     req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/adminsInfo`, true);
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
-          // Todo: implement parsing data
-          let response = JSON.parse(req.response);
-          setImg(response.data.img);
+          
+          let response = JSON.parse(req.response.trim());
           const { data: { img, FirstName, LastName } } = response
+          setImg(img);
           console.log(response);
 
           dispatch(updateImageAdmin({ ImageAdmin: img, FirstName: FirstName, LastName: LastName, unique_id: "" }))
+          
         }
       }
     };
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     req.setRequestHeader("Content-Type", "multipart/form-data");
 
-    req.send(`id=${id}`);
+    req.send(`id=${id || Aid}`);
 
   }, [dispatch, id, router])
   const notified = useSelector(
