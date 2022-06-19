@@ -48,7 +48,7 @@ export const ProjectDeadline = () => {
           if (req.response.trim()) {
             let datas = req.response.trim()
             setTempId(datas)
-            console.log(datas);
+            // console.log(datas);
 
           }
         }
@@ -83,7 +83,9 @@ export const ProjectDeadline = () => {
   }, [dispatch, tempId]) 
 
 
-  const AllTasks = parseInt((+CompletedTasks) + (+progress) + (+starter_Tasks)) 
+  let AllTasks = (+CompletedTasks! + (+progress!) + (+starter_Tasks!))
+  console.log(AllTasks    );
+  
   const projectData = useSelector((state: RooteState) => state.projectData)
   return (
     <>
