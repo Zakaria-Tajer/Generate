@@ -28,6 +28,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { RooteState } from "store/store";
 import { SearchRes } from "./SearchRes";
+import { NotificationsHandling } from "slices/ProjectSlice";
 
 const Menu = [
   {
@@ -38,41 +39,19 @@ const Menu = [
   },
   { id: 3, title: "Profile", icon: <UserOutlined />, Link: "/client/profile" },
   {
-    id: 4,
-    title: "Todo",
-    icon: <FontAwesomeIcon icon={faListCheck} />,
-    Link: "",
-  },
-  {
-    id: 5,
-    title: "Chat",
-    icon: <FontAwesomeIcon icon={faMessage} />,
-    Link: "",
-  },
-  {
     id: 6,
     title: "Email",
     icon: <FontAwesomeIcon icon={faEnvelope} />,
     Link: "",
   },
-  {
-    id: 7,
-    title: "Calendar",
-    icon: <FontAwesomeIcon icon={faCalendarDay} />,
-    Link: "",
-  },
+
   {
     id: 8,
     title: "Settings",
     icon: <SettingOutlined />,
     Link: "/client/settings",
   },
-  {
-    id: 9,
-    title: "Notifications",
-    icon: <FontAwesomeIcon icon={faBell} />,
-    Link: "",
-  },
+
 ];
 
 export const ResSidebar = () => {
@@ -92,9 +71,9 @@ export const ResSidebar = () => {
   const Mobile = useMediaQuery({ query: "(max-width: 425px)" });
   return (
     <>
-      {search ? <SearchRes /> : ""}
+      {/* {search ? <SearchRes /> : ""} */}
 
-      <div className="bg-white w-24 h-screen space-y-4 ">
+      <div className="bg-white w-24 h-fit py-2 space-y-4 ">
         <div className="bg-gray-400 h-28 relative">
           {Mobile ? (
             <div
@@ -111,15 +90,11 @@ export const ResSidebar = () => {
             ""
           )}
 
-          <h1>Logo</h1>
+          <img src="/Gener8.png" className="w-full h-[12rem] object-cover" />
+
         </div>
-        <div className="flex flex-col justify-center items-center space-y-6">
-          <li
-            className="list-none flex relative items-center justify-center text-xl cursor-pointer hover:bg-gray-400/25 hover:text-blue-700 hover:duration-700 text-gray-500 w-[4.7rem] rounded-md py-3"
-            onClick={Search}
-          >
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </li>
+        <div className="flex flex-col justify-center items-center space-y-6 pt-10">
+
           {Menu.map((items) => (
             <>
               <Link href={items.Link} passHref>
@@ -132,6 +107,9 @@ export const ResSidebar = () => {
               </Link>
             </>
           ))}
+          <li className="list-none flex relative items-center justify-center text-xl cursor-pointer hover:bg-gray-400/25 hover:text-blue-700 hover:duration-700 text-gray-500 w-[4.7rem] rounded-md py-3" onClick={() => dispatch(NotificationsHandling({ Notifiy: true }))}>
+            <FontAwesomeIcon icon={faBell} />
+          </li>
           <li className="list-none flex relative items-center justify-center text-xl cursor-pointer hover:bg-gray-400/25 hover:text-blue-700 hover:duration-700 text-gray-500 w-[4.7rem] rounded-md py-3">
             <PoweroffOutlined onClick={Logout} />
           </li>

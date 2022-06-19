@@ -15,7 +15,7 @@ export const Logo = () => {
   const Devices = useMediaQuery({ query: "(max-width: 425px)" });
 
   return (
-    <div className="bg-gray-400 h-28 relative">
+    <div className=" h-28 relative flex items-center">
       {Devices ? (
         <div
           className="w-8 h-8 -right-4 top-2 cursor-pointer absolute rounded-full flex items-center justify-center bg-white"
@@ -26,7 +26,7 @@ export const Logo = () => {
       ) : (
         ""
       )}
-      <h1>Logo</h1>
+      <img src="/Gener8.png" className="w-full h-[12rem] translate-y-10 object-cover"/>
     </div>
   );
 };
