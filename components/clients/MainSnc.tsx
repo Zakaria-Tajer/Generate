@@ -98,7 +98,7 @@ export const MainSnc = () => {
           {isExpired && <Expired />}
           <div
             className={
-              Mobile ? "z-10 absolute -left-24" : isExpired ? "" : "z-10"
+              Mobile ? "z-10 absolute -left-24 " : isExpired ? "" : "z-10 "
             }
           >
             {Devices ? (

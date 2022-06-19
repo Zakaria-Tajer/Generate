@@ -23,20 +23,20 @@ export const ClientProjectRequests = ({
   const [devId, setDevId] = useState<string>('');
   const [data, setData] = useState<any>([])
   const [list, setList] = useState<any>([])
+  const [projectDes, setProjectDes] = useState<boolean>(false)
+
   useEffect(() => {
     const req = new XMLHttpRequest();
-    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/getDeves`, true);
+    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/isWorkingDev`, true);
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
-
-          if (req.response.trim() !== '') {
-            let response = JSON.parse(req.response);
-            setData(response);
-          } else {
+          let response = JSON.parse(req.response);
+          const { bodyMessage } = response
+          if (bodyMessage == '') {
             setIsEmpty(true)
-          }
 
+          }
         }
       }
     };
@@ -44,17 +44,19 @@ export const ClientProjectRequests = ({
     req.setRequestHeader("Content-Type", "multipart/form-data");
 
     req.send();
+
   }, []);
 
   const assignProject = () => {
     const req = new XMLHttpRequest();
-    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/AssingedProject`, true);
+    req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/isWorkingDev`, true);
     req.onload = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
-          // let response = JSON.parse(req.response);
+          let response = JSON.parse(req.response.trim());
           // setList(response.data);
-          console.log(req.response);
+          setData(response)
+          console.log(response);
 
         }
       }
@@ -63,7 +65,7 @@ export const ClientProjectRequests = ({
     req.setRequestHeader("Content-Type", "multipart/form-data");
 
     req.send(`developer_id=${devId}&project_id=${projectId}`);
-    console.log();
+    // console.log();
 
   }
 
@@ -91,20 +93,18 @@ export const ClientProjectRequests = ({
 
     console.log(id);
 
-    assignProject()
   }
-  console.log(list);
-
   const AssignATeam = (e: any) => {
     setProjectId(e.target.value)
     setAssign(!assign)
     console.log(e.target.value);
+    assignProject()
 
   }
 
   return (
 
-    <div className="2xl:w-full w-3/4 mx-auto bg-white h-96 2xl:ml-5 rounded xl:w-5/6 xl:h-fit">
+    <div className="2xl:w-full w-full ml-4 xl:ml-[7.6rem] bg-white h-96 2xl:ml-5 rounded xl:w-full xl:h-fit">
       <div className="xl:flex items-center h-20 border-b-2 border-gray-300">
         <div className="xl:w-fit h-full px-4 items-center flex space-x-2 justify-between py-1">
           <div className="flex space-x-2">
@@ -130,21 +130,23 @@ export const ClientProjectRequests = ({
           </h1>
           <h1 className="font-poppins">{Delivery}</h1>
         </div>
-        <div className=" w-fit h-full px-4 items-center flex space-x-2 justify-between py-1">
+        <div className="w-fit h-full px-4 items-center flex space-x-2 justify-between py-1" onClick={() => setProjectDes(!projectDes)}>
           <h1 className="font-poppins underline underline-offset-2 uppercase">
             Project Description:
           </h1>
           <h1 className="font-poppins">{birefProjectDesc}</h1>
         </div>
+        <div className="ml-auto mr-2">
 
-        <button
-          className="w-64 bg-Teal text-white flex items-center justify-center mx-auto py-3 font-poppins  rounded cursor-pointer space-x-4"
-          onClick={AssignATeam}
-          value={id}
-        >
-          <h1>Assign a team</h1>
-          <DownOutlined className="" />
-        </button>
+          <button
+            className="w-64 bg-Teal text-white flex items-center justify-center mx-auto py-3 font-poppins  rounded cursor-pointer space-x-4"
+            onClick={AssignATeam}
+            value={id}
+          >
+            <h1>Assign a team</h1>
+            <DownOutlined className="" />
+          </button>
+        </div>
       </div>
       {assign && (
 
@@ -164,7 +166,8 @@ export const ClientProjectRequests = ({
               <div className="bg-gray-400 w-2/4 rounded-md py-2 mt-10 ml-4 relative">
                 <h1 className="font-poppins pl-4 uppercase">Developers List</h1>
                 <div className="w-full bg-purple-900 h-56 rounded-b-md absolute list-none">
-                  {data.map((item: SuperUsersData) => (
+
+                  {data?.map((item: SuperUsersData) => (
                     <li className="flex mt-2 py-2 w-full bg-white justify-between items-center" key={item.id}>
                       <div className="flex items-center" >
                         <div className="h-10 w-10 bg-gray-500 rounded-full">

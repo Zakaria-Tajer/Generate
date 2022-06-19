@@ -7,7 +7,7 @@ import { TeamMem } from "./projectDetails/TeamMem";
 export const MainProject = () => {
 
   return (
-    <div className=" lg:w-full 2xl:max-w-7xl sm:w-5/6 py-3 mx-auto mt-10 space-y-7">
+    <div className=" lg:w-full 2xl:max-w-7xl sm:w-5/6 py-3 mx-auto mt-10 space-y-7 ">
        <div className="pl-3">
         <h1 className="font-poppins text-2xl">Dashboard</h1>
       </div>

@@ -50,10 +50,10 @@ export const ComposeEmail = () => {
   };
 
   return (
-    <div className="relative z-10">
+    <div className="relative z-10 ">
       <Transition
         as="div"
-        className="xl:w-2/5 w-full md:w-3/4 bg-white shadow-xl p-4 right-2 rounded-lg xl:top-56 2xl:top-96 top-24 absolute"
+        className="xl:w-2/5 w-full md:w-3/4 bg-white shadow-xl p-4 right-2 rounded-lg xl:top-56 2xl:top-80 top-24 absolute"
         show={compsoeEmail}
         enter="transition-opacity duration-200"
         enterFrom="opacity-0"

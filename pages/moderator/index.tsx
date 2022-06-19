@@ -113,29 +113,29 @@ function Home() {
 
       {isOpening && <ComposeEmail />}
       <div className="2xl:flex w-fullrelative pt-16 space-y-4">
-        <div className="w-3/4 space-y-3">
-          {isConfirmed ||
-            (isData && (
-              <>
-                {confirmedData.map(({ projectName, id, Project_unique_id, birefProjectDesc, ProjectDetails, Delivery }: ProjectDetails) => (
-                  <>
-                    <AnimatePresence>
-                      <motion.div
-                        transition={{ type: "spring", delay: 0.5 }}
+        <div className="w-3/4 space-y-3 ">
+          {/* {isConfirmed ||
+            } */}
+          {(isData && (
+            <>
+              {confirmedData.map(({ projectName, id, Project_unique_id, birefProjectDesc, ProjectDetails, Delivery }: ProjectDetails) => (
+                <>
+                  <AnimatePresence>
+                    <motion.div
+                      transition={{ type: "spring", delay: 0.5 }}
 
-                      >
-                        <div className="2xl:full relative h-fit mx-auto 2xl:mx-0">
+                    >
+                      <div className="2xl:full relative h-fit mx-auto 2xl:mx-0">
 
-                          <ClientProjectRequests key={id} projectName={projectName} Project_unique_id={Project_unique_id} birefProjectDesc={birefProjectDesc} ProjectDetails={ProjectDetails} Delivery={Delivery} id={id} />
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-                  </>
-                ))}
+                        <ClientProjectRequests key={id} projectName={projectName} Project_unique_id={Project_unique_id} birefProjectDesc={birefProjectDesc} ProjectDetails={ProjectDetails} Delivery={Delivery} id={id} />
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </>
+              ))}
 
-              </>
-            ))}
-
+            </>
+          ))}
         </div>
         <div className="2xl:w-1/4">
           <div className='w-5/6 mx-auto bg-white py-2 rounded-md top-12 2xl:mr-4 space-y-3 right-2'>

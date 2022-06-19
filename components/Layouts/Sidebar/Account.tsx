@@ -24,12 +24,6 @@ export const Account = () => {
   };
   return (
     <>
-      <Link href="/client/settings" passHref>
-        <li className="flex items-center w-72 rounded-md mx-auto px-16 cursor-pointer text-gray-400 hover:bg-gray-400/25 hover:text-blue-700 hover:duration-700">
-          <SettingOutlined className="mr-3 text-lg mb-2" />
-          <a className="font-poppins text-lg py-3">Settings</a>
-        </li>
-      </Link>
       <li
         className="flex items-center w-72 rounded-md mx-auto px-16 cursor-pointer text-gray-400 hover:bg-gray-400/25 hover:text-blue-700 hover:duration-700"
         onClick={notificationsBtn}

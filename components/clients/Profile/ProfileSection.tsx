@@ -42,7 +42,7 @@ export const ProfileSection = () => {
     );
   };
   return (
-    <div className=" space-y-4 2xl:max-w-7xl 2xl:mx-auto 2xl:space-y-0">
+    <div className=" space-y-4 2xl:max-w-7xl 2xl:mx-auto 2xl:space-y-0 overflow-y-hidden">
       <h1 className="text-3xl font-poppins ml-4 mb-2">Edit Profile</h1>
 
       <div className="bg-white  xl:ml-28 xl:w-2/4 md:mx-auto rounded-xl 2xl:ml-40 py-3 pr-4 flex-col flex items-center space-y-4">

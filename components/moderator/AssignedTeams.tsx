@@ -8,19 +8,17 @@ export const AssignedTeams = () => {
 
     useEffect(() => {
         const req = new XMLHttpRequest();
-        req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/getDeves`, true);
+        req.open("POST", `${process.env.NEXT_PUBLIC_API_URL_Generate}api/isWorkingDev`, true);
         req.onload = () => {
             if (req.readyState === XMLHttpRequest.DONE) {
                 if (req.status === 200) {
-                    if (req.response.trim() == '') {
+                    let response = JSON.parse(req.response.trim());
+                    const { bodyMessage } = response
+                    if (bodyMessage == '') {
                         setIsEmpty(true)
                     } else {
-
-                        let response = JSON.parse(req.response.trim());
-                        console.log(response);
                         setDevs(response)
                     }
-
                 }
             }
         };

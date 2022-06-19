@@ -45,13 +45,6 @@ const Menu = [
     Link: "",
   },
 
-  {
-    id: 8,
-    title: "Settings",
-    icon: <SettingOutlined />,
-    Link: "/client/settings",
-  },
-
 ];
 
 export const ResSidebar = () => {
@@ -73,7 +66,7 @@ export const ResSidebar = () => {
     <>
       {/* {search ? <SearchRes /> : ""} */}
 
-      <div className="bg-white w-24 h-fit py-2 space-y-4 ">
+      <div className="bg-white w-24 h-screen py-2 space-y-4 ">
         <div className="bg-gray-400 h-28 relative">
           {Mobile ? (
             <div
