@@ -6,9 +6,9 @@ import { AppDispatch, RooteState } from "store/store";
 import { clientProjectDataManaging } from "slices/ClientProjectData";
 export const ProjectDeadline = () => {
 
-  const Project = useSelector((state: RooteState) => state?.projectData)
+  const Project = useSelector((state: RooteState) => state.projectData)
   const CLientId = useSelector((state: RooteState) => state.Data.uniqueId)
-  const CompletedTasks = useSelector((state: RooteState) => state?.projectData?.CompletedTasks)
+  const CompletedTasks = useSelector((state: RooteState) => state.projectData.CompletedTasks)
   const progress = useSelector((state: RooteState) => state.projectData.Progress)
   const starter_Tasks = useSelector((state: RooteState) => state.projectData.starter_Tasks)
   const projectIndexID = useSelector((state: RooteState) => state.projectData.projectIndexID)
@@ -80,9 +80,10 @@ export const ProjectDeadline = () => {
     req.setRequestHeader("Content-Type", "multipart/form-data");
     req.send(`developerID=${tempId}`);
 
-  }, [dispatch, tempId])
+  }, [dispatch, tempId]) 
 
-  const AllTasks = parseInt((+CompletedTasks) + (+progress) + (+starter_Tasks) ) 
+
+  const AllTasks = parseInt((+CompletedTasks) + (+progress) + (+starter_Tasks)) 
   const projectData = useSelector((state: RooteState) => state.projectData)
   return (
     <>

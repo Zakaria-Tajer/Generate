@@ -63,6 +63,11 @@ export const ClientNotifications = () => {
 
   };
 
+  const videoCalling = () => {
+    router.push('/moderator/videoCalls')
+    dispatch(showNotifications({ Notifications: false}))
+  }
+
   return (
     <>
       {isData.map(
@@ -133,7 +138,7 @@ export const ClientNotifications = () => {
               </div>
 
               <div className="w-full mt-2 flex pt-3">
-                <PhoneOutlined className="w-1/2 py-4 bg-white border-r-[1px] cursor-pointer hover:bg-gray-100 duration-700" />
+                <PhoneOutlined className="w-1/2 py-4 bg-white border-r-[1px] cursor-pointer hover:bg-gray-100 duration-700" onClick={videoCalling}/>
                 <MailOutlined
                   className="w-1/2 py-4 bg-white border-r-[1px] cursor-pointer hover:bg-gray-100 duration-700"
                   onClick={() => dispatch(Composing(true))}
